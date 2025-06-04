@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: electron-app
+appId: net.southcraft.dmlauncher
+productName: DMLauncher
 directories:
   buildResources: build
 files:
@@ -13,7 +13,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: electron-app
+  executableName: DMLauncher
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

@@ -1,6 +1,6 @@
-# electron-app
+# DMLauncher
 
-An Electron application with React and TypeScript
+An open-source, versatile Minecraft launcher based on Electron
 
 ## Recommended IDE Setup
 
