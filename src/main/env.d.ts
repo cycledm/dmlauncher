@@ -16,6 +16,7 @@ interface ImportMetaEnv {
 
   readonly MAIN_DEFAULT_WIDTH: number;
   readonly MAIN_DEFAULT_HEIGHT: number;
+  readonly MAIN_APP_PROTOCOL: string;
 }
 
 interface ImportMeta {

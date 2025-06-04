@@ -3,6 +3,7 @@ import { electronApp, optimizer } from "@electron-toolkit/utils";
 import { installExtension, REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import MainWindow from "./classes/main-window";
 import { i18n } from "./utils";
+import { resolve } from "path";
 
 function createMainWindow(): MainWindow {
   const mainWindow = new MainWindow();
@@ -22,6 +23,20 @@ async function installReactDevTools(): Promise<void> {
   }
 }
 
+// 单例应用锁
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  app.quit();
+}
+
+// 设置应用程序的默认协议处理器（Scheme）
+// 在开发模式下，使用 `dmlauncher-dev` 协议
+if (!app.isPackaged) {
+  app.setAsDefaultProtocolClient(import.meta.env.MAIN_APP_PROTOCOL, process.execPath, [
+    resolve(process.argv[1])
+  ]);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -30,7 +45,7 @@ app.whenReady().then(async () => {
   await installReactDevTools();
 
   // Set app user model id for windows
-  electronApp.setAppUserModelId("com.electron");
+  electronApp.setAppUserModelId("net.southcraft.dmlauncher");
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -48,7 +63,28 @@ app.whenReady().then(async () => {
   ipcMain.handle("i18n:load-resource", (_, lng, ns) => i18n.loadResource(lng, ns));
   ipcMain.handle("theme:get-current-color-mode", () => nativeTheme.themeSource);
 
-  createMainWindow();
+  const mainWindow = createMainWindow();
+
+  app.on("second-instance", (_event, argv, workingDirectory) => {
+    // 当运行第二个实例时，这里会被调用
+    // argv: 传递给第二个实例的命令行参数
+    // workingDirectory: 第二个实例的工作目录
+    console.log("Second instance launched with args:", argv, "in directory:", workingDirectory);
+
+    // 如果主窗口已存在，则将其聚焦
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+
+    // 查找命令行参数中的 Protocol
+    const protocol = argv.find((arg) => arg.startsWith(import.meta.env.MAIN_APP_PROTOCOL));
+    if (protocol) {
+      console.log("Found protocol:", protocol);
+    }
+
+    // TODO: 解析微软登录，并发送至前端
+  });
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
