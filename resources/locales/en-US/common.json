@@ -1,0 +1,13 @@
+{
+  "language": {
+    "self": "EngLish",
+    "text": "Language"
+  },
+  "loading": "Loading...",
+  "colorMode": {
+    "text": "Color Mode",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "poweredBy": "由 {{framework}} 驱动",
+  "buildWith": "使用 <0>React</0> 和 <1>TypeScript</1> 构建 Electron 应用",
+  "openDevTool": "请尝试按下 <code>F12</code> 以打开开发者工具",
+  "documentation": "文档",
+  "sendIPC": "发送 IPC"
+}

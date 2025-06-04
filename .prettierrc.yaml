@@ -1,0 +1,7 @@
+singleQuote: false
+semi: true
+printWidth: 100
+trailingComma: none
+tailwindFunctions: ["clsx", "classNames", "twJoin"]
+plugins:
+  - "prettier-plugin-tailwindcss"

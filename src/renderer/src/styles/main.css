@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "@fontsource-variable/noto-sans-sc";
+@import "@fontsource-variable/noto-serif-sc";
+@import "@fontsource-variable/jetbrains-mono";
+
+@theme {
+  /* https://tailwindcss.com/docs/theme#default-theme-variable-reference */
+  --font-sans:
+    "Noto Sans SC Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif:
+    "Noto Serif SC Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  /* Electron 窗口控制 */
+  --app-region-drag: drag;
+  --app-region-nodrag: no-drag;
+  --app-region-no-drag: no-drag;
+  --titlebar-x: env(titlebar-area-x, 0);
+  --titlebar-y: env(titlebar-area-y, 0);
+  --titlebar-w: env(titlebar-area-width, 100%);
+  --titlebar-h: env(titlebar-area-height, 30px);
+}
+
+/* Electron 窗口拖动 */
+@utility app-* {
+  -webkit-app-region: --value(--app-region-\*);
+}

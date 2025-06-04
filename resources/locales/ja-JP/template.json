@@ -1,0 +1,7 @@
+{
+  "poweredBy": "{{framework}} によって動作しています",
+  "buildWith": "<0>React</0> と <1>TypeScript</1> を使用して Electron アプリを構築",
+  "openDevTool": "<code>F12</code> を押して開発者ツールを開いてください",
+  "documentation": "ドキュメント",
+  "sendIPC": "IPC を送信"
+}

@@ -1,0 +1,7 @@
+{
+  "poweredBy": "Powered by {{framework}}",
+  "buildWith": "Build an Electron app with <0>React</0> and <1>TypeScript</1>",
+  "openDevTool": "Please try pressing <code>F12</code> to open the devTool",
+  "documentation": "Documentation",
+  "sendIPC": "Send IPC"
+}
