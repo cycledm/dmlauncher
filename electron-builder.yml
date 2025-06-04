@@ -9,9 +9,6 @@ files:
   - '!{.eslintcache,eslint.config.{js,ts,mjs,cjs},.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
-# 不需要解压时应当移除
-asarUnpack:
-  - resources/**
 win:
   executableName: DMLauncher
 nsis:
