@@ -30,6 +30,7 @@
     "@electron-toolkit/utils": "^4.0.0",
     "chokidar": "^4.0.3",
     "electron-devtools-installer": "^4.0.0",
+    "electron-dl": "^4.0.0",
     "electron-updater": "^6.6.2"
   },
   "devDependencies": {
