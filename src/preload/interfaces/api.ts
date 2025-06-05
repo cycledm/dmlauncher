@@ -1,3 +1,4 @@
+import { DownloaderInfoForRenderer, DownloadOptions } from "@main/interfaces/downloader";
 import { SupportedLanguages } from "@main/interfaces/i18n";
 
 interface I18nAPI {
@@ -18,8 +19,15 @@ interface ThemeAPI {
   setColorMode: (mode: string) => Promise<"system" | "light" | "dark">;
 }
 
+interface DownloaderAPI {
+  download: (opts: DownloadOptions[]) => Promise<void>;
+  onUpdateProgress: (callback: (data: DownloaderInfoForRenderer) => void) => void;
+  onDownloadComplete: (callback: () => void) => void;
+}
+
 export default interface API {
   i18n: I18nAPI;
   titlebar: TitleBarAPI;
   theme: ThemeAPI;
+  downloader: DownloaderAPI;
 }

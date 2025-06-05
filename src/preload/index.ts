@@ -20,6 +20,13 @@ const api: API = {
   theme: {
     getCurrentColorMode: () => ipcRenderer.invoke("theme:get-current-color-mode"),
     setColorMode: (mode) => ipcRenderer.invoke("theme:set-color-mode", mode)
+  },
+  downloader: {
+    download: (opts) => ipcRenderer.invoke("downloader:download", opts),
+    onUpdateProgress: (callback) =>
+      ipcRenderer.on("downloader:update-progress", (_, data) => callback(data)),
+    onDownloadComplete: (callback) =>
+      ipcRenderer.on("downloader:download-complete", () => callback())
   }
 };
 

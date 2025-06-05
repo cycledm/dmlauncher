@@ -2,6 +2,8 @@ import { app, BrowserWindow, BrowserWindowConstructorOptions, nativeTheme } from
 import { resolve } from "path";
 import { Worker } from "worker_threads";
 import fileTracker from "@main/workers/file-tracker?modulePath";
+import { Downloader } from "./downloader";
+import { DownloadOptions } from "@main/interfaces/downloader";
 
 export type PrimaryBrowserWindowConstructorOptions = Omit<
   BrowserWindowConstructorOptions,
@@ -62,6 +64,21 @@ export class PrimaryBrowserWindow extends BrowserWindow {
       this.setBackgroundColor(nativeTheme.shouldUseDarkColors ? "black" : "white");
       this.webContents.send("titlebar:on-color-mode-change");
       return nativeTheme.themeSource;
+    });
+
+    // 下载
+    ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
+      opts.map((opt) => {
+        Downloader.addTask({
+          url: opt.url,
+          directory: opt.directory,
+          filename: opt.filename
+        });
+      });
+      Downloader.startDownload(
+        (data) => this.webContents.send("downloader:update-progress", data),
+        () => this.webContents.send("downloader:download-complete")
+      );
     });
   }
 
