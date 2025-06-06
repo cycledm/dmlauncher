@@ -98,6 +98,7 @@ export class Downloader {
    */
   private static async calcTaskSize(task: DownloadTask): Promise<number> {
     try {
+      if (task.total > 0) return task.total;
       const { headers } = await axios.head(task.url);
       const size = Number(headers["content-length"] ?? headers["Content-Length"] ?? 1);
       task.total = size;
@@ -111,7 +112,7 @@ export class Downloader {
   /**
    * 添加下载任务，同时获取文件的基本信息（Headers）
    */
-  public static async pushTask(opt: DownloadOptions): Promise<string> {
+  public static pushTask(opt: DownloadOptions): string {
     try {
       const { url, directory, filename } = opt;
       // 避免重复添加相同的任务
@@ -126,7 +127,7 @@ export class Downloader {
       const id = crypto.randomBytes(16).toString("hex");
       const status: DownloadTaskStatus = "pending";
       const transferred = 0;
-      const total = 0;
+      const total = opt.size ?? 0;
       const fails = 0;
 
       const task: DownloadTask = {
@@ -158,6 +159,7 @@ export class Downloader {
   public static async start(callbacks?: DownloadCallbacks): Promise<void> {
     if (this.running) return;
     this.running = true;
+    const startTime = Date.now();
 
     // 计算下载进度信息，出于性能考虑，使用计时器
     const interval = setInterval(() => {
@@ -174,6 +176,7 @@ export class Downloader {
         totalProgress,
         transferredBytes,
         totalBytes,
+        startTime,
         tasks: this.tasks
       });
 
@@ -246,6 +249,7 @@ export class Downloader {
   private async download(): Promise<void> {
     if (!this.activeTask) return;
     const task = this.activeTask;
+    task.startTime = Date.now();
     try {
       const { data, headers, status } = await axios.get<Stream>(task.url, {
         responseType: "stream",

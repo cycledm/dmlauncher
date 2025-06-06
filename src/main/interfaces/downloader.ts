@@ -9,12 +9,14 @@ export interface DownloadTask {
   directory?: string;
   filename?: string;
   fails?: number;
+  startTime?: number;
 }
 
 export interface DownloadOptions {
   url: string;
   directory?: string;
   filename?: string;
+  size?: number;
 }
 
 // 用于渲染进程获取下载器信息
@@ -22,5 +24,6 @@ export interface DownloaderInfoForRenderer {
   totalProgress: number;
   transferredBytes: number;
   totalBytes: number;
+  startTime?: number;
   tasks: DownloadTask[];
 }
