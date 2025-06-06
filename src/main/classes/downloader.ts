@@ -170,6 +170,7 @@ export class Downloader {
       if (validTasks.length === 0) {
         clearInterval(interval);
         onComplete?.();
+        Downloader.clearTasks();
         return;
       }
     }, 500);
