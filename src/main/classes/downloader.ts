@@ -158,7 +158,8 @@ export class Downloader {
 
       const transferredBytes = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
       const totalBytes = calcTasks.reduce((acc, task) => acc + task.total, 0);
-      const totalProgress = totalBytes > 0 ? Math.floor((transferredBytes / totalBytes) * 100) : 0;
+      const totalProgress =
+        totalBytes > 0 ? Math.floor((transferredBytes / totalBytes) * 10000) / 100 : 0;
       console.log(`Downloaded: ${totalProgress}% (${transferredBytes} of ${totalBytes} bytes)`);
       onProgress?.({
         totalProgress,
@@ -173,6 +174,6 @@ export class Downloader {
         Downloader.clearTasks();
         return;
       }
-    }, 500);
+    }, 100);
   }
 }
