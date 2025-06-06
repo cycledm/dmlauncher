@@ -68,17 +68,19 @@ export class PrimaryBrowserWindow extends BrowserWindow {
 
     // 下载
     ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
-      opts.map((opt) => {
-        Downloader.pushTask({
+      for (const opt of opts) {
+        await Downloader.pushTask({
           url: opt.url,
           directory: opt.directory,
           filename: opt.filename
         });
-      });
-      Downloader.startDownload(
-        (data) => this.webContents.send("downloader:update-progress", data),
-        () => this.webContents.send("downloader:download-complete")
-      );
+      }
+      if (!Downloader.isRunning()) {
+        Downloader.start({
+          onProgress: (data) => this.webContents.send("downloader:update-progress", data),
+          onComplete: () => this.webContents.send("downloader:download-complete")
+        });
+      }
     });
   }
 
