@@ -141,8 +141,7 @@ export class Downloader {
     for (const task of Downloader.tasks) {
       if (task.status !== "pending") continue;
       const res = await axios.head(task.url);
-      const length = (res.headers["content-length"] =
-        res.headers["content-length"] ?? res.headers["Content-Length"] ?? 0);
+      const length = res.headers["content-length"] ?? res.headers["Content-Length"] ?? 0;
       task.total = Number(length);
     }
 
