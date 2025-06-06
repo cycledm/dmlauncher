@@ -83,7 +83,7 @@ export class Downloader {
   //   return Downloader.instances;
   // }
 
-  public static addTask(opt: DownloadOptions): string {
+  public static pushTask(opt: DownloadOptions): string {
     const { url, directory, filename } = opt;
 
     // 生成唯一的任务 ID

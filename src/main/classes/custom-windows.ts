@@ -69,7 +69,7 @@ export class PrimaryBrowserWindow extends BrowserWindow {
     // 下载
     ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
       opts.map((opt) => {
-        Downloader.addTask({
+        Downloader.pushTask({
           url: opt.url,
           directory: opt.directory,
           filename: opt.filename
