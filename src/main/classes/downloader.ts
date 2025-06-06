@@ -51,6 +51,9 @@ export class Downloader {
       task.filename ?? headers["content-disposition"].split("filename=")[1] ?? task.id;
     const directory = task.directory ?? app.getPath("downloads");
     if (status === 200) {
+      // 确保目录存在
+      fs.mkdirSync(directory, { recursive: true });
+      // 创建写入流并将数据流写入文件
       const writer = fs.createWriteStream(path.join(directory, filename));
       data.pipe(writer);
       // 下载完成后重新调用 download 方法
