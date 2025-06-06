@@ -11,7 +11,7 @@ import {
 } from "@main/interfaces/downloader";
 
 // TODO: 下载线程数
-const LIMIT = 8;
+const LIMIT = 16;
 // TODO: 最大失败次数
 const MAX_FAILS = 3;
 
