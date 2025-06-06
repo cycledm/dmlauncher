@@ -158,24 +158,24 @@ export class Downloader {
    */
   public static async start(callbacks?: DownloadCallbacks): Promise<void> {
     if (this.running) return;
-    this.running = true;
     const startTime = Date.now();
+    this.running = true;
+
+    for (const task of this.tasks) {
+      await this.calcTaskSize(task);
+    }
 
     // 计算下载进度信息，出于性能考虑，使用计时器
     const interval = setInterval(() => {
       const calcTasks = this.tasks.filter((task) => (task.fails ?? 0) < MAX_FAILS);
-      const transferredBytes = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
-      const totalBytes = calcTasks.reduce((acc, task) => acc + task.total, 0);
-      const totalProgress =
-        totalBytes > 0 ? Math.floor((transferredBytes / totalBytes) * 10000) / 100 : 0;
-      console.log(
-        "[Downloader]",
-        `Downloaded: ${totalProgress}% (${transferredBytes} of ${totalBytes} bytes)`
-      );
+      const transferred = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
+      const total = calcTasks.reduce((acc, task) => acc + task.total, 0);
+      const progress = total > 0 ? Math.floor((transferred / total) * 10000) / 100 : 0;
+      console.log("[Downloader]", `Downloaded: ${progress}% (${transferred} of ${total} bytes)`);
       callbacks?.onProgress?.({
-        totalProgress,
-        transferredBytes,
-        totalBytes,
+        progress,
+        transferred,
+        total,
         startTime,
         tasks: this.tasks
       });
@@ -187,32 +187,6 @@ export class Downloader {
         callbacks?.onComplete?.();
       }
     }, 100);
-
-    // TODO: 启动下载循环，为每个实例分配下载任务（会阻塞主线程，也许可以在 Worker 中使用）
-    /*
-    while (this.running) {
-      // 等待下载的任务
-      const task = this.getPendingTask();
-      // 获取一个空闲的下载器实例
-      const instance = this.getInactiveInstance();
-      // 如果待下载任务和可用实例都不存在，则终止循环（视为下载完成）
-      if (!task && !instance) {
-        this.running = false;
-        continue;
-      }
-
-      // 如果没有待下载任务或没有可用实例，则进入下一次循环
-      if (!task || !instance) continue;
-      // 使用空闲实例开始下载
-      instance.activeTask = task;
-      task.status = "downloading";
-      instance.download();
-    }
-    // 清除定时器
-    clearInterval(interval);
-    // 执行回调函数
-    callbacks?.onComplete?.();
-    */
 
     // 递归调用此函数进行下载
     const recursiveDownload = (): void => {

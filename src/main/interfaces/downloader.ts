@@ -21,9 +21,9 @@ export interface DownloadOptions {
 
 // 用于渲染进程获取下载器信息
 export interface DownloaderInfoForRenderer {
-  totalProgress: number;
-  transferredBytes: number;
-  totalBytes: number;
+  progress: number;
+  transferred: number;
+  total: number;
   startTime?: number;
   tasks: DownloadTask[];
 }
