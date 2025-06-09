@@ -166,19 +166,34 @@ export class Downloader {
     }
 
     // 计算下载进度信息，出于性能考虑，使用计时器
+    let lastUpdateTime = startTime;
+    let lastUpdateTransferred = 0;
+    let lastUpdateSpeed = 0;
     const interval = setInterval(() => {
+      const currentTime = Date.now();
+      const duration = currentTime - lastUpdateTime;
       const calcTasks = this.tasks.filter((task) => (task.fails ?? 0) < MAX_FAILS);
       const transferred = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
       const total = calcTasks.reduce((acc, task) => acc + task.total, 0);
       const progress = total > 0 ? Math.floor((transferred / total) * 10000) / 100 : 0;
+      const speed =
+        duration >= 1000
+          ? Math.floor(((transferred - lastUpdateTransferred) / duration / 1000) * 100) / 100
+          : lastUpdateSpeed;
       console.log("[Downloader]", `Downloaded: ${progress}% (${transferred} of ${total} bytes)`);
       callbacks?.onProgress?.({
         progress,
         transferred,
         total,
         startTime,
+        speed,
         tasks: this.tasks
       });
+      if (duration >= 1000) {
+        lastUpdateTime = currentTime;
+        lastUpdateTransferred = transferred;
+        lastUpdateSpeed = speed;
+      }
 
       if (!this.running) {
         // 清除定时器

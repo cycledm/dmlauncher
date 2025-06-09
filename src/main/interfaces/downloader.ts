@@ -25,5 +25,6 @@ export interface DownloaderInfoForRenderer {
   transferred: number;
   total: number;
   startTime?: number;
+  speed?: number;
   tasks: DownloadTask[];
 }
