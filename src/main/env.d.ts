@@ -15,7 +15,7 @@ interface ViteTypeOptions {
  */
 interface ImportMetaEnv {
   readonly PROTECTED_AZURE_CLIENT_ID: string;
-  readonly PROTECTED_AZURE_SECRET_ID: string;
+  readonly PROTECTED_AZURE_CLIENT_SECRET: string;
 
   readonly COMM_APP_TITLE: string;
 
