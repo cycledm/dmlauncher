@@ -31,7 +31,7 @@ if (!gotTheLock) {
 
 // 设置应用程序的默认协议处理器（Scheme）
 // 在开发模式下，使用 `dmlauncher-dev` 协议
-if (!app.isPackaged) {
+if (!app.isPackaged && import.meta.env.MAIN_APP_PROTOCOL) {
   app.setAsDefaultProtocolClient(import.meta.env.MAIN_APP_PROTOCOL, process.execPath, [
     resolve(process.argv[1])
   ]);
