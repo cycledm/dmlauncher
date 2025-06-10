@@ -76,8 +76,19 @@ export class PrimaryBrowserWindow extends BrowserWindow {
       });
       if (!Downloader.isRunning()) {
         Downloader.startAll({
-          onProgress: (data) => this.webContents.send("downloader:update-progress", data),
-          onComplete: () => this.webContents.send("downloader:download-complete")
+          onStart: () => {
+            this.setProgressBar(0, { mode: "indeterminate" });
+          },
+          onProgress: (data) => {
+            this.setProgressBar(data.progress, {
+              mode: data.progress > 0 ? "normal" : "indeterminate"
+            });
+            this.webContents.send("downloader:update-progress", data);
+          },
+          onComplete: () => {
+            this.setProgressBar(-1);
+            this.webContents.send("downloader:download-complete");
+          }
         });
       }
     });

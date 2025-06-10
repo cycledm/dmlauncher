@@ -17,6 +17,7 @@ const DEFAULT_LIMIT = 16;
 const MAX_FAILS = 3;
 
 type DownloadCallbacks = {
+  onStart?: () => void;
   onProgress?: (data: DownloaderInfoForRenderer) => void;
   onComplete?: () => void;
 };
@@ -160,8 +161,10 @@ export class Downloader {
    */
   public static async startAll(callbacks?: DownloadCallbacks): Promise<void> {
     if (this.running) return;
-    const startTime = Date.now();
     this.running = true;
+
+    callbacks?.onStart?.();
+    const startTime = Date.now();
 
     for (const task of this.tasks) {
       await this.calcTaskSize(task);
@@ -177,16 +180,18 @@ export class Downloader {
       const calcTasks = this.tasks.filter((task) => (task.fails ?? 0) < MAX_FAILS);
       const transferred = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
       const total = calcTasks.reduce((acc, task) => acc + task.total, 0);
-      const progress = total > 0 ? Math.floor((transferred / total) * 10000) / 100 : 0;
+      const progress = total > 0 ? Number.parseFloat((transferred / total).toFixed(4)) : 0;
+      const percent = Number.parseFloat((progress * 100).toFixed(2));
       const calcSpeed = (): number => {
         if (!this.running) return 0;
         if (duration < 1000) return lastUpdateSpeed;
         return Math.floor(((transferred - lastUpdateTransferred) / duration / 1000) * 100) / 100;
       };
       const speed = calcSpeed();
-      console.log("[Downloader]", `Downloaded: ${progress}% (${transferred} of ${total} bytes)`);
+      console.log("[Downloader]", `Downloaded: ${percent}% (${transferred} of ${total} bytes)`);
       callbacks?.onProgress?.({
         progress,
+        percent,
         transferred,
         total,
         startTime,
