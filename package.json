@@ -1,8 +1,8 @@
 {
   "name": "dmlauncher",
   "productName": "DMLauncher",
+  "description": "DMLauncher",
   "version": "0.0.1",
-  "description": "An open-source, versatile Minecraft launcher based on Electron",
   "author": "CycleDM",
   "homepage": "https://github.com/cycledm/dmlauncher#readme",
   "repository": "github:cycledm/dmlauncher",
