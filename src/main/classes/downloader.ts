@@ -180,8 +180,8 @@ export class Downloader {
       const calcTasks = this.tasks.filter((task) => (task.fails ?? 0) < MAX_FAILS);
       const transferred = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
       const total = calcTasks.reduce((acc, task) => acc + task.total, 0);
-      const progress = total > 0 ? Number.parseFloat((transferred / total).toFixed(4)) : 0;
-      const percent = Number.parseFloat((progress * 100).toFixed(2));
+      const progress = total > 0 ? Number.parseFloat((transferred / total).toFixed(2)) : 0;
+      const percent = total > 0 ? Number.parseFloat(((transferred / total) * 100).toFixed(2)) : 0;
       const calcSpeed = (): number => {
         if (!this.running) return 0;
         if (duration < 1000) return lastUpdateSpeed;
