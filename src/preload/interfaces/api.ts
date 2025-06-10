@@ -21,6 +21,7 @@ interface ThemeAPI {
 
 interface DownloaderAPI {
   download: (opts: DownloadOptions[]) => Promise<void>;
+  stopAll: () => Promise<void>;
   onUpdateProgress: (callback: (data: DownloaderInfoForRenderer) => void) => void;
   onDownloadComplete: (callback: () => void) => void;
 }

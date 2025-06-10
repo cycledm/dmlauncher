@@ -23,6 +23,7 @@ const api: API = {
   },
   downloader: {
     download: (opts) => ipcRenderer.invoke("downloader:download", opts),
+    stopAll: () => ipcRenderer.invoke("downloader:stop-all"),
     onUpdateProgress: (callback) =>
       ipcRenderer.on("downloader:update-progress", (_, data) => callback(data)),
     onDownloadComplete: (callback) =>

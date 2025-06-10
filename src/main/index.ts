@@ -4,6 +4,7 @@ import { installExtension, REACT_DEVELOPER_TOOLS } from "electron-devtools-insta
 import MainWindow from "./classes/main-window";
 import { i18n } from "./utils";
 import { resolve } from "path";
+import { Downloader } from "./classes/downloader";
 
 function createMainWindow(): MainWindow {
   const mainWindow = new MainWindow();
@@ -100,6 +101,10 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+app.on("will-quit", () => {
+  Downloader.terminate();
 });
 
 // In this file you can include the rest of your app"s specific main process

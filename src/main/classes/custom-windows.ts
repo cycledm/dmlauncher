@@ -68,14 +68,21 @@ export class PrimaryBrowserWindow extends BrowserWindow {
 
     // 下载
     ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
-      opts.map((opt) => Downloader.pushTask(opt));
+      opts.map((opt) => {
+        // opt.url =
+        //   "https://mirrors.nju.edu.cn/adoptium/21/jdk/x64/windows/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip";
+        // opt.directory = join(app.getPath("downloads"), "jdk");
+        Downloader.pushTask(opt);
+      });
       if (!Downloader.isRunning()) {
-        Downloader.start({
+        Downloader.startAll({
           onProgress: (data) => this.webContents.send("downloader:update-progress", data),
           onComplete: () => this.webContents.send("downloader:download-complete")
         });
       }
     });
+    // 取消下载
+    ipc.handle("downloader:stop-all", () => Downloader.stopAll());
   }
 
   /**

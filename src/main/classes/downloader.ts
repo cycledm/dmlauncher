@@ -25,8 +25,10 @@ export class Downloader {
   private static limit: number = DEFAULT_LIMIT;
   private static instances: Downloader[] = [];
   private static tasks: DownloadTask[] = [];
+  private static timer: NodeJS.Timeout | null = null;
   private static running: boolean = false;
   private activeTask: DownloadTask | null = null;
+  private controller: AbortController | null = null;
 
   private constructor() {
     if (Downloader.instances.length >= Downloader.limit) {
@@ -41,7 +43,7 @@ export class Downloader {
   }
 
   /**
-   * 获取批量下载是否在进行中
+   * 获取下载器是否在运行中
    */
   public static isRunning(): boolean {
     return this.running;
@@ -154,9 +156,9 @@ export class Downloader {
   }
 
   /**
-   * 启动下载任务（批量）
+   * 启动所有下载任务
    */
-  public static async start(callbacks?: DownloadCallbacks): Promise<void> {
+  public static async startAll(callbacks?: DownloadCallbacks): Promise<void> {
     if (this.running) return;
     const startTime = Date.now();
     this.running = true;
@@ -169,17 +171,19 @@ export class Downloader {
     let lastUpdateTime = startTime;
     let lastUpdateTransferred = 0;
     let lastUpdateSpeed = 0;
-    const interval = setInterval(() => {
+    this.timer = setInterval(() => {
       const currentTime = Date.now();
       const duration = currentTime - lastUpdateTime;
       const calcTasks = this.tasks.filter((task) => (task.fails ?? 0) < MAX_FAILS);
       const transferred = calcTasks.reduce((acc, task) => acc + task.transferred, 0);
       const total = calcTasks.reduce((acc, task) => acc + task.total, 0);
       const progress = total > 0 ? Math.floor((transferred / total) * 10000) / 100 : 0;
-      const speed =
-        duration >= 1000
-          ? Math.floor(((transferred - lastUpdateTransferred) / duration / 1000) * 100) / 100
-          : lastUpdateSpeed;
+      const calcSpeed = (): number => {
+        if (!this.running) return 0;
+        if (duration < 1000) return lastUpdateSpeed;
+        return Math.floor(((transferred - lastUpdateTransferred) / duration / 1000) * 100) / 100;
+      };
+      const speed = calcSpeed();
       console.log("[Downloader]", `Downloaded: ${progress}% (${transferred} of ${total} bytes)`);
       callbacks?.onProgress?.({
         progress,
@@ -195,13 +199,14 @@ export class Downloader {
         lastUpdateSpeed = speed;
       }
 
-      if (!this.running) {
+      if (!this.running && this.timer) {
         // 清除定时器
-        clearInterval(interval);
+        clearInterval(this.timer);
+        this.timer = null;
         // 执行回调函数
         callbacks?.onComplete?.();
       }
-    }, 100);
+    }, 50);
 
     // 递归调用此函数进行下载
     const recursiveDownload = (): void => {
@@ -225,7 +230,7 @@ export class Downloader {
       // 使用空闲实例开始下载
       inactiveInstance.activeTask = task;
       task.status = "downloading";
-      inactiveInstance.download();
+      inactiveInstance.start();
       setImmediate(() => recursiveDownload());
     };
 
@@ -233,27 +238,66 @@ export class Downloader {
   }
 
   /**
+   * 终止所有下载任务
+   */
+  public static stopAll(): void {
+    this.running = false;
+    this.instances.forEach((instance) => instance.stop());
+    this.tasks.forEach((task) => {
+      const { directory, filename } = task;
+      if (!directory || !filename) return;
+      // 检查文件是否存在
+      if (!fs.existsSync(path.join(directory, filename))) return;
+      try {
+        fs.unlinkSync(path.join(directory, filename));
+      } catch (err) {
+        console.log("[Downloader]", `Failed to delete file ${filename}:`, err);
+      }
+    });
+    // TODO: 任务状态
+    this.tasks = [];
+  }
+
+  /**
+   * 强制终止下载器，清理正在使用的回调，主要用于在应用退出时调用
+   */
+  public static terminate(): void {
+    if (!this.running) return;
+
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+    this.stopAll();
+  }
+
+  /**
    * 当前实例开始执行被分配的下载任务
    */
-  private async download(): Promise<void> {
+  private async start(): Promise<void> {
     if (!this.activeTask) return;
     const task = this.activeTask;
-    task.startTime = Date.now();
     try {
+      this.controller = new AbortController();
+      task.startTime = Date.now();
+
       const { data, headers, status } = await axios.get<Stream>(task.url, {
         responseType: "stream",
         onDownloadProgress: (progressEvent) => {
           task.transferred = progressEvent.loaded;
           // TODO: 对于没有 Content-Length 的响应，需要额外处理
           task.total = progressEvent.total ?? progressEvent.loaded + 1;
-        }
+        },
+        signal: this.controller.signal
       });
-      const filename =
+      const filename: string =
         task.filename ??
         headers["content-disposition"].split("filename=")[1] ??
         headers["Content-Disposition"].split("filename=")[1] ??
         task.id;
-      const directory = task.directory ?? app.getPath("downloads");
+      const directory: string = task.directory ?? app.getPath("downloads");
+      task.filename = filename;
+      task.directory = directory;
 
       if (status === 200) {
         // 确保目录存在
@@ -261,15 +305,23 @@ export class Downloader {
         // 创建写入流并将数据流写入文件
         const writer = fs.createWriteStream(path.join(directory, filename));
         data.pipe(writer);
+
+        // 接收到终止信号时终止写入流
+        this.controller.signal.onabort = () => {
+          writer.end();
+        };
+
         writer.on("finish", () => {
           task.status = "completed";
           this.activeTask = null;
+          this.controller = null;
         });
         writer.on("error", (error) => {
           console.error("[Downloader]", `Error downloading file from ${task.url}:`, error);
           task.status = "failed";
           task.fails = (task.fails ?? 0) + 1;
           this.activeTask = null;
+          this.controller = null;
         });
       } else {
         throw new Error(`Download failed with status ${status} for URL: ${task.url}`);
@@ -279,6 +331,15 @@ export class Downloader {
       task.status = "failed";
       task.fails = (task.fails ?? 0) + 1;
       this.activeTask = null;
+      this.controller = null;
     }
+  }
+
+  /**
+   * 当前实例停止下载任务
+   */
+  private stop(): void {
+    this.controller?.abort();
+    this.activeTask = null;
   }
 }
