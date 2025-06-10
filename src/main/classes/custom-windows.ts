@@ -1,5 +1,5 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, nativeTheme } from "electron";
-import { resolve } from "path";
+import path from "path";
 import { Worker } from "worker_threads";
 import fileTracker from "@main/workers/file-tracker?modulePath";
 import { Downloader } from "./downloader";
@@ -71,7 +71,7 @@ export class PrimaryBrowserWindow extends BrowserWindow {
       opts.map((opt) => {
         // opt.url =
         //   "https://mirrors.nju.edu.cn/adoptium/21/jdk/x64/windows/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip";
-        // opt.directory = join(app.getPath("downloads"), "jdk");
+        // opt.directory = path.join(app.getPath("downloads"), "jdk");
         Downloader.pushTask(opt);
       });
       if (!Downloader.isRunning()) {
@@ -93,6 +93,6 @@ export class PrimaryBrowserWindow extends BrowserWindow {
     tracker.on("error", (error) => console.error("Worker exit with error:", error));
     tracker.on("exit", (code) => console.log("Worker exit with code:", code));
     tracker.on("message", () => this.reload());
-    tracker.postMessage({ dir: resolve(app.getAppPath(), "resources", "locales") });
+    tracker.postMessage({ dir: path.resolve(app.getAppPath(), "resources", "locales") });
   }
 }
