@@ -35,10 +35,12 @@
     "electron-updater": "^6.6.2"
   },
   "devDependencies": {
+    "@base-ui-components/react": "1.0.0-beta.0",
     "@dotenvx/dotenvx": "^1.44.1",
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
     "@electron-toolkit/eslint-config-ts": "^3.1.0",
     "@electron-toolkit/tsconfig": "^1.0.1",
+    "@floating-ui/react": "^0.27.12",
     "@fontsource-variable/jetbrains-mono": "^5.2.6",
     "@fontsource-variable/noto-sans-sc": "^5.2.6",
     "@fontsource-variable/noto-serif-sc": "^5.2.6",
