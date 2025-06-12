@@ -42,7 +42,8 @@ export default function TitleBar({ icon }: Props): React.JSX.Element {
   return (
     <div
       className={clsx(
-        "app-drag absolute top-[var(--titlebar-y)] z-100 h-[var(--titlebar-h)] w-dvw overflow-hidden select-none",
+        "relative z-100 size-full",
+        "app-drag overflow-hidden select-none",
         "bg-[#f0f0f0] dark:bg-[#202020]",
         {
           "text-black dark:text-white": focused,
@@ -52,7 +53,7 @@ export default function TitleBar({ icon }: Props): React.JSX.Element {
       draggable={false}
       ref={ref}
     >
-      <div className="left-[var(--titlebar-x)] h-full w-[var(--titlebar-w)]">
+      <div className="absolute left-[var(--titlebar-x)] h-full w-[var(--titlebar-w)]">
         <div className="ms-2 flex h-full items-center justify-start gap-1">
           {icon && (
             <img

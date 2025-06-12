@@ -1,34 +1,32 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import "@renderer/utils/i18n";
+import useSWRImmutable, { Fetcher } from "swr";
+import i18next from "i18next";
+import rtb from "i18next-resources-to-backend";
+import { initReactI18next } from "react-i18next";
 
-interface UseI18nInitResponse {
-  loading: boolean;
-}
+const fetcher: Fetcher<null, string> = async () => {
+  const supported = await window.api.i18n.loadSupported();
+  await i18next
+    .use(initReactI18next)
+    .use(rtb((lng: string, ns: string) => window.api.i18n.loadResource(lng, ns)))
+    .init({
+      debug: import.meta.env.DEV,
+      lng: supported.languages[0],
+      fallbackLng: supported.languages,
+      supportedLngs: supported.languages,
+      ns: supported.namespaces,
+      defaultNS: "common",
+      load: "currentOnly"
+    });
+
+  const appLocale = await window.api.i18n.getAppLocale();
+  await i18next.changeLanguage(appLocale);
+  return null;
+};
 
 /**
  * i18n初始化hook
  */
-export function useI18nInit(): UseI18nInitResponse {
-  const { i18n } = useTranslation();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const init = async (): Promise<void> => {
-      if (!i18n.isInitialized) return;
-
-      try {
-        const appLocale = await window.api.i18n.getAppLocale();
-        await i18n.changeLanguage(appLocale);
-      } catch (error) {
-        console.error("Failed to initialize i18n:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    init();
-  }, [i18n]);
-
-  return { loading };
+export function useI18nInit(): { data: null } {
+  const { data } = useSWRImmutable("i18n-init", fetcher, { suspense: true });
+  return { data };
 }

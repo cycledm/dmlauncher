@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { CgSpinner } from "react-icons/cg";
 import clsx from "clsx";
 
@@ -20,8 +19,6 @@ export default function Spinner({
   pulse,
   hidden
 }: Props): React.JSX.Element {
-  const { t } = useTranslation();
-
   return (
     <div
       className={clsx(
@@ -37,7 +34,7 @@ export default function Spinner({
       <div className={clsx({ "animate-none": !pulse, "animate-pulse": pulse })}>
         <CgSpinner className="animate-spin" size={fullscreen ? "5rem" : size || "100%"} />
       </div>
-      <span className="sr-only">{t("loading")}</span>
+      {/* <span className="sr-only">{t("loading")}</span> */}
     </div>
   );
 }

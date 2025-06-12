@@ -13,6 +13,7 @@
   --font-mono:
     "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+
   /* Electron 窗口控制 */
   --app-region-drag: drag;
   --app-region-nodrag: no-drag;
@@ -21,6 +22,9 @@
   --titlebar-y: env(titlebar-area-y, 0);
   --titlebar-w: env(titlebar-area-width, 100%);
   --titlebar-h: env(titlebar-area-height, 30px);
+
+  /* 侧边导航栏 */
+  --sidebar-w: 3rem;
 }
 
 /* Electron 窗口拖动 */
