@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import prettyBytes from "pretty-bytes";
@@ -12,15 +12,6 @@ export default function Home(): React.JSX.Element {
   const [totalBytes, setTotalBytes] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // 创建一个测试用的localStorage条目
-    localStorage.setItem("testKey", "testValue");
-    // 从localStorage中获取并打印该条目
-    console.log(localStorage.getItem("testKey"));
-    // 清除localStorage中的该条目
-    localStorage.removeItem("testKey");
-  }, []);
 
   const handleDownload = async (): Promise<void> => {
     if (loading) return;

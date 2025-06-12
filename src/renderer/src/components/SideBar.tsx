@@ -4,30 +4,52 @@ import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Popover } from "@base-ui-components/react/popover";
 import routes from "@renderer/routes";
+import { BiSolidHome } from "react-icons/bi";
+import { BiSolidCoffee } from "react-icons/bi";
+import { VscVscode } from "react-icons/vsc";
 
 export function SideBar(): React.JSX.Element {
   const { t } = useTranslation("page");
 
+  const styles = {
+    icon: clsx("size-full"),
+    backdropColor: clsx("bg-[#f0f0f0] dark:bg-[#202020]"),
+    itemColor: clsx("bg-blue-200 dark:bg-blue-700")
+  };
+
+  const icons = {
+    home: <BiSolidHome className={styles.icon} />,
+    java: <BiSolidCoffee className={styles.icon} />,
+    template: <VscVscode className={styles.icon} />
+  };
+
   return (
-    <div className={clsx("size-full", "bg-red-50", "overflow-hidden")}>
+    <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
       <div className={clsx("relative", "size-full", "px-1 py-1")}>
         <nav className={clsx("size-full")}>
-          <ul className={clsx("w-full", "flex flex-col gap-0.5", "items-center justify-start")}>
-            {routes.map(({ id, path }, idx) => (
+          <ul
+            className={clsx(
+              "app-no-drag",
+              "w-full",
+              "flex flex-col gap-0.5",
+              "items-center justify-start"
+            )}
+          >
+            {routes.map(({ id, path }) => (
               <SideBarItem key={id} popoverText={t(`${id}.name`)}>
                 <NavLink className={clsx("size-full")} to={path ?? "/"} viewTransition>
                   {({ isActive }) => (
                     <div
                       className={clsx(
-                        "size-full",
+                        "size-full p-2",
                         "flex items-center justify-center",
                         "rounded-md",
                         {
-                          "bg-red-400": isActive
+                          [styles.itemColor]: isActive
                         }
                       )}
                     >
-                      {idx}
+                      {id ? icons[id] : null}
                     </div>
                   )}
                 </NavLink>

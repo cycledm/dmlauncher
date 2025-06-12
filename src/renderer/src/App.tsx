@@ -9,9 +9,9 @@ import { TitleBar } from "@renderer/components";
 
 import icon from "@renderer/assets/electron.svg";
 
-function I18nProvider(): null {
-  const { data } = useI18nInit();
-  return data;
+function I18nProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
+  useI18nInit();
+  return <React.Fragment>{children}</React.Fragment>;
 }
 
 export default function App(): React.JSX.Element {
@@ -33,25 +33,26 @@ export default function App(): React.JSX.Element {
           fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
         >
           <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
-            <I18nProvider />
-            <div className={clsx("size-full", "grid grid-cols-[var(--sidebar-w)_1fr]")}>
-              {/* 侧边导航栏 */}
-              <SideBar />
-              {/* 主内容区域 */}
-              <div className={clsx("relative", "size-full", "overflow-hidden")}>
-                <ErrorBoundary
-                  fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
-                  key={navigation.location?.key || location.key}
-                >
-                  <Suspense
-                    fallback={<Spinner className="size-full" size="4rem" center pulse />}
+            <I18nProvider>
+              <div className={clsx("size-full", "grid grid-cols-[var(--sidebar-w)_1fr]")}>
+                {/* 侧边导航栏 */}
+                <SideBar />
+                {/* 主内容区域 */}
+                <div className={clsx("relative", "size-full", "overflow-hidden")}>
+                  <ErrorBoundary
+                    fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
                     key={navigation.location?.key || location.key}
                   >
-                    <Outlet />
-                  </Suspense>
-                </ErrorBoundary>
+                    <Suspense
+                      fallback={<Spinner className="size-full" size="4rem" center pulse />}
+                      key={navigation.location?.key || location.key}
+                    >
+                      <Outlet />
+                    </Suspense>
+                  </ErrorBoundary>
+                </div>
               </div>
-            </div>
+            </I18nProvider>
           </Suspense>
         </ErrorBoundary>
       </div>
