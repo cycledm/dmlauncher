@@ -33,6 +33,7 @@
     "chokidar": "^4.0.3",
     "electron-devtools-installer": "^4.0.0",
     "electron-updater": "^6.6.2",
+    "pretty-bytes": "^7.0.0",
     "ts-case-convert": "^2.1.0"
   },
   "devDependencies": {

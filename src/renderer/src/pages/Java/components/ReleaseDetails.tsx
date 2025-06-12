@@ -6,7 +6,7 @@ type Props = {
   version?: number | null;
 };
 
-export default function ReleaseDetails({ version }: Props): React.JSX.Element {
+export function ReleaseDetails({ version }: Props): React.JSX.Element {
   const { releaseDetails } = useAdoptium(version);
 
   if (!version || !releaseDetails) {
