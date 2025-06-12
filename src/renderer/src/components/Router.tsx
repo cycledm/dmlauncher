@@ -1,27 +1,24 @@
 import React from "react";
-import { HashRouter, Route, Routes } from "react-router";
+import { createHashRouter, RouteObject, RouterProvider } from "react-router";
 import BaseLayout from "./BaseLayout";
-import { RouteInfo } from "@renderer/interfaces/";
 import Template from "@renderer/pages/Template";
 import Home from "@renderer/pages/Home";
 import Java from "@renderer/pages/Java";
 
-const mainRoutes: RouteInfo[] = [
-  { key: "home", path: "/", element: <Home /> },
-  { key: "java", path: "/java", element: <Java /> },
-  { key: "template", path: "/template", element: <Template /> }
+const mainRoutes: RouteObject[] = [
+  { id: "home", path: "/", Component: Home },
+  { id: "java", path: "/java", Component: Java },
+  { id: "template", path: "/template", Component: Template }
 ];
 
+const root = createHashRouter([
+  {
+    path: "/",
+    element: <BaseLayout routes={mainRoutes} />,
+    children: mainRoutes
+  }
+]);
+
 export default function Router(): React.JSX.Element {
-  return (
-    <HashRouter>
-      <Routes>
-        <Route element={<BaseLayout routes={mainRoutes} />}>
-          {mainRoutes.map(({ key, path, element }) => (
-            <Route key={key} path={path} element={element} />
-          ))}
-        </Route>
-      </Routes>
-    </HashRouter>
-  );
+  return <RouterProvider router={root} />;
 }

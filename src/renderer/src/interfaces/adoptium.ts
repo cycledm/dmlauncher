@@ -9,7 +9,7 @@ type AdoptiumPackageInfo = {
   size: number;
 };
 
-export interface AdoptiumReleaseInfo {
+export interface AdoptiumReleasesInfo {
   availableLtsReleases: number[];
   availableReleases: number[];
   mostRecentFeatureRelease: number;

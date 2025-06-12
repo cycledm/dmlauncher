@@ -1,8 +1,7 @@
 //import { useElectron } from ".";
 
 import useSWR, { Fetcher } from "swr";
-import { AdoptiumReleaseInfo as AdoptiumReleasesInfo } from "@renderer/interfaces";
-import { AdoptiumReleaseDetails } from "@renderer/interfaces/adoptium";
+import { AdoptiumReleasesInfo, AdoptiumReleaseDetails } from "@renderer/interfaces";
 import { fetcher } from "@renderer/utils/java";
 
 interface UseAdoptiumResponse {

@@ -1,17 +1,17 @@
 import React, { Suspense, useState } from "react";
-import { useLocation, Outlet, NavLink } from "react-router";
-import { RouteInfo } from "@renderer/interfaces/";
+import { useLocation, Outlet, NavLink, useNavigation, RouteObject } from "react-router";
 import Spinner from "./Spinner";
 import clsx from "clsx";
 import { Popover } from "@base-ui-components/react/popover";
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  routes: RouteInfo[];
+  routes: RouteObject[];
 };
 
 export default function BaseLayout({ routes }: Props): React.JSX.Element {
   const location = useLocation();
+  const navigation = useNavigation();
   const { t } = useTranslation("page");
 
   return (
@@ -27,9 +27,9 @@ export default function BaseLayout({ routes }: Props): React.JSX.Element {
           <div className={clsx("relative size-full px-1 py-1")}>
             <nav className="size-full">
               <ul className="flex w-full flex-col items-center justify-start gap-0.5">
-                {routes.map(({ key, path }, idx) => (
-                  <SideBarItem key={key} popoverText={t(`${key}.name`)}>
-                    <NavLink className="size-full" to={path}>
+                {routes.map(({ id, path }, idx) => (
+                  <SideBarItem key={id} popoverText={t(`${id}.name`)}>
+                    <NavLink className="size-full" to={path ?? "/"}>
                       {({ isActive }) => (
                         <div
                           className={clsx(
@@ -51,11 +51,11 @@ export default function BaseLayout({ routes }: Props): React.JSX.Element {
           </div>
         </div>
         {/* 主内容区域 */}
-        <div
-          className="relative size-full overflow-hidden"
-          key={routes.find(({ path }) => location.pathname === path)?.key}
-        >
-          <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
+        <div className="relative size-full overflow-hidden">
+          <Suspense
+            fallback={<Spinner className="size-full" size="4rem" center pulse />}
+            key={navigation.location?.key || location.key}
+          >
             <Outlet />
           </Suspense>
         </div>
