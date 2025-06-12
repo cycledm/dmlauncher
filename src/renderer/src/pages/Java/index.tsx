@@ -6,14 +6,14 @@ import { ReleaseDetails } from "./components";
 
 export default function Java(): React.JSX.Element {
   const { releasesInfo } = useAdoptium();
-  const { setColorMode } = useElectron();
+  const { theme } = useElectron();
   const [showLtsOnly, setShowLtsOnly] = useState(false);
   const [filteredReleases, setFilteredReleases] = useState(releasesInfo.availableReleases);
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
 
   useEffect(() => {
-    setColorMode("light");
-  }, [releasesInfo, setColorMode]);
+    theme.setColorMode("light");
+  }, [releasesInfo, theme]);
 
   useEffect(() => {
     const filtered = releasesInfo.availableReleases

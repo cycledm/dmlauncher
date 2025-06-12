@@ -1,12 +1,14 @@
 interface useElectronResponse {
-  getCurrentColorMode: () => Promise<"system" | "light" | "dark">;
-  setColorMode: (mode: "system" | "light" | "dark") => Promise<"system" | "light" | "dark">;
+  i18n: Window["api"]["i18n"];
+  theme: Window["api"]["theme"];
+  titlebar: Window["api"]["titlebar"];
   downloader: Window["api"]["downloader"];
 }
 
 export function useElectron(): useElectronResponse {
-  const getCurrentColorMode = window.api.theme.getCurrentColorMode;
-  const setColorMode = window.api.theme.setColorMode;
+  const i18n = window.api.i18n;
+  const theme = window.api.theme;
+  const titlebar = window.api.titlebar;
   const downloader = window.api.downloader;
-  return { getCurrentColorMode, setColorMode, downloader };
+  return { i18n, theme, titlebar, downloader };
 }

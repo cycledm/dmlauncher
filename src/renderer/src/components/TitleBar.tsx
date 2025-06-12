@@ -1,18 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { formatHex8, parse } from "culori";
+import { useElectron } from "@renderer/hooks";
 
 type Props = {
   icon?: string;
 };
 
 export function TitleBar({ icon }: Props): React.JSX.Element {
+  const { titlebar } = useElectron();
+
   const ref = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
 
-  const setColor = async (): Promise<void> => {
+  const setColor = useCallback(async (): Promise<void> => {
     if (!ref.current) return;
-    const focused = await window.api.titlebar.isFocused();
+    const focused = await titlebar.isFocused();
     const bgColor = window.getComputedStyle(ref.current).backgroundColor;
     const textColor = window.getComputedStyle(ref.current).color;
     if (!bgColor || !textColor) return;
@@ -26,18 +29,18 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
     const symbolColor = formatHex8(parsedTextColor);
     if (!color || !symbolColor) return;
 
-    window.api.titlebar.setColor({ color, symbolColor });
-  };
+    titlebar.setColor({ color, symbolColor });
+  }, [titlebar]);
 
   useEffect(() => {
-    window.api.titlebar.isFocused().then(setFocused);
-    window.api.titlebar.onFocusChange(setFocused);
-    window.api.titlebar.onColorModeChange(() => setColor());
-  }, []);
+    titlebar.isFocused().then(setFocused);
+    titlebar.onFocusChange(setFocused);
+    titlebar.onColorModeChange(() => setColor());
+  }, [setColor, titlebar]);
 
   useEffect(() => {
     setColor();
-  });
+  }, [setColor]);
 
   return (
     <div

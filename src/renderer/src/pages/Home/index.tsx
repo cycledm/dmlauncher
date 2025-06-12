@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
 import prettyBytes from "pretty-bytes";
+import { useElectron } from "@renderer/hooks";
 
 export default function Home(): React.JSX.Element {
+  const { downloader } = useElectron();
+
   const [progress, setProgress] = useState(0);
   const [transferredBytes, setTransferredBytes] = useState(0);
   const [totalBytes, setTotalBytes] = useState(0);
@@ -41,20 +44,20 @@ export default function Home(): React.JSX.Element {
       return { ...opt, filename: `${idx + 1}.zip` };
     });
 
-    await window.api.downloader.download(opts);
-    window.api.downloader.onUpdateProgress((data) => {
+    await downloader.download(opts);
+    downloader.onUpdateProgress((data) => {
       setProgress(data.percent);
       setTransferredBytes(data.transferred);
       setTotalBytes(data.total);
       setSpeed(data.speed ?? 0);
     });
-    window.api.downloader.onDownloadComplete(() => {
+    downloader.onDownloadComplete(() => {
       setLoading(false);
     });
   };
 
   const handleCancel = async (): Promise<void> => {
-    await window.api.downloader.stopAll();
+    await downloader.stopAll();
     setProgress(0);
     setTransferredBytes(0);
     setTotalBytes(0);
