@@ -119,9 +119,7 @@ export class Downloader {
     try {
       const { url, directory, filename } = opt;
       // 避免重复添加相同的任务
-      const existingTask = this.tasks.find(
-        (task) => task.url === url && task.directory === directory && task.filename === filename
-      );
+      const existingTask = this.tasks.find((task) => task.url === url);
       if (existingTask) {
         console.warn("[Downloader]", "Task already exists:", existingTask.id);
         return existingTask.id;

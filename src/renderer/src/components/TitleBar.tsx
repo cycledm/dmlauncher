@@ -6,7 +6,7 @@ type Props = {
   icon?: string;
 };
 
-export default function TitleBar({ icon }: Props): React.JSX.Element {
+export function TitleBar({ icon }: Props): React.JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
 

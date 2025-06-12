@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
-export default function Versions(): React.JSX.Element {
+export function Versions(): React.JSX.Element {
   const versionStyles = ["float-left block px-[20px] py-0", "text-[14px]/[14px] opacity-80"];
   const [versions] = useState(window.electron.process.versions);
 

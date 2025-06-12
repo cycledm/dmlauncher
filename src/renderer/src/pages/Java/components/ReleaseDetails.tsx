@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import prettyBytes from "pretty-bytes";
-import { useAdoptium } from "@renderer/hooks";
+import { useAdoptium, useElectron } from "@renderer/hooks";
 
 type Props = {
   version?: number | null;
@@ -136,9 +136,9 @@ function DownloadCard({
   downloadUrl,
   checksumUrl
 }: DownloadCardProps): React.JSX.Element {
+  const { downloader } = useElectron();
   const handleDownload = (): void => {
-    // 这里将来可以集成下载功能
-    window.open(downloadUrl, "_blank");
+    downloader.download([{ url: downloadUrl }]);
   };
 
   return (

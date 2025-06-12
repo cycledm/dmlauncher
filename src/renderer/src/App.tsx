@@ -3,9 +3,9 @@ import clsx from "clsx";
 import { useLocation, Outlet, useNavigation } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 import { useI18nInit } from "@renderer/hooks";
-import SideBar from "@renderer/components/SideBar";
-import Spinner from "@renderer/components/Spinner";
-import TitleBar from "@renderer/components/TitleBar";
+import { SideBar } from "@renderer/components";
+import { Spinner } from "@renderer/components";
+import { TitleBar } from "@renderer/components";
 
 import icon from "@renderer/assets/electron.svg";
 

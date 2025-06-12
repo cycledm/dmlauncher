@@ -11,7 +11,7 @@ type Props = {
   hidden?: boolean;
 };
 
-export default function Spinner({
+export function Spinner({
   className,
   size,
   fullscreen,
