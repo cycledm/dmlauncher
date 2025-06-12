@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import prettyBytes from "pretty-bytes";
 import { useAdoptium } from "@renderer/hooks";
 
 type Props = {
@@ -24,14 +25,6 @@ export function ReleaseDetails({ version }: Props): React.JSX.Element {
       </div>
     );
   }
-
-  const formatBytes = (bytes: number): string => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
 
   const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString("zh-CN", {
@@ -102,7 +95,7 @@ export function ReleaseDetails({ version }: Props): React.JSX.Element {
           <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">下载选项</h2>
           <DownloadCard
             title={releaseDetails.binary.package.name}
-            size={formatBytes(releaseDetails.binary.package.size)}
+            size={prettyBytes(releaseDetails.binary.package.size, { binary: true })}
             downloadCount={releaseDetails.binary.package.downloadCount}
             downloadUrl={releaseDetails.binary.package.link}
             checksumUrl={releaseDetails.binary.package.checksumLink}

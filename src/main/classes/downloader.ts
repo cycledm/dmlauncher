@@ -185,7 +185,7 @@ export class Downloader {
       const calcSpeed = (): number => {
         if (!this.running) return 0;
         if (duration < 1000) return lastUpdateSpeed;
-        return Math.floor(((transferred - lastUpdateTransferred) / duration / 1000) * 100) / 100;
+        return Math.floor(((transferred - lastUpdateTransferred) / duration) * 1000 * 100) / 100;
       };
       const speed = calcSpeed();
       console.log("[Downloader]", `Downloaded: ${percent}% (${transferred} of ${total} bytes)`);

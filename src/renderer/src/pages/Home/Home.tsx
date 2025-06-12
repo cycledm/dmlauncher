@@ -1,6 +1,7 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import prettyBytes from "pretty-bytes";
 
 export default function Home(): React.JSX.Element {
   const [progress, setProgress] = useState(0);
@@ -82,7 +83,7 @@ export default function Home(): React.JSX.Element {
         <span>
           {progress.toFixed(2)}% ({transferredBytes} of {totalBytes} bytes)
         </span>
-        <span>{`Speed: ${speed.toFixed(2)} MB/s`}</span>
+        <span>{`Speed: ${prettyBytes(speed, { binary: true, minimumFractionDigits: 2, maximumFractionDigits: 2 })}/s`}</span>
         <button
           className={clsx(
             "bg-red-600",
