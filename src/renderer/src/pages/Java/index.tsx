@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useElectron, useAdoptium } from "@renderer/hooks";
 import clsx from "clsx";
-import { Spinner } from "@renderer/components";
+import { SimpleCard, Spinner } from "@renderer/components";
 import { ReleaseDetails } from "./components";
 
 export default function Java(): React.JSX.Element {
@@ -23,7 +23,7 @@ export default function Java(): React.JSX.Element {
   }, [releasesInfo, showLtsOnly]);
 
   return (
-    <div className="grid size-full grid-cols-[16rem_1fr]">
+    <div className="grid size-full grid-cols-[16rem_1fr] select-none">
       <div className="flex size-full flex-col gap-2 overflow-auto p-2">
         {/* LTS 筛选复选框 */}
         <div className="flex items-center gap-2">
@@ -52,29 +52,26 @@ export default function Java(): React.JSX.Element {
             <li
               key={version}
               onClick={() => setSelectedVersion(version)}
-              className={clsx(
-                "w-full p-2",
-                "cursor-pointer transition-colors",
-                "rounded-lg shadow-sm",
-                "",
-                "hover:outline-blue-700 dark:hover:bg-gray-700",
-                {
-                  "bg-gray-100 outline-2 outline-blue-700 dark:bg-gray-700":
-                    selectedVersion === version,
-                  "bg-white outline outline-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:outline-gray-700":
-                    selectedVersion !== version
-                }
-              )}
+              className={clsx("w-full")}
             >
-              <div className="flex items-center justify-between">
-                <span className="font-medium">Adoptium Java {version}</span>
-                {releasesInfo.availableLtsReleases.includes(version) && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">LTS</span>
-                )}
-              </div>
-              <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                OpenJDK {version} with HotSpot
-              </div>
+              <SimpleCard
+                className={clsx("cursor-pointer", "hover:outline-blue-700 dark:hover:bg-gray-700", {
+                  "bg-gray-100 outline-2 outline-blue-700 dark:bg-gray-700 dark:outline-blue-700":
+                    selectedVersion === version,
+                  "bg-white outline outline-gray-200 hover:bg-gray-50 dark:bg-gray-800":
+                    selectedVersion !== version
+                })}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">Adoptium Java {version}</span>
+                  {releasesInfo.availableLtsReleases.includes(version) && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">LTS</span>
+                  )}
+                </div>
+                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                  OpenJDK {version} with HotSpot
+                </div>
+              </SimpleCard>
             </li>
           ))}
         </ul>
