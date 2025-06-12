@@ -2,6 +2,9 @@
   "home": {
     "name": "Home"
   },
+  "java": {
+    "name": "Java Management"
+  },
   "template": {
     "name": "Template"
   }

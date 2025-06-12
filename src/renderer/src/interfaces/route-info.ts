@@ -1,4 +1,4 @@
-export default interface RouteInfo {
+export interface RouteInfo {
   key: string;
   path: string;
   element: React.JSX.Element;

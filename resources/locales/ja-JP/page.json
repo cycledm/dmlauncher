@@ -2,6 +2,9 @@
   "home": {
     "name": "ホーム"
   },
+  "java": {
+    "name": "Java管理"
+  },
   "template": {
     "name": "テンプレート"
   }

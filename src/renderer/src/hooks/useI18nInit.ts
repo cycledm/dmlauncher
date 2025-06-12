@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import "@renderer/utils/i18n";
 
 interface UseI18nInitResponse {
   loading: boolean;

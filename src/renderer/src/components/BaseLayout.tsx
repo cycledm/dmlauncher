@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { useLocation, Outlet, NavLink } from "react-router";
-import RouteInfo from "@renderer/interfaces/route-info";
+import { RouteInfo } from "@renderer/interfaces/";
 import Spinner from "./Spinner";
 import clsx from "clsx";
 import { Popover } from "@base-ui-components/react/popover";
@@ -12,6 +12,7 @@ type Props = {
 
 export default function BaseLayout({ routes }: Props): React.JSX.Element {
   const location = useLocation();
+  const { t } = useTranslation("page");
 
   return (
     <div
@@ -22,12 +23,36 @@ export default function BaseLayout({ routes }: Props): React.JSX.Element {
     >
       <div className="grid size-full grid-cols-[3rem_1fr]">
         {/* 侧边导航栏 */}
-        <div className="relative size-full bg-red-50">
-          <SideBar routes={routes} />
+        <div className="relative size-full overflow-hidden bg-red-50">
+          <div className={clsx("relative size-full px-1 py-1")}>
+            <nav className="size-full">
+              <ul className="flex w-full flex-col items-center justify-start gap-0.5">
+                {routes.map(({ key, path }, idx) => (
+                  <SideBarItem key={key} popoverText={t(`${key}.name`)}>
+                    <NavLink className="size-full" to={path}>
+                      {({ isActive }) => (
+                        <div
+                          className={clsx(
+                            "flex size-full items-center justify-center",
+                            "rounded-md",
+                            {
+                              "bg-red-400": isActive
+                            }
+                          )}
+                        >
+                          {idx}
+                        </div>
+                      )}
+                    </NavLink>
+                  </SideBarItem>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
         {/* 主内容区域 */}
         <div
-          className="relative size-full"
+          className="relative size-full overflow-hidden"
           key={routes.find(({ path }) => location.pathname === path)?.key}
         >
           <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
@@ -35,33 +60,6 @@ export default function BaseLayout({ routes }: Props): React.JSX.Element {
           </Suspense>
         </div>
       </div>
-    </div>
-  );
-}
-
-function SideBar({ routes }: Props): React.JSX.Element {
-  const { t } = useTranslation("page");
-  return (
-    <div className={clsx("relative size-full px-1 py-1")}>
-      <nav className="size-full">
-        <ul className="flex w-full flex-col items-center justify-start gap-0.5">
-          {routes.map(({ key, path }, idx) => (
-            <SideBarItem key={key} popoverText={t(`${key}.name`)}>
-              <NavLink className="size-full" to={path}>
-                {({ isActive }) => (
-                  <div
-                    className={clsx("flex size-full items-center justify-center", "rounded-md", {
-                      "bg-red-400": isActive
-                    })}
-                  >
-                    {idx}
-                  </div>
-                )}
-              </NavLink>
-            </SideBarItem>
-          ))}
-        </ul>
-      </nav>
     </div>
   );
 }
