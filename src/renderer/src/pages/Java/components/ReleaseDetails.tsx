@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import prettyBytes from "pretty-bytes";
 import { useAdoptium } from "@renderer/hooks";
 
@@ -25,14 +26,6 @@ export function ReleaseDetails({ version }: Props): React.JSX.Element {
       </div>
     );
   }
-
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString("zh-CN", {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    });
-  };
 
   return (
     <div className="h-full">
@@ -83,7 +76,7 @@ export function ReleaseDetails({ version }: Props): React.JSX.Element {
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">更新时间</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {formatDate(releaseDetails.binary.updateAt)}
+              {dayjs(releaseDetails.binary.updatedAt).format("YYYY-MM-DD HH:mm:ss")}
             </dd>
           </div>
         </dl>

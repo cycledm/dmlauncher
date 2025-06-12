@@ -28,7 +28,7 @@ export interface AdoptiumReleaseDetails {
     os: string;
     project: string;
     scmRef: string;
-    updateAt: string;
+    updatedAt: string;
     installer: AdoptiumPackageInfo;
     package: AdoptiumPackageInfo;
   };
