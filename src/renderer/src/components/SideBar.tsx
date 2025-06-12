@@ -4,12 +4,16 @@ import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Popover } from "@base-ui-components/react/popover";
 import routes from "@renderer/routes";
-import { BiSolidHome } from "react-icons/bi";
-import { BiSolidCoffee } from "react-icons/bi";
-import { VscVscode } from "react-icons/vsc";
+import { FiHome } from "react-icons/fi";
+import { LuCoffee } from "react-icons/lu";
+import { GoRepoTemplate } from "react-icons/go";
+import { HiOutlineBars3 } from "react-icons/hi2";
+import { FiDownload } from "react-icons/fi";
 
 export function SideBar(): React.JSX.Element {
   const { t } = useTranslation("page");
+
+  const settings = routes.find((route) => route.id === "settings");
 
   const styles = {
     icon: clsx("size-full"),
@@ -18,44 +22,79 @@ export function SideBar(): React.JSX.Element {
   };
 
   const icons = {
-    home: <BiSolidHome className={styles.icon} />,
-    java: <BiSolidCoffee className={styles.icon} />,
-    template: <VscVscode className={styles.icon} />
+    home: <FiHome className={styles.icon} />,
+    java: <LuCoffee className={styles.icon} />,
+    downloads: <FiDownload className={styles.icon} />,
+    settings: <HiOutlineBars3 className={styles.icon} />,
+    template: <GoRepoTemplate className={styles.icon} />
   };
 
   return (
     <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
       <div className={clsx("relative", "size-full", "px-1 py-1")}>
         <nav className={clsx("size-full")}>
-          <ul
-            className={clsx(
-              "app-no-drag",
-              "w-full",
-              "flex flex-col gap-0.5",
-              "items-center justify-start"
-            )}
-          >
-            {routes.map(({ id, path }) => (
-              <SideBarItem key={id} popoverText={t(`${id}.name`)}>
-                <NavLink className={clsx("size-full")} to={path ?? "/"} viewTransition>
-                  {({ isActive }) => (
-                    <div
-                      className={clsx(
-                        "size-full p-2",
-                        "flex items-center justify-center",
-                        "rounded-md",
-                        {
-                          [styles.itemColor]: isActive
-                        }
-                      )}
+          <div className={clsx("h-full w-full", "flex flex-col", "items-center justify-between")}>
+            <div className={clsx("w-full", "flex flex-col gap-0.5", "items-center justify-start")}>
+              {routes
+                .filter(({ id }) => id !== "settings")
+                .map(({ id, path }) => (
+                  <SideBarItem key={id} popoverText={t(`${id}.name`)}>
+                    <NavLink
+                      className={clsx("app-no-drag", "size-full", {
+                        "order-last": id === "settings"
+                      })}
+                      to={path ?? "/"}
+                      viewTransition
+                      draggable={false}
                     >
-                      {id ? icons[id] : null}
-                    </div>
-                  )}
-                </NavLink>
-              </SideBarItem>
-            ))}
-          </ul>
+                      {({ isActive }) => (
+                        <div
+                          className={clsx(
+                            "size-full p-2",
+                            "flex items-center justify-center",
+                            "rounded-md",
+                            {
+                              [styles.itemColor]: isActive
+                            }
+                          )}
+                        >
+                          {id ? icons[id] : null}
+                        </div>
+                      )}
+                    </NavLink>
+                  </SideBarItem>
+                ))}
+            </div>
+            <div className={clsx("w-full")}>
+              {settings && (
+                <SideBarItem popoverText={t(`${settings.id}.name`)}>
+                  <NavLink
+                    className={clsx("app-no-drag", "size-full", {
+                      "order-last": settings.id === "settings"
+                    })}
+                    to={settings.path ?? "/"}
+                    viewTransition
+                    draggable={false}
+                  >
+                    {({ isActive }) => (
+                      <div
+                        className={clsx(
+                          "size-full p-2",
+                          "flex items-center justify-center",
+                          "rounded-md",
+                          {
+                            [styles.itemColor]: isActive
+                          }
+                        )}
+                      >
+                        {settings.id ? icons[settings.id] : null}
+                      </div>
+                    )}
+                  </NavLink>
+                </SideBarItem>
+              )}
+            </div>
+          </div>
         </nav>
       </div>
     </div>
@@ -77,7 +116,6 @@ function SideBarItem({
       <Popover.Trigger
         className={clsx("relative aspect-square w-full")}
         tabIndex={-1}
-        render={<li />}
         onClick={() => setPopoverOpen(false)}
         onMouseEnter={() => setPopoverOpen(true)}
         onMouseLeave={() => setPopoverOpen(false)}
