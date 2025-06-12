@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
+import clsx from "clsx";
 import { useLocation, Outlet, useNavigation } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
-import clsx from "clsx";
 import { useI18nInit } from "@renderer/hooks";
 import SideBar from "@renderer/components/SideBar";
 import Spinner from "@renderer/components/Spinner";

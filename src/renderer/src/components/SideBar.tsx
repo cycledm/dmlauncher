@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import clsx from "clsx";
-import { Popover } from "@base-ui-components/react/popover";
-import routes from "@renderer/routes";
 import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
+import { Popover } from "@base-ui-components/react/popover";
+import routes from "@renderer/routes";
 
 export default function SideBar(): React.JSX.Element {
   const { t } = useTranslation("page");

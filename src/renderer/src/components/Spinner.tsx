@@ -1,6 +1,6 @@
 import React from "react";
-import { CgSpinner } from "react-icons/cg";
 import clsx from "clsx";
+import { CgSpinner } from "react-icons/cg";
 
 type Props = {
   className?: string;

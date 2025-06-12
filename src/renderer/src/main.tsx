@@ -1,9 +1,9 @@
 import "@renderer/styles/main.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import routes from "./routes";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import App from "@renderer/App";
+import routes from "@renderer/routes";
 
 const router = createBrowserRouter([
   {
