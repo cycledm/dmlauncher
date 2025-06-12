@@ -27,7 +27,7 @@ export interface AdoptiumReleaseDetails {
     jvmImpl: string;
     os: string;
     project: string;
-    //scmRef: string;
+    scmRef: string;
     updateAt: string;
     installer: AdoptiumPackageInfo;
     package: AdoptiumPackageInfo;

@@ -32,7 +32,8 @@
     "axios": "^1.9.0",
     "chokidar": "^4.0.3",
     "electron-devtools-installer": "^4.0.0",
-    "electron-updater": "^6.6.2"
+    "electron-updater": "^6.6.2",
+    "ts-case-convert": "^2.1.0"
   },
   "devDependencies": {
     "@base-ui-components/react": "1.0.0-beta.0",
@@ -73,7 +74,6 @@
     "swr": "^2.3.3",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.8",
-    "ts-case-convert": "^2.1.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   },

@@ -26,6 +26,9 @@ importers:
       electron-updater:
         specifier: ^6.6.2
         version: 6.6.2
+      ts-case-convert:
+        specifier: ^2.1.0
+        version: 2.1.0
     devDependencies:
       '@base-ui-components/react':
         specifier: 1.0.0-beta.0
@@ -141,9 +144,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.8
         version: 4.1.8
-      ts-case-convert:
-        specifier: ^2.1.0
-        version: 2.1.0
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
