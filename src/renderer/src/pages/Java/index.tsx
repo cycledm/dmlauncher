@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useElectron, useAdoptium } from "@renderer/hooks";
 import clsx from "clsx";
 import Spinner from "@renderer/components/Spinner";
-import { ReleaseDetails } from "./components/";
+import { ReleaseDetails } from "./components";
 
 export default function Java(): React.JSX.Element {
   const { releasesInfo } = useAdoptium();
