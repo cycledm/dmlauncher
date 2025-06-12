@@ -1,4 +1,5 @@
 import axios from "axios";
+import { objectToCamel } from "ts-case-convert";
 import { AdoptiumReleaseInfo } from "@renderer/interfaces";
 import { AdoptiumReleaseDetails } from "@renderer/interfaces/adoptium";
 
@@ -52,7 +53,6 @@ export async function fetchAdoptiumReleaseDetails(
     }
 
     const data: AdoptiumReleaseDetails = {
-      version,
       binary: {
         architecture: response.data[0].binary.architecture,
         downloadCount: response.data[0].binary.download_count,
@@ -93,4 +93,22 @@ export async function fetchAdoptiumReleaseDetails(
     console.error("Error fetching Adoptium release details:", error);
     throw error;
   }
+}
+
+export async function fetcher<T>(url: string): Promise<T> {
+  console.log(`Fetching data from: ${url}`);
+  const response = await axios.get<unknown>(url, { headers: { accept: "application/json" } });
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch: ${response.statusText}`);
+  }
+
+  if (typeof response.data !== "object" || response.data === null) {
+    throw new Error(`Unexpected response format: ${typeof response.data}`);
+  }
+
+  if (response.data instanceof Array) {
+    return objectToCamel(response.data[0]) as T;
+  }
+
+  return objectToCamel(response.data) as T;
 }

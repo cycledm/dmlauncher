@@ -1,28 +1,26 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { useElectron, useJava } from "@renderer/hooks";
+import { useElectron, useAdoptium } from "@renderer/hooks";
 import clsx from "clsx";
 import ReleaseDetails from "./components/ReleaseDetails";
 import Spinner from "@renderer/components/Spinner";
 
 export default function Java(): React.JSX.Element {
-  const { adoptiumReleases } = useJava();
+  const { releasesInfo } = useAdoptium();
   const { setColorMode } = useElectron();
   const [showLtsOnly, setShowLtsOnly] = useState(false);
-  const [filteredReleases, setFilteredReleases] = useState(adoptiumReleases.availableReleases);
+  const [filteredReleases, setFilteredReleases] = useState(releasesInfo.availableReleases);
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
 
   useEffect(() => {
     setColorMode("light");
-    console.log("Adoptium Java Releases:", adoptiumReleases);
-  }, [adoptiumReleases, setColorMode]);
+  }, [releasesInfo, setColorMode]);
 
   useEffect(() => {
-    const filtered = adoptiumReleases.availableReleases
-      .filter((version) => !showLtsOnly || adoptiumReleases.availableLtsReleases.includes(version))
+    const filtered = releasesInfo.availableReleases
+      .filter((version) => !showLtsOnly || releasesInfo.availableLtsReleases.includes(version))
       .sort((a: number, b: number) => b - a);
     setFilteredReleases(filtered);
-    console.log("Adoptium Java Releases:", adoptiumReleases);
-  }, [adoptiumReleases, showLtsOnly]);
+  }, [releasesInfo, showLtsOnly]);
 
   return (
     <div className="grid size-full grid-cols-[16rem_1fr]">
@@ -70,7 +68,7 @@ export default function Java(): React.JSX.Element {
             >
               <div className="flex items-center justify-between">
                 <span className="font-medium">Adoptium Java {version}</span>
-                {adoptiumReleases.availableLtsReleases.includes(version) && (
+                {releasesInfo.availableLtsReleases.includes(version) && (
                   <span className="text-sm text-gray-500 dark:text-gray-400">LTS</span>
                 )}
               </div>

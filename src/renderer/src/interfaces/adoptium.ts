@@ -19,7 +19,6 @@ export interface AdoptiumReleaseInfo {
 }
 
 export interface AdoptiumReleaseDetails {
-  version: number;
   binary: {
     architecture: string;
     downloadCount: number;

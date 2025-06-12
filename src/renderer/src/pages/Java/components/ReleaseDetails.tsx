@@ -1,16 +1,15 @@
 import React from "react";
 import clsx from "clsx";
-import { useJava } from "@renderer/hooks";
+import { useAdoptium } from "@renderer/hooks";
 
 type Props = {
   version?: number | null;
 };
 
 export default function ReleaseDetails({ version }: Props): React.JSX.Element {
-  //const { adoptiumReleaseDetails } = useJava(version);
-  const adoptiumReleaseDetails = null;
+  const { releaseDetails } = useAdoptium(version);
 
-  if (!version || !adoptiumReleaseDetails) {
+  if (!version || !releaseDetails) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center">
@@ -47,11 +46,10 @@ export default function ReleaseDetails({ version }: Props): React.JSX.Element {
       {/* 标题区域 */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {adoptiumReleaseDetails.releaseName}
+          {releaseDetails.releaseName}
         </h1>
         <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-          {adoptiumReleaseDetails.vendor} OpenJDK {version} with{" "}
-          {adoptiumReleaseDetails.binary.jvmImpl}
+          {releaseDetails.vendor} OpenJDK {version} with {releaseDetails.binary.jvmImpl}
         </p>
       </div>
 
@@ -62,37 +60,37 @@ export default function ReleaseDetails({ version }: Props): React.JSX.Element {
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">架构</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {adoptiumReleaseDetails.binary.architecture}
+              {releaseDetails.binary.architecture}
             </dd>
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">操作系统</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {adoptiumReleaseDetails.binary.os}
+              {releaseDetails.binary.os}
             </dd>
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">堆内存大小</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {adoptiumReleaseDetails.binary.heapSize}
+              {releaseDetails.binary.heapSize}
             </dd>
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">镜像类型</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {adoptiumReleaseDetails.binary.imageType.toUpperCase()}
+              {releaseDetails.binary.imageType.toUpperCase()}
             </dd>
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">项目</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {adoptiumReleaseDetails.binary.project}
+              {releaseDetails.binary.project}
             </dd>
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">更新时间</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-              {formatDate(adoptiumReleaseDetails.binary.updateAt)}
+              {formatDate(releaseDetails.binary.updateAt)}
             </dd>
           </div>
         </dl>
@@ -103,11 +101,11 @@ export default function ReleaseDetails({ version }: Props): React.JSX.Element {
         <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
           <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">下载选项</h2>
           <DownloadCard
-            title={adoptiumReleaseDetails.binary.package.name}
-            size={formatBytes(adoptiumReleaseDetails.binary.package.size)}
-            downloadCount={adoptiumReleaseDetails.binary.package.downloadCount}
-            downloadUrl={adoptiumReleaseDetails.binary.package.link}
-            checksumUrl={adoptiumReleaseDetails.binary.package.checksumLink}
+            title={releaseDetails.binary.package.name}
+            size={formatBytes(releaseDetails.binary.package.size)}
+            downloadCount={releaseDetails.binary.package.downloadCount}
+            downloadUrl={releaseDetails.binary.package.link}
+            checksumUrl={releaseDetails.binary.package.checksumLink}
           />
         </div>
       </div>
@@ -117,7 +115,7 @@ export default function ReleaseDetails({ version }: Props): React.JSX.Element {
         <h3 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">相关链接</h3>
         <div className="space-y-2">
           <a
-            href={adoptiumReleaseDetails.releaseLink}
+            href={releaseDetails.releaseLink}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
