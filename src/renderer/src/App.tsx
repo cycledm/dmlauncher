@@ -8,6 +8,7 @@ import { Spinner } from "@renderer/components";
 import { TitleBar } from "@renderer/components";
 
 import icon from "@renderer/assets/electron.svg";
+import { GlobalScrollbar } from "mac-scrollbar";
 
 function I18nProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
   useI18nInit();
@@ -23,16 +24,18 @@ export default function App(): React.JSX.Element {
       className={clsx(
         "h-dvh max-h-dvh w-dvw max-w-dvw",
         "bg-white text-black dark:bg-gray-950 dark:text-white",
-        "grid grid-rows-[var(--titlebar-h)_1fr]"
+        "grid grid-rows-[var(--titlebar-h)_1fr]",
+        "ms-track-box ms-theme-dark"
       )}
     >
       {/* 窗口标题栏 */}
       <TitleBar icon={icon} />
-      <div className={clsx("relative size-full overflow-hidden")}>
+      <div className={clsx("relative size-full overflow-hidden px-0.25 pb-0.75")}>
         <ErrorBoundary
           fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
         >
           <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
+            <GlobalScrollbar />
             <I18nProvider>
               <div className={clsx("size-full", "grid grid-cols-[var(--sidebar-w)_1fr]")}>
                 {/* 侧边导航栏 */}

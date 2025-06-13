@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./title-bar.css";
+@import "./scroll-box.css";
 @import "@fontsource-variable/noto-sans-sc";
 @import "@fontsource-variable/noto-serif-sc";
 @import "@fontsource-variable/jetbrains-mono";
@@ -14,20 +16,6 @@
     "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* Electron 窗口控制 */
-  --app-region-drag: drag;
-  --app-region-nodrag: no-drag;
-  --app-region-no-drag: no-drag;
-  --titlebar-x: env(titlebar-area-x, 0);
-  --titlebar-y: env(titlebar-area-y, 0);
-  --titlebar-w: env(titlebar-area-width, 100%);
-  --titlebar-h: env(titlebar-area-height, 30px);
-
   /* 侧边导航栏 */
   --sidebar-w: 3rem;
-}
-
-/* Electron 窗口拖动 */
-@utility app-* {
-  -webkit-app-region: --value(--app-region-\*);
 }

@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useAdoptium } from "@renderer/hooks";
 import clsx from "clsx";
-import { SimpleCard, Spinner } from "@renderer/components";
+import { ScrollBox, SimpleCard, Spinner } from "@renderer/components";
 import { ReleaseDetails } from "./components";
 
 export default function Java(): React.JSX.Element {
@@ -19,7 +19,7 @@ export default function Java(): React.JSX.Element {
 
   return (
     <div className="grid size-full grid-cols-[16rem_1fr] select-none">
-      <div className="flex size-full flex-col gap-2 overflow-auto p-2">
+      <ScrollBox className={clsx("flex flex-col gap-2")}>
         {/* LTS 筛选复选框 */}
         <div className="flex items-center gap-2">
           <input
@@ -70,12 +70,12 @@ export default function Java(): React.JSX.Element {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="w-full overflow-auto bg-gray-50 p-6 dark:bg-gray-900">
+      </ScrollBox>
+      <ScrollBox className={clsx("size-full bg-gray-50 p-6 dark:bg-gray-900")}>
         <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
           <ReleaseDetails version={selectedVersion} />
         </Suspense>
-      </div>
+      </ScrollBox>
     </div>
   );
 }

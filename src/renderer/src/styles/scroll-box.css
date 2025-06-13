@@ -1,0 +1,108 @@
+@import "mac-scrollbar/dist/mac-scrollbar.css";
+
+@theme {
+  --scroll-track-gutter: 2px;
+  --scroll-box-padding-offset: 2px;
+
+  --preset-scroll-thumb-sm: 1 * 1.5;
+  --preset-scroll-thumb-md: 2 * 1.5;
+  --preset-scroll-thumb-lg: 3 * 1.5;
+
+  --preset-scroll-thumb-margin-1: 1;
+  --preset-scroll-thumb-margin-2: 2;
+  --preset-scroll-thumb-margin-3: 3;
+  --preset-scroll-thumb-margin-4: 4;
+}
+
+@utility scroll-thumb-* {
+  padding: calc(
+    var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2 +
+      var(--scroll-box-padding-offset)
+  );
+
+  .ms-track {
+    &.ms-y {
+      width: calc(
+        var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
+      ) !important;
+
+      &.ms-active,
+      &:hover {
+        .ms-thumb {
+          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+        }
+      }
+
+      .ms-thumb {
+        right: var(--scroll-track-gutter) !important;
+        width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5) !important;
+
+        &:hover {
+          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+        }
+
+        &:after {
+          right: calc(var(--scroll-track-gutter) * -1) !important;
+          width: calc(
+            var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
+          ) !important;
+        }
+      }
+    }
+
+    &.ms-x {
+      height: calc(
+        var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
+      ) !important;
+
+      &.ms-active,
+      &:hover {
+        .ms-thumb {
+          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+        }
+      }
+
+      .ms-thumb {
+        bottom: var(--scroll-track-gutter) !important;
+        height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5) !important;
+
+        &:hover {
+          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+        }
+
+        &:after {
+          bottom: calc(var(--scroll-track-gutter) * -1) !important;
+          height: calc(
+            var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
+          ) !important;
+        }
+      }
+    }
+  }
+}
+
+@utility scroll-thumb-bg-* {
+  .ms-track {
+    .ms-thumb {
+      background-color: --value(--color-\*, [color]) !important;
+    }
+  }
+}
+
+@utility scroll-track-hover-bg-* {
+  .ms-track {
+    &.ms-active,
+    &:hover {
+      background-color: --value(--color-\*, [color]) !important;
+    }
+  }
+}
+
+@utility scroll-track-hover-border-* {
+  .ms-track {
+    &.ms-active,
+    &:hover {
+      border-color: --value(--color-\*, [color]) !important;
+    }
+  }
+}
