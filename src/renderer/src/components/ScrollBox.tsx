@@ -6,12 +6,12 @@ import { MacScrollbar } from "mac-scrollbar";
 interface Props extends React.HTMLAttributes<HTMLElement> {
   ref?: React.Ref<HTMLElement>;
   suppressAutoHide?: boolean;
-  size?: "small" | "medium" | "large";
+  thumbSize?: "small" | "medium" | "large";
 }
 
 export function ScrollBox({ ref, ...props }: Props): React.JSX.Element {
   const matchSize = (): string => {
-    switch (props.size) {
+    switch (props.thumbSize) {
       case "small":
         return clsx("scroll-thumb-sm");
       case "medium":
