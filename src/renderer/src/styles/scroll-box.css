@@ -19,28 +19,28 @@
     &.ms-y {
       width: calc(
         var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-      ) !important;
+      );
 
       &.ms-active,
       &:hover {
         .ms-thumb {
-          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
         }
       }
 
       .ms-thumb {
-        right: var(--scroll-track-gutter) !important;
-        width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5) !important;
+        right: var(--scroll-track-gutter);
+        width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5);
 
         &:hover {
-          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
         }
 
         &:after {
-          right: calc(var(--scroll-track-gutter) * -1) !important;
+          right: calc(var(--scroll-track-gutter) * -1);
           width: calc(
             var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-          ) !important;
+          );
         }
       }
     }
@@ -48,28 +48,28 @@
     &.ms-x {
       height: calc(
         var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-      ) !important;
+      );
 
       &.ms-active,
       &:hover {
         .ms-thumb {
-          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
         }
       }
 
       .ms-thumb {
-        bottom: var(--scroll-track-gutter) !important;
-        height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5) !important;
+        bottom: var(--scroll-track-gutter);
+        height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5);
 
         &:hover {
-          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*)) !important;
+          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
         }
 
         &:after {
-          bottom: calc(var(--scroll-track-gutter) * -1) !important;
+          bottom: calc(var(--scroll-track-gutter) * -1);
           height: calc(
             var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-          ) !important;
+          );
         }
       }
     }
@@ -79,7 +79,7 @@
 @utility scroll-thumb-bg-* {
   .ms-track {
     .ms-thumb {
-      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value(--color-\*, [color]);
     }
   }
 }
@@ -88,7 +88,7 @@
   .ms-track {
     &.ms-active,
     &:hover {
-      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value(--color-\*, [color]);
     }
   }
 }
@@ -97,7 +97,7 @@
   .ms-track {
     &.ms-active,
     &:hover {
-      border-color: --value(--color-\*, [color]) !important;
+      border-color: --value(--color-\*, [color]);
     }
   }
 }
