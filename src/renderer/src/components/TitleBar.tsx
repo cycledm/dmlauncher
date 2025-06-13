@@ -13,7 +13,7 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
 
-  const setColor = useCallback(async (): Promise<void> => {
+  const updateColor = useCallback(async (): Promise<void> => {
     if (!ref.current) return;
     const focused = await titlebar.isFocused();
     const bgColor = window.getComputedStyle(ref.current).backgroundColor;
@@ -35,12 +35,12 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
   useEffect(() => {
     titlebar.isFocused().then(setFocused);
     titlebar.onFocusChange(setFocused);
-    titlebar.onColorModeChange(() => setColor());
-  }, [setColor, titlebar]);
+    titlebar.onColorModeChange(() => updateColor());
+  }, [updateColor, titlebar]);
 
   useEffect(() => {
-    setColor();
-  }, [setColor]);
+    updateColor();
+  }, [focused, updateColor]);
 
   return (
     <div

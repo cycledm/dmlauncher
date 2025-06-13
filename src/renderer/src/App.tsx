@@ -30,7 +30,7 @@ export default function App(): React.JSX.Element {
     >
       {/* 窗口标题栏 */}
       <TitleBar icon={icon} />
-      <div className={clsx("relative size-full overflow-hidden px-0.25 pb-0.75")}>
+      <div className={clsx("relative size-full overflow-hidden px-[0.5px] pb-0.75")}>
         <ErrorBoundary
           fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
         >
