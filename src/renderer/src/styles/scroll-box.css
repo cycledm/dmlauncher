@@ -7,11 +7,6 @@
   --preset-scroll-thumb-sm: 1 * 1.5;
   --preset-scroll-thumb-md: 2 * 1.5;
   --preset-scroll-thumb-lg: 3 * 1.5;
-
-  --preset-scroll-thumb-margin-1: 1;
-  --preset-scroll-thumb-margin-2: 2;
-  --preset-scroll-thumb-margin-3: 3;
-  --preset-scroll-thumb-margin-4: 4;
 }
 
 @utility scroll-thumb-* {
