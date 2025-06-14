@@ -75,11 +75,11 @@ export function SideBar(): React.JSX.Element {
                         className={clsx(
                           "absolute bottom-1 h-1.25 w-full",
                           "px-1.5",
-                          "opacity-0 transition-opacity",
+                          "transition-opacity duration-500",
                           {
-                            "animate-fade-in opacity-100":
+                            "opacity-100":
                               downloaderInfo.percent > 0 && downloaderInfo.percent < 100,
-                            "animate-fade-out opacity-0":
+                            "opacity-0":
                               downloaderInfo.percent <= 0 || downloaderInfo.percent >= 100
                           }
                         )}
@@ -89,7 +89,7 @@ export function SideBar(): React.JSX.Element {
                             className={clsx(
                               "size-full overflow-hidden",
                               "rounded bg-gray-500",
-                              "shadow-[inset_0_0_0_1px] shadow-gray-200"
+                              "shadow-[inset_0_0_0_1px] shadow-gray-200 dark:shadow-gray-900"
                             )}
                           >
                             <Progress.Indicator
