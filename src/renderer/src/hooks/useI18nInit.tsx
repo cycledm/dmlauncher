@@ -8,7 +8,7 @@ import { useElectron } from "./useElectron";
 /**
  * i18n初始化hook
  */
-export function useI18nInit(): { data: null } {
+export function useI18nInit(): void {
   const { i18n: electronApi } = useElectron();
 
   const fetcher = useCallback(async () => {
@@ -31,6 +31,5 @@ export function useI18nInit(): { data: null } {
     return null;
   }, [electronApi]);
 
-  const { data } = useSWRImmutable("i18n-init", fetcher, { suspense: true });
-  return { data };
+  useSWRImmutable("i18n-init", fetcher, { suspense: true });
 }
