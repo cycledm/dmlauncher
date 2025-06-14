@@ -31,8 +31,6 @@
     "@renderer": "${workspaceRoot}/src/renderer/src"
   },
   "github.copilot.chat.commitMessageGeneration.instructions": [
-    {
-      "text": "Use conventional commit message format."
-    }
+    { "text": "Use Conventional Commits 1.0.0 for commit messages." }
   ]
 }
