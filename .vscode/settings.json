@@ -29,5 +29,10 @@
     "@main": "${workspaceRoot}/src/main",
     "@preload": "${workspaceRoot}/src/preload",
     "@renderer": "${workspaceRoot}/src/renderer/src"
-  }
+  },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use conventional commit message format."
+    }
+  ]
 }
