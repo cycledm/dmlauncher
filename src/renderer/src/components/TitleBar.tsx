@@ -121,6 +121,7 @@ function ColorModeSwitchButton(): React.JSX.Element {
         "aspect-square h-4/5 p-1",
         "rounded-[50%]",
         "cursor-pointer",
+        "transition-colors duration-250",
         "hover:bg-gray-300/50",
         "dark:hover:bg-gray-500/50"
       )}
