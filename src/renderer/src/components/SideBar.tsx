@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import clsx from "clsx";
+import routes from "@renderer/routes";
 import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Popover } from "@base-ui-components/react/popover";
-import routes from "@renderer/routes";
+import { Progress } from "@base-ui-components/react/progress";
+
+import { useDownloader } from "@renderer/hooks";
 import { FiHome } from "react-icons/fi";
 import { LuCoffee } from "react-icons/lu";
 import { GoRepoTemplate } from "react-icons/go";
@@ -12,6 +15,7 @@ import { FiDownload } from "react-icons/fi";
 
 export function SideBar(): React.JSX.Element {
   const { t } = useTranslation("page");
+  const { downloaderInfo } = useDownloader();
 
   const settings = routes.find((route) => route.id === "settings");
 
@@ -65,6 +69,27 @@ export function SideBar(): React.JSX.Element {
                         </div>
                       )}
                     </NavLink>
+                    {/* 下载进度条 */}
+                    {id === "downloads" && downloaderInfo && downloaderInfo.percent < 100 && (
+                      <div className={clsx("absolute bottom-0.5 h-1.25 w-full")}>
+                        <Progress.Root
+                          value={downloaderInfo?.percent ?? 0}
+                          className={clsx("size-full", "px-1.5")}
+                        >
+                          <Progress.Track
+                            className={clsx(
+                              "size-full overflow-hidden",
+                              "rounded bg-gray-500",
+                              "shadow-[inset_0_0_0_1px] shadow-gray-200"
+                            )}
+                          >
+                            <Progress.Indicator
+                              className={clsx("block bg-green-500", "transition-all duration-500")}
+                            />
+                          </Progress.Track>
+                        </Progress.Root>
+                      </div>
+                    )}
                   </SideBarItem>
                 ))}
             </div>
