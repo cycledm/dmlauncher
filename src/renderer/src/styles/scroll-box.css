@@ -4,72 +4,90 @@
   --scroll-track-gutter: 2px;
   --scroll-box-padding-offset: 2px;
 
-  --preset-scroll-thumb-sm: 1 * 1.5;
-  --preset-scroll-thumb-md: 2 * 1.5;
-  --preset-scroll-thumb-lg: 3 * 1.5;
+  --scroll-thumb-size-sm: 1;
+  --scroll-thumb-size-md: 2;
+  --scroll-thumb-size-lg: 3;
+
+  --scroll-thumb-scale-sm: 2;
+  --scroll-thumb-scale-md: 1.5;
+  --scroll-thumb-scale-lg: 1.25;
 }
 
 @utility scroll-thumb-* {
   padding: calc(
-    var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2 +
-      var(--scroll-box-padding-offset)
-  );
+    var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+      var(--scroll-track-gutter) * 2 + var(--scroll-box-padding-offset)
+  ) !important;
 
   .ms-track {
     &.ms-y {
+      margin-right: calc(var(--scroll-track-gutter) / 2) !important;
       width: calc(
-        var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-      );
+        var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+          var(--scroll-track-gutter) * 2
+      ) !important;
 
       &.ms-active,
       &:hover {
         .ms-thumb {
-          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
+          width: calc(
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+          ) !important;
         }
       }
 
       .ms-thumb {
-        right: var(--scroll-track-gutter);
-        width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5);
+        right: var(--scroll-track-gutter) !important;
+        width: calc(var(--spacing) * --value(--scroll-thumb-size-\*)) !important;
 
         &:hover {
-          width: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
+          width: calc(
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+          ) !important;
         }
 
         &:after {
-          right: calc(var(--scroll-track-gutter) * -1);
+          right: calc(var(--scroll-track-gutter) * -1) !important;
           width: calc(
-            var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-          );
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+              var(--scroll-track-gutter) * 2
+          ) !important;
         }
       }
     }
 
     &.ms-x {
+      margin-bottom: calc(var(--scroll-track-gutter) / 2) !important;
       height: calc(
-        var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-      );
+        var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+          var(--scroll-track-gutter) * 2
+      ) !important;
 
       &.ms-active,
       &:hover {
         .ms-thumb {
-          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
+          height: calc(
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+          ) !important;
         }
       }
 
       .ms-thumb {
-        bottom: var(--scroll-track-gutter);
-        height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*) / 1.5);
+        bottom: var(--scroll-track-gutter) !important;
+        height: calc(var(--spacing) * --value(--scroll-thumb-size-\*)) !important;
 
         &:hover {
-          height: calc(var(--spacing) * --value(--preset-scroll-thumb-\*));
+          height: calc(
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+          ) !important;
         }
 
         &:after {
-          bottom: calc(var(--scroll-track-gutter) * -1);
+          bottom: calc(var(--scroll-track-gutter) * -1) !important;
           height: calc(
-            var(--spacing) * --value(--preset-scroll-thumb-\*) + var(--scroll-track-gutter) * 2
-          );
+            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+              var(--scroll-track-gutter) * 2
+          ) !important;
         }
       }
     }
@@ -79,7 +97,8 @@
 @utility scroll-thumb-bg-* {
   .ms-track {
     .ms-thumb {
-      background-color: --value(--color-\*, [color]);
+      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value("transparent") !important;
     }
   }
 }
@@ -88,7 +107,8 @@
   .ms-track {
     &.ms-active,
     &:hover {
-      background-color: --value(--color-\*, [color]);
+      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value("transparent") !important;
     }
   }
 }
@@ -97,7 +117,8 @@
   .ms-track {
     &.ms-active,
     &:hover {
-      border-color: --value(--color-\*, [color]);
+      border-color: --value(--color-\*, [color]) !important;
+      border-color: --value("transparent") !important;
     }
   }
 }

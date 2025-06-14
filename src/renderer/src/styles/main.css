@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "./title-bar.css";
-@import "./scroll-box.css" important;
+@import "./scroll-box.css";
 @import "@fontsource-variable/noto-sans-sc";
 @import "@fontsource-variable/noto-serif-sc";
 @import "@fontsource-variable/jetbrains-mono";
