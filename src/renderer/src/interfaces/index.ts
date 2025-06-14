@@ -1,1 +1,1 @@
-export type { AdoptiumReleasesInfo, AdoptiumReleaseDetails } from "./adoptium";
+export * from "./adoptium";
