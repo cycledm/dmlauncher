@@ -38,6 +38,8 @@ export default defineConfig(({ mode }) => {
       envPrefix: ["COMM_", "RNDR_"],
       resolve: {
         alias: {
+          "@main": resolve("src/main"),
+          "@preload": resolve("src/preload"),
           "@renderer": resolve("src/renderer/src")
         }
       },
