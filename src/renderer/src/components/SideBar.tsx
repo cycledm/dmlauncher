@@ -8,7 +8,7 @@ import { Progress } from "@base-ui-components/react/progress";
 
 import { useDownloader } from "@renderer/hooks";
 import { FiHome } from "react-icons/fi";
-import { LuCoffee } from "react-icons/lu";
+import { RiJavaLine } from "react-icons/ri";
 import { GoRepoTemplate } from "react-icons/go";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { FiDownload } from "react-icons/fi";
@@ -27,7 +27,7 @@ export function SideBar(): React.JSX.Element {
 
   const icons = {
     home: <FiHome className={styles.icon} />,
-    java: <LuCoffee className={styles.icon} />,
+    java: <RiJavaLine className={styles.icon} />,
     downloads: <FiDownload className={styles.icon} />,
     template: <GoRepoTemplate className={styles.icon} />,
     settings: <HiOutlineBars3 className={styles.icon} />

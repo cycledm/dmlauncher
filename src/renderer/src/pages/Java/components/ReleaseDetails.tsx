@@ -5,6 +5,7 @@ import prettyBytes from "pretty-bytes";
 import { useAdoptium, useElectron } from "@renderer/hooks";
 import { SimpleCard } from "@renderer/components";
 import { AdoptiumReleaseDetails } from "@renderer/interfaces";
+import { RiJavaLine } from "react-icons/ri";
 
 type Props = {
   version?: number | null;
@@ -22,7 +23,9 @@ export function ReleaseDetails({ version }: Props): React.JSX.Element {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center">
-          <div className="mb-4 text-6xl">☕</div>
+          <div className="mb-4 flex h-20 items-center justify-center text-center">
+            <RiJavaLine className="size-full" />
+          </div>
           <h2 className="mb-2 text-xl font-semibold text-gray-700 dark:text-gray-300">
             选择 Java 版本
           </h2>
