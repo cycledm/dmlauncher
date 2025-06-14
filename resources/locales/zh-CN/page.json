@@ -5,6 +5,12 @@
   "java": {
     "name": "Java管理"
   },
+  "downloads": {
+    "name": "下载管理"
+  },
+  "settings": {
+    "name": "设置"
+  },
   "template": {
     "name": "模板"
   }

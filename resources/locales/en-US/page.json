@@ -5,6 +5,12 @@
   "java": {
     "name": "Java Management"
   },
+  "downloads": {
+    "name": "Download Management"
+  },
+  "settings": {
+    "name": "Settings"
+  },
   "template": {
     "name": "Template"
   }
