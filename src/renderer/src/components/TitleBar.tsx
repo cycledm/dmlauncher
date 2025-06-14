@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { formatHex8, parse } from "culori";
 import { useElectron } from "@renderer/hooks";
+import { ColorModeSwitchButton } from "./ColorModeSwitchButton";
 
 type Props = {
   icon?: string;
@@ -57,14 +58,19 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
       ref={ref}
     >
       <div className="absolute left-[var(--titlebar-x)] h-full w-[var(--titlebar-w)]">
-        <div className="ms-2 flex h-full items-center justify-start gap-1">
-          {icon && (
-            <img
-              className="aspect-square size-[min(1.2rem,calc(var(--titlebar-h)-0.8rem))]"
-              src={icon}
-            />
-          )}
-          <span className="font-sans text-sm">{import.meta.env.COMM_APP_TITLE}</span>
+        <div className={clsx("mx-2 h-full", "grid grid-cols-12")}>
+          <div className={clsx("col-span-6", "flex items-center justify-start gap-1")}>
+            {icon && (
+              <img
+                className="aspect-square size-[min(1.2rem,calc(var(--titlebar-h)-0.8rem))]"
+                src={icon}
+              />
+            )}
+            <span className="font-sans text-sm">{import.meta.env.COMM_APP_TITLE}</span>
+          </div>
+          <div className={clsx("col-span-2 col-start-11", "flex items-center justify-end")}>
+            <ColorModeSwitchButton />
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+export { ColorModeSwitchButton } from "./ColorModeSwitchButton";
 export { ScrollBox } from "./ScrollBox";
 export { SideBar } from "./SideBar";
 export { SimpleCard } from "./SimpleCard";
