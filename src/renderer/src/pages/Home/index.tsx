@@ -92,15 +92,6 @@ export default function Home(): React.JSX.Element {
       >
         Cancel / Delete
       </button>
-      <div className="grid w-full auto-cols-min grid-flow-col grid-rows-1">
-        <div className="aspect-square w-8">01</div>
-        <div className="aspect-square w-8">02</div>
-        <div className="aspect-square w-8">03</div>
-        <div className="aspect-square w-8">04</div>
-        <div className="order-last col-span-5 ms-auto grid grid-cols-subgrid">
-          <div className="col-start-3 aspect-square w-8">05</div>
-        </div>
-      </div>
     </div>
   );
 }

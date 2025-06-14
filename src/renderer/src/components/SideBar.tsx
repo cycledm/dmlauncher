@@ -78,8 +78,9 @@ export function SideBar(): React.JSX.Element {
                           "opacity-0 transition-opacity",
                           {
                             "animate-fade-in opacity-100":
-                              downloaderInfo.percent >= 0 && downloaderInfo.percent < 100,
-                            "animate-fade-out": downloaderInfo.percent >= 100
+                              downloaderInfo.percent > 0 && downloaderInfo.percent < 100,
+                            "animate-fade-out":
+                              downloaderInfo.percent <= 0 || downloaderInfo.percent >= 100
                           }
                         )}
                       >
