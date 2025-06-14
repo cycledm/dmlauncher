@@ -24,7 +24,7 @@ export default function App(): React.JSX.Element {
         "h-dvh max-h-dvh w-dvw max-w-dvw",
         "bg-white text-black dark:bg-gray-950 dark:text-white",
         "grid grid-rows-[var(--titlebar-h)_1fr]",
-        "ms-track-box ms-theme-dark"
+        "transition-colors duration-[50ms]"
       )}
     >
       {/* 窗口标题栏 */}
