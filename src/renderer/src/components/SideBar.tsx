@@ -70,11 +70,22 @@ export function SideBar(): React.JSX.Element {
                       )}
                     </NavLink>
                     {/* 下载进度条 */}
-                    {id === "downloads" && downloaderInfo && downloaderInfo.percent < 100 && (
-                      <div className={clsx("absolute bottom-0.5 h-1.25 w-full")}>
+                    {id === "downloads" && downloaderInfo && (
+                      <div
+                        className={clsx(
+                          "absolute bottom-1 h-1.25 w-full",
+                          "px-1.5",
+                          "opacity-0 transition-opacity",
+                          {
+                            "animate-fade-in opacity-100":
+                              downloaderInfo.percent >= 0 && downloaderInfo.percent < 100,
+                            "animate-fade-out": downloaderInfo.percent >= 100
+                          }
+                        )}
+                      >
                         <Progress.Root
                           value={downloaderInfo?.percent ?? 0}
-                          className={clsx("size-full", "px-1.5")}
+                          className={clsx("size-full")}
                         >
                           <Progress.Track
                             className={clsx(
