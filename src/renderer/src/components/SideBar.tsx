@@ -79,15 +79,12 @@ export function SideBar(): React.JSX.Element {
                           {
                             "animate-fade-in opacity-100":
                               downloaderInfo.percent > 0 && downloaderInfo.percent < 100,
-                            "animate-fade-out":
+                            "animate-fade-out opacity-0":
                               downloaderInfo.percent <= 0 || downloaderInfo.percent >= 100
                           }
                         )}
                       >
-                        <Progress.Root
-                          value={downloaderInfo?.percent ?? 0}
-                          className={clsx("size-full")}
-                        >
+                        <Progress.Root value={downloaderInfo.percent} className={clsx("size-full")}>
                           <Progress.Track
                             className={clsx(
                               "size-full overflow-hidden",
