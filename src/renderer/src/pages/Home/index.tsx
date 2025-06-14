@@ -56,43 +56,50 @@ export default function Home(): React.JSX.Element {
   };
 
   return (
-    <div className="size-full">
-      <div className="flex w-full flex-col items-center justify-center gap-4">
-        <button
-          className={clsx(
-            "bg-blue-500",
-            "text-white",
-            "p-2",
-            "rounded",
-            "cursor-pointer",
-            "h-16",
-            "w-1/3",
-            "hover:brightness-125"
-          )}
-          onClick={handleDownload}
-          disabled={loading}
-        >
-          {loading ? "Downloading..." : "Download"}
-        </button>
-        <span>
-          {progress.toFixed(2)}% ({transferredBytes} of {totalBytes} bytes)
-        </span>
-        <span>{`Speed: ${prettyBytes(speed, { binary: true, minimumFractionDigits: 2, maximumFractionDigits: 2 })}/s`}</span>
-        <button
-          className={clsx(
-            "bg-red-600",
-            "text-white",
-            "p-2",
-            "rounded",
-            "cursor-pointer",
-            "h-16",
-            "w-1/5",
-            "hover:brightness-125"
-          )}
-          onClick={handleCancel}
-        >
-          Cancel / Delete
-        </button>
+    <div className="flex w-full flex-col items-center justify-center gap-4">
+      <button
+        className={clsx(
+          "bg-blue-500",
+          "text-white",
+          "p-2",
+          "rounded",
+          "cursor-pointer",
+          "h-16",
+          "w-1/3",
+          "hover:brightness-125"
+        )}
+        onClick={handleDownload}
+        disabled={loading}
+      >
+        {loading ? "Downloading..." : "Download"}
+      </button>
+      <span>
+        {progress.toFixed(2)}% ({transferredBytes} of {totalBytes} bytes)
+      </span>
+      <span>{`Speed: ${prettyBytes(speed, { binary: true, minimumFractionDigits: 2, maximumFractionDigits: 2 })}/s`}</span>
+      <button
+        className={clsx(
+          "bg-red-600",
+          "text-white",
+          "p-2",
+          "rounded",
+          "cursor-pointer",
+          "h-16",
+          "w-1/5",
+          "hover:brightness-125"
+        )}
+        onClick={handleCancel}
+      >
+        Cancel / Delete
+      </button>
+      <div className="grid w-full auto-cols-min grid-flow-col grid-rows-1">
+        <div className="aspect-square w-8">01</div>
+        <div className="aspect-square w-8">02</div>
+        <div className="aspect-square w-8">03</div>
+        <div className="aspect-square w-8">04</div>
+        <div className="order-last col-span-5 ms-auto grid grid-cols-subgrid">
+          <div className="col-start-3 aspect-square w-8">05</div>
+        </div>
       </div>
     </div>
   );

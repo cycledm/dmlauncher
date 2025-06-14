@@ -32,17 +32,20 @@ export function SideBar(): React.JSX.Element {
   return (
     <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
       <div className={clsx("relative", "size-full", "px-1 py-1")}>
-        <nav className={clsx("size-full")}>
-          <div className={clsx("h-full w-full", "flex flex-col", "items-center justify-between")}>
-            <div className={clsx("w-full", "flex flex-col gap-0.5", "items-center justify-start")}>
+        <nav className={clsx("size-full", "container-type-size")}>
+          <div className={clsx("size-full", "grid grid-rows-[1fr_100cqw] gap-0.5")}>
+            <div
+              className={clsx(
+                "grid auto-rows-min grid-cols-1 gap-0.5",
+                "scrollbar-hidden max-h-[calc(100cqh-100cqw-0.5rem)] overflow-auto"
+              )}
+            >
               {routes
                 .filter(({ id }) => id !== "settings")
                 .map(({ id, path }) => (
                   <SideBarItem key={id} popoverText={t(`${id}.name`)}>
                     <NavLink
-                      className={clsx("app-no-drag", "size-full", {
-                        "order-last": id === "settings"
-                      })}
+                      className={clsx("app-no-drag", "size-full")}
                       to={path ?? "/"}
                       viewTransition
                       draggable={false}
@@ -65,13 +68,11 @@ export function SideBar(): React.JSX.Element {
                   </SideBarItem>
                 ))}
             </div>
-            <div className={clsx("w-full")}>
+            <div>
               {settings && (
                 <SideBarItem popoverText={t(`${settings.id}.name`)}>
                   <NavLink
-                    className={clsx("app-no-drag", "size-full", {
-                      "order-last": settings.id === "settings"
-                    })}
+                    className={clsx("app-no-drag", "size-full")}
                     to={settings.path ?? "/"}
                     viewTransition
                     draggable={false}

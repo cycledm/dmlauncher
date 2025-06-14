@@ -16,3 +16,23 @@
     "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 }
+
+@utility container-type-* {
+  container-type: --value(
+    "normal",
+    "size",
+    "inline-size",
+    "scroll-state",
+    "inherit",
+    "initial",
+    "revert",
+    "revert-layer",
+    "unset"
+  );
+}
+
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
