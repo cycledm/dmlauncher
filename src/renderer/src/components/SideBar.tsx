@@ -25,8 +25,8 @@ export function SideBar(): React.JSX.Element {
     home: <FiHome className={styles.icon} />,
     java: <LuCoffee className={styles.icon} />,
     downloads: <FiDownload className={styles.icon} />,
-    settings: <HiOutlineBars3 className={styles.icon} />,
-    template: <GoRepoTemplate className={styles.icon} />
+    template: <GoRepoTemplate className={styles.icon} />,
+    settings: <HiOutlineBars3 className={styles.icon} />
   };
 
   return (

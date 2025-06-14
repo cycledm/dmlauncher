@@ -35,7 +35,7 @@ export default function App(): React.JSX.Element {
         >
           <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
             <I18nProvider>
-              <div className={clsx("size-full", "grid grid-cols-[var(--sidebar-w)_1fr]")}>
+              <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
                 {/* 侧边导航栏 */}
                 <SideBar />
                 {/* 主内容区域 */}
