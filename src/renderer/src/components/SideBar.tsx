@@ -32,7 +32,7 @@ export function SideBar(): React.JSX.Element {
   return (
     <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
       <div className={clsx("relative", "size-full", "px-1 py-1")}>
-        <nav className={clsx("size-full", "container-type-size")}>
+        <nav className={clsx("size-full", "container-type-inline-size")}>
           <div className={clsx("size-full", "grid grid-rows-[1fr_100cqw] gap-0.5")}>
             <div
               className={clsx(
