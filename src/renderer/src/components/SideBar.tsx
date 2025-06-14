@@ -16,7 +16,7 @@ export function SideBar(): React.JSX.Element {
   const settings = routes.find((route) => route.id === "settings");
 
   const styles = {
-    icon: clsx("size-full"),
+    icon: clsx("size-1/2"),
     backdropColor: clsx("bg-[#f0f0f0] dark:bg-[#202020]"),
     itemColor: clsx("bg-blue-200 dark:bg-blue-700")
   };
@@ -50,7 +50,7 @@ export function SideBar(): React.JSX.Element {
                       {({ isActive }) => (
                         <div
                           className={clsx(
-                            "size-full p-2",
+                            "size-full",
                             "flex items-center justify-center",
                             "rounded-md",
                             {
@@ -79,7 +79,7 @@ export function SideBar(): React.JSX.Element {
                     {({ isActive }) => (
                       <div
                         className={clsx(
-                          "size-full p-2",
+                          "size-full",
                           "flex items-center justify-center",
                           "rounded-md",
                           {
