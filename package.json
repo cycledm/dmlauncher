@@ -53,6 +53,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "culori": "^4.0.1",
     "electron": "^35.5.1",
