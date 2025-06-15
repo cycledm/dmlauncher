@@ -1,7 +1,7 @@
 import axios from "axios";
 import { objectToCamel } from "ts-case-convert";
 
-export async function fetcher<T>(url: string): Promise<T> {
+export async function fetchJava<T>(url: string): Promise<T> {
   console.log(`Fetching data from: ${url}`);
   const response = await axios.get<unknown>(url, { headers: { accept: "application/json" } });
   if (response.status !== 200) {

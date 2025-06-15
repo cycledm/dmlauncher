@@ -2,16 +2,16 @@
 
 import useSWR, { Fetcher } from "swr";
 import { AdoptiumReleasesInfo, AdoptiumReleaseDetails } from "@renderer/interfaces";
-import { fetcher } from "@renderer/utils/java";
+import { fetchJava } from "@renderer/utils";
 
 interface UseAdoptiumResponse {
   releasesInfo: AdoptiumReleasesInfo;
   releaseDetails?: AdoptiumReleaseDetails;
 }
 
-const fetchReleasesInfo: Fetcher<AdoptiumReleasesInfo, string> = (url) => fetcher(url);
+const fetchReleasesInfo: Fetcher<AdoptiumReleasesInfo, string> = (url) => fetchJava(url);
 const fetchReleaseDetails: Fetcher<AdoptiumReleaseDetails | undefined, string> = (url) =>
-  fetcher(url);
+  fetchJava(url);
 
 export function useAdoptium(version?: number | null): UseAdoptiumResponse {
   // TODO: 从Electron主进程获取
