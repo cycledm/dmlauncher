@@ -9,7 +9,7 @@ import { TitleBar } from "@renderer/components";
 
 import icon from "@renderer/assets/electron.svg";
 
-function I18nProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
+function AppDataContainer({ children }: { children: React.ReactNode }): React.JSX.Element {
   useI18nInit();
   return <React.Fragment>{children}</React.Fragment>;
 }
@@ -33,7 +33,7 @@ export default function App(): React.JSX.Element {
           fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
         >
           <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
-            <I18nProvider>
+            <AppDataContainer>
               <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
                 {/* 侧边导航栏 */}
                 <SideBar />
@@ -52,7 +52,7 @@ export default function App(): React.JSX.Element {
                   </ErrorBoundary>
                 </div>
               </div>
-            </I18nProvider>
+            </AppDataContainer>
           </Suspense>
         </ErrorBoundary>
       </div>
