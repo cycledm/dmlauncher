@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useAdoptium } from "@renderer/hooks";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ScrollBox, SimpleCard, Spinner } from "@renderer/components";
 import { ReleaseDetails } from "./components";
 

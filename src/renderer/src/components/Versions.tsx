@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 export function Versions(): React.JSX.Element {
   const versionStyles = ["float-left block px-[20px] py-0", "text-[14px]/[14px] opacity-80"];

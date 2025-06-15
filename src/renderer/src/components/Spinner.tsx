@@ -1,5 +1,5 @@
 import React from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { CgSpinner } from "react-icons/cg";
 
 type Props = {

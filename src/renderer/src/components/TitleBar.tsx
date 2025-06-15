@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { formatHex8, parse } from "culori";
 import { useElectron } from "@renderer/hooks";
 

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { useLocation, Outlet, useNavigation } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 import { useI18nInit } from "@renderer/hooks";

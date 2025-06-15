@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import prettyBytes from "pretty-bytes";
 import { useElectron } from "@renderer/hooks";
 

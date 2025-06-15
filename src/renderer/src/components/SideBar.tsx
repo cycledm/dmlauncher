@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import routes from "@renderer/routes";
 import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";

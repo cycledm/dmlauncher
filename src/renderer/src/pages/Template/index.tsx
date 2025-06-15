@@ -1,7 +1,7 @@
 import React from "react";
 import { Versions } from "@renderer/components";
 import electronLogo from "@renderer/assets/electron.svg";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Trans, useTranslation } from "react-i18next";
 import { atom, useAtomValue } from "jotai";

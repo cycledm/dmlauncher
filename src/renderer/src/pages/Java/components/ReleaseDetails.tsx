@@ -1,5 +1,5 @@
 import React from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import dayjs from "dayjs";
 import prettyBytes from "pretty-bytes";
 import { useAdoptium, useElectron } from "@renderer/hooks";

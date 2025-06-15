@@ -24,7 +24,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "tailwindCSS.classFunctions": ["clsx", "classNames", "twJoin"],
+  "tailwindCSS.classFunctions": ["clsx", "cn"],
   "path-intellisense.mappings": {
     "@main": "${workspaceRoot}/src/main",
     "@preload": "${workspaceRoot}/src/preload",

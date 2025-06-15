@@ -1,5 +1,5 @@
 import React from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { Progress } from "@base-ui-components/react/progress";
 import { ScrollBox, SimpleCard } from "@renderer/components";
 import { useDownloader } from "@renderer/hooks";
