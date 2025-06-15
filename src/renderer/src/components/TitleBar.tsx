@@ -7,6 +7,16 @@ import { VscColorMode } from "react-icons/vsc";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 
+const styles = {
+  icon: clsx("size-full")
+};
+
+const icons = {
+  system: <VscColorMode className={styles.icon} />,
+  light: <MdOutlineLightMode className={styles.icon} />,
+  dark: <MdOutlineDarkMode className={styles.icon} />
+};
+
 type Props = {
   icon?: string;
 };
@@ -83,16 +93,6 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
 function ColorModeSwitchButton(): React.JSX.Element {
   const { theme } = useElectron();
   const [colorMode, setColorMode] = useState<"system" | "light" | "dark">("system");
-
-  const styles = {
-    icon: clsx("size-full")
-  };
-
-  const icons = {
-    system: <VscColorMode className={styles.icon} />,
-    light: <MdOutlineLightMode className={styles.icon} />,
-    dark: <MdOutlineDarkMode className={styles.icon} />
-  };
 
   const handleClick = async (): Promise<void> => {
     switch (colorMode) {

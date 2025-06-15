@@ -13,25 +13,25 @@ import { GoRepoTemplate } from "react-icons/go";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { FiDownload } from "react-icons/fi";
 
+const styles = {
+  icon: clsx("size-1/2"),
+  backdropColor: clsx("bg-[#f0f0f0] dark:bg-[#202020]"),
+  itemColor: clsx("bg-blue-200 dark:bg-blue-700")
+};
+
+const icons = {
+  home: <FiHome className={styles.icon} />,
+  java: <RiJavaLine className={styles.icon} />,
+  downloads: <FiDownload className={styles.icon} />,
+  template: <GoRepoTemplate className={styles.icon} />,
+  settings: <HiOutlineBars3 className={styles.icon} />
+};
+
 export function SideBar(): React.JSX.Element {
   const { t } = useTranslation("page");
   const { downloaderInfo } = useDownloader();
 
   const settings = routes.find((route) => route.id === "settings");
-
-  const styles = {
-    icon: clsx("size-1/2"),
-    backdropColor: clsx("bg-[#f0f0f0] dark:bg-[#202020]"),
-    itemColor: clsx("bg-blue-200 dark:bg-blue-700")
-  };
-
-  const icons = {
-    home: <FiHome className={styles.icon} />,
-    java: <RiJavaLine className={styles.icon} />,
-    downloads: <FiDownload className={styles.icon} />,
-    template: <GoRepoTemplate className={styles.icon} />,
-    settings: <HiOutlineBars3 className={styles.icon} />
-  };
 
   return (
     <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
