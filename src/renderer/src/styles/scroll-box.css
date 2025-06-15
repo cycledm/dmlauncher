@@ -13,9 +13,10 @@
   --scroll-thumb-scale-lg: 1.25;
 }
 
+/* prettier-ignore */
 @utility scroll-thumb-* {
   padding: calc(
-    var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+    var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
       var(--scroll-track-gutter) * 2 + var(--scroll-box-padding-offset)
   ) !important;
 
@@ -23,7 +24,7 @@
     &.ms-y {
       margin-right: calc(var(--scroll-track-gutter) / 2) !important;
       width: calc(
-        var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+        var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
           var(--scroll-track-gutter) * 2
       ) !important;
 
@@ -31,25 +32,25 @@
       &:hover {
         .ms-thumb {
           width: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*)
           ) !important;
         }
       }
 
       .ms-thumb {
         right: var(--scroll-track-gutter) !important;
-        width: calc(var(--spacing) * --value(--scroll-thumb-size-\*)) !important;
+        width: calc(var(--spacing) * --value(--scroll-thumb-size-*)) !important;
 
         &:hover {
           width: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*)
           ) !important;
         }
 
         &:after {
           right: calc(var(--scroll-track-gutter) * -1) !important;
           width: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
               var(--scroll-track-gutter) * 2
           ) !important;
         }
@@ -59,7 +60,7 @@
     &.ms-x {
       margin-bottom: calc(var(--scroll-track-gutter) / 2) !important;
       height: calc(
-        var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+        var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
           var(--scroll-track-gutter) * 2
       ) !important;
 
@@ -67,25 +68,25 @@
       &:hover {
         .ms-thumb {
           height: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*)
           ) !important;
         }
       }
 
       .ms-thumb {
         bottom: var(--scroll-track-gutter) !important;
-        height: calc(var(--spacing) * --value(--scroll-thumb-size-\*)) !important;
+        height: calc(var(--spacing) * --value(--scroll-thumb-size-*)) !important;
 
         &:hover {
           height: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*)
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*)
           ) !important;
         }
 
         &:after {
           bottom: calc(var(--scroll-track-gutter) * -1) !important;
           height: calc(
-            var(--spacing) * --value(--scroll-thumb-size-\*) * --value(--scroll-thumb-scale-\*) +
+            var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
               var(--scroll-track-gutter) * 2
           ) !important;
         }
@@ -94,30 +95,33 @@
   }
 }
 
+/* prettier-ignore */
 @utility scroll-thumb-bg-* {
   .ms-track {
     .ms-thumb {
-      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value(--color-*, [color]) !important;
       background-color: --value("transparent") !important;
     }
   }
 }
 
+/* prettier-ignore */
 @utility scroll-track-hover-bg-* {
   .ms-track {
     &.ms-active,
     &:hover {
-      background-color: --value(--color-\*, [color]) !important;
+      background-color: --value(--color-*, [color]) !important;
       background-color: --value("transparent") !important;
     }
   }
 }
 
+/* prettier-ignore */
 @utility scroll-track-hover-border-* {
   .ms-track {
     &.ms-active,
     &:hover {
-      border-color: --value(--color-\*, [color]) !important;
+      border-color: --value(--color-*, [color]) !important;
       border-color: --value("transparent") !important;
     }
   }
