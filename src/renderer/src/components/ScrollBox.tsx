@@ -1,6 +1,6 @@
 import React from "react";
 import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@renderer/utils";
 import { MacScrollbar } from "mac-scrollbar";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -41,7 +41,7 @@ export function ScrollBox({ ref, ...props }: Props): React.JSX.Element {
       minThumbSize={0}
       trackGap={[8, 8, 8, 8]}
       suppressAutoHide={props.suppressAutoHide}
-      className={twMerge(styles.size, styles.colors, props.className)}
+      className={cn(styles.size, styles.colors, props.className)}
     >
       {props.children}
     </MacScrollbar>

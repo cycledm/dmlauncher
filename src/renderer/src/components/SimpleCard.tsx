@@ -1,13 +1,10 @@
 import React from "react";
 import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@renderer/utils";
 
-type Props = {
-  children?: React.ReactNode;
-  className?: string;
-};
+type Props = React.HTMLAttributes<HTMLDivElement>;
 
-export function SimpleCard({ children, className }: Props): React.JSX.Element {
+export function SimpleCard({ children, className, ...props }: Props): React.JSX.Element {
   const style = clsx(
     "size-auto p-2",
     "rounded-lg shadow-sm outline",
@@ -16,5 +13,9 @@ export function SimpleCard({ children, className }: Props): React.JSX.Element {
     "select-none"
   );
 
-  return <div className={twMerge(style, className)}>{children}</div>;
+  return (
+    <div {...props} className={cn(style, className)}>
+      {children}
+    </div>
+  );
 }
