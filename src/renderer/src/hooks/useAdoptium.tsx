@@ -1,6 +1,5 @@
 //import { useElectron } from ".";
-
-import useSWR, { Fetcher } from "swr";
+import useSWR from "swr";
 import { AdoptiumReleasesInfo, AdoptiumReleaseDetails } from "@renderer/interfaces";
 import { fetchJava } from "@renderer/utils";
 
@@ -9,10 +8,6 @@ interface UseAdoptiumResponse {
   releaseDetails?: AdoptiumReleaseDetails;
 }
 
-const fetchReleasesInfo: Fetcher<AdoptiumReleasesInfo, string> = (url) => fetchJava(url);
-const fetchReleaseDetails: Fetcher<AdoptiumReleaseDetails | undefined, string> = (url) =>
-  fetchJava(url);
-
 export function useAdoptium(version?: number | null): UseAdoptiumResponse {
   // TODO: 从Electron主进程获取
   const architecture = "x64";
@@ -20,7 +15,7 @@ export function useAdoptium(version?: number | null): UseAdoptiumResponse {
 
   const { data: releasesInfo } = useSWR(
     "https://api.adoptium.net/v3/info/available_releases",
-    fetchReleasesInfo,
+    fetchJava<AdoptiumReleasesInfo>,
     { suspense: true }
   );
 
@@ -28,7 +23,7 @@ export function useAdoptium(version?: number | null): UseAdoptiumResponse {
     version
       ? `https://api.adoptium.net/v3/assets/latest/${version}/hotspot?architecture=${architecture}&image_type=jdk&os=${os}&vendor=eclipse`
       : null,
-    fetchReleaseDetails,
+    fetchJava<AdoptiumReleaseDetails>,
     { suspense: true }
   );
 
