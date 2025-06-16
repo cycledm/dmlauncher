@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { clsx } from "clsx";
-import { useLocation, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 import { useI18nInit } from "@renderer/hooks";
-import { SideBar } from "@renderer/components";
+import { SafeBoundary, SideBar } from "@renderer/components";
 import { Spinner } from "@renderer/components";
 import { TitleBar } from "@renderer/components";
 
@@ -15,8 +15,6 @@ function AppDataContainer({ children }: { children: React.ReactNode }): React.JS
 }
 
 export default function App(): React.JSX.Element {
-  const location = useLocation();
-
   return (
     <div
       className={clsx(
@@ -39,17 +37,9 @@ export default function App(): React.JSX.Element {
                 <SideBar />
                 {/* 主内容区域 */}
                 <div className={clsx("relative", "size-full", "overflow-hidden")}>
-                  <ErrorBoundary
-                    fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
-                    key={location.pathname}
-                  >
-                    <Suspense
-                      fallback={<Spinner className="size-full" size="4rem" center pulse />}
-                      key={location.pathname}
-                    >
-                      <Outlet />
-                    </Suspense>
-                  </ErrorBoundary>
+                  <SafeBoundary>
+                    <Outlet />
+                  </SafeBoundary>
                 </div>
               </div>
             </AppDataContainer>
