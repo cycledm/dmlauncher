@@ -11,6 +11,7 @@ import rtb from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
 
 import icon from "@renderer/assets/electron.svg";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const supported = await window.api.i18n.loadSupported();
 await i18next
@@ -32,35 +33,39 @@ await i18next.changeLanguage(appLocale);
 // const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 // await sleep(10000);
 
+const queryClient = new QueryClient();
+
 export default function App(): React.JSX.Element {
   return (
-    <div
-      className={clsx(
-        "h-dvh max-h-dvh w-dvw max-w-dvw",
-        "bg-white text-black dark:bg-gray-950 dark:text-white",
-        "grid grid-rows-[var(--titlebar-h)_1fr]",
-        "transition-colors duration-[50ms]"
-      )}
-    >
-      {/* 窗口标题栏 */}
-      <TitleBar icon={icon} />
-      <div className={clsx("relative size-full overflow-hidden")}>
-        <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
-          {/* 侧边导航栏 */}
-          <SideBar />
-          {/* 主内容区域 */}
-          <div className={clsx("relative", "size-full", "overflow-hidden")}>
-            <Outlet />
-          </div>
-        </div>
-        {/* 开发者工具 */}
-        {import.meta.env.DEV && (
-          <div className="absolute right-0 bottom-0 me-2 mb-12">
-            <ReactQueryDevtools position="bottom" buttonPosition="relative" />
-            <TanStackRouterDevtools position="bottom-right" />
-          </div>
+    <QueryClientProvider client={queryClient}>
+      <div
+        className={clsx(
+          "h-dvh max-h-dvh w-dvw max-w-dvw",
+          "bg-white text-black dark:bg-gray-950 dark:text-white",
+          "grid grid-rows-[var(--titlebar-h)_1fr]",
+          "transition-colors duration-[50ms]"
         )}
+      >
+        {/* 窗口标题栏 */}
+        <TitleBar icon={icon} />
+        <div className={clsx("relative size-full overflow-hidden")}>
+          <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
+            {/* 侧边导航栏 */}
+            <SideBar />
+            {/* 主内容区域 */}
+            <div className={clsx("relative", "size-full", "overflow-hidden")}>
+              <Outlet />
+            </div>
+          </div>
+          {/* 开发者工具 */}
+          {import.meta.env.DEV && (
+            <div className="absolute right-0 bottom-0 me-2 mb-12">
+              <ReactQueryDevtools position="bottom" buttonPosition="relative" />
+              <TanStackRouterDevtools position="bottom-right" />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 }
