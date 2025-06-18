@@ -4,6 +4,7 @@ out
 .DS_Store
 .eslintcache
 *.log*
+.tanstack
 .env.*
 .env.keys
 !.env.production

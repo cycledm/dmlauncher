@@ -1,6 +1,7 @@
 import { resolve } from "path";
 import { defineConfig, externalizeDepsPlugin, bytecodePlugin, loadEnv } from "electron-vite";
 import react from "@vitejs/plugin-react";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import jotaiDebugLabel from "jotai/babel/plugin-debug-label";
 import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
 import tailwindcss from "@tailwindcss/vite";
@@ -58,6 +59,10 @@ export default defineConfig(({ mode }) => {
         }
       },
       plugins: [
+        tanstackRouter({
+          target: "react",
+          autoCodeSplitting: true
+        }),
         react({
           babel: {
             plugins: [jotaiDebugLabel, jotaiReactRefresh]

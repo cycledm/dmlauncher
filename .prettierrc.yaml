@@ -2,6 +2,11 @@ singleQuote: false
 semi: true
 printWidth: 100
 trailingComma: none
-tailwindFunctions: ["clsx", "cva", "cx", "cn"]
 plugins:
+  - "prettier-plugin-packagejson"
   - "prettier-plugin-tailwindcss"
+tailwindFunctions: ["clsx", "cva", "cx", "cn"]
+overrides:
+  - files: "package.json"
+    options:
+      packageSortOrder: ["name", "productName", "description"]
