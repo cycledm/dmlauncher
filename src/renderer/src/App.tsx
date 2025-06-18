@@ -42,6 +42,7 @@ export default function App(): React.JSX.Element {
           "bg-white text-black dark:bg-gray-950 dark:text-white",
           "grid grid-rows-[var(--titlebar-h)_1fr]",
           "transition-colors duration-[50ms]",
+          "select-none",
         )}
       >
         {/* 窗口标题栏 */}
