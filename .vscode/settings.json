@@ -32,9 +32,6 @@
   },
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "You must use Simplified Chinese for commit messages."
-    },
-    {
       "text": "Use Conventional Commits 1.0.0 for commit messages."
     }
   ]
