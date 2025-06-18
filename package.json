@@ -23,11 +23,15 @@
     "generate-routes": "tsr generate && prettier --write src/renderer/src/routes",
     "postinstall": "electron-builder install-app-deps",
     "lint": "eslint --cache .",
+    "prepare": "husky",
     "start": "npm run dotenvx-run electron-vite preview",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "watch-routes": "tsr watch"
+  },
+  "lint-staged": {
+    "*": "prettier --write ."
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.2",
@@ -77,9 +81,11 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "html-react-parser": "^5.2.5",
+    "husky": "^9.1.7",
     "i18next": "^25.2.1",
     "i18next-resources-to-backend": "^1.2.1",
     "jotai": "^2.12.5",
+    "lint-staged": "^16.1.2",
     "mac-scrollbar": "^0.13.8",
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.15",
