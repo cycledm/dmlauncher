@@ -28,7 +28,7 @@
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
-    "watch-routes": "tsr watch test123"
+    "watch-routes": "tsr watch"
   },
   "lint-staged": {
     "*": "prettier --write ."
