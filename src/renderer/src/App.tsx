@@ -1,18 +1,36 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { clsx } from "clsx";
-import { Outlet } from "react-router";
-import { ErrorBoundary } from "react-error-boundary";
-import { useI18nInit } from "@renderer/hooks";
-import { SafeBoundary, SideBar } from "@renderer/components";
-import { Spinner } from "@renderer/components";
+import { Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { SideBar } from "@renderer/components";
 import { TitleBar } from "@renderer/components";
+
+import i18next from "i18next";
+import rtb from "i18next-resources-to-backend";
+import { initReactI18next } from "react-i18next";
 
 import icon from "@renderer/assets/electron.svg";
 
-function AppDataContainer({ children }: { children: React.ReactNode }): React.JSX.Element {
-  useI18nInit();
-  return <React.Fragment>{children}</React.Fragment>;
-}
+const supported = await window.api.i18n.loadSupported();
+await i18next
+  .use(initReactI18next)
+  .use(rtb((lng: string, ns: string) => window.api.i18n.loadResource(lng, ns)))
+  .init({
+    debug: import.meta.env.DEV,
+    lng: supported.languages[0],
+    fallbackLng: supported.languages,
+    supportedLngs: supported.languages,
+    ns: supported.namespaces,
+    defaultNS: "common",
+    load: "currentOnly"
+  });
+
+const appLocale = await window.api.i18n.getAppLocale();
+await i18next.changeLanguage(appLocale);
+
+// const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+// await sleep(10000);
 
 export default function App(): React.JSX.Element {
   return (
@@ -27,24 +45,21 @@ export default function App(): React.JSX.Element {
       {/* 窗口标题栏 */}
       <TitleBar icon={icon} />
       <div className={clsx("relative size-full overflow-hidden")}>
-        <ErrorBoundary
-          fallback={<h2 className="text-2xl font-bold">Oops, an error has occurred.</h2>}
-        >
-          <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
-            <AppDataContainer>
-              <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
-                {/* 侧边导航栏 */}
-                <SideBar />
-                {/* 主内容区域 */}
-                <div className={clsx("relative", "size-full", "overflow-hidden")}>
-                  <SafeBoundary>
-                    <Outlet />
-                  </SafeBoundary>
-                </div>
-              </div>
-            </AppDataContainer>
-          </Suspense>
-        </ErrorBoundary>
+        <div className={clsx("size-full", "grid grid-cols-[3rem_1fr]")}>
+          {/* 侧边导航栏 */}
+          <SideBar />
+          {/* 主内容区域 */}
+          <div className={clsx("relative", "size-full", "overflow-hidden")}>
+            <Outlet />
+          </div>
+        </div>
+        {/* 开发者工具 */}
+        {import.meta.env.DEV && (
+          <div className="absolute right-0 bottom-0 me-2 mb-12">
+            <ReactQueryDevtools position="bottom" buttonPosition="relative" />
+            <TanStackRouterDevtools position="bottom-right" />
+          </div>
+        )}
       </div>
     </div>
   );

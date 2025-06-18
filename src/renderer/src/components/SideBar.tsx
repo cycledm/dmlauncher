@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { clsx } from "clsx";
-import routes from "@renderer/routes";
-import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
+import { Link, linkOptions } from "@tanstack/react-router";
 import { Popover } from "@base-ui-components/react/popover";
 import { Progress } from "@base-ui-components/react/progress";
-
 import { useDownloader } from "@renderer/hooks";
+import { Route as settingsRoute } from "@renderer/routes/app/settings";
+
 import { FiHome } from "react-icons/fi";
 import { RiJavaLine } from "react-icons/ri";
 import { GoRepoTemplate } from "react-icons/go";
@@ -19,19 +19,37 @@ const styles = {
   itemColor: clsx("bg-blue-200 dark:bg-blue-700")
 };
 
-const icons = {
-  home: <FiHome className={styles.icon} />,
-  java: <RiJavaLine className={styles.icon} />,
-  downloads: <FiDownload className={styles.icon} />,
-  template: <GoRepoTemplate className={styles.icon} />,
-  settings: <HiOutlineBars3 className={styles.icon} />
-};
+const options = linkOptions([
+  {
+    to: "/app/home",
+    key: "home",
+    icon: <FiHome className={styles.icon} />
+  },
+  {
+    to: "/app/java",
+    key: "java",
+    icon: <RiJavaLine className={styles.icon} />
+  },
+  {
+    to: "/app/downloads",
+    key: "downloads",
+    icon: <FiDownload className={styles.icon} />
+  },
+  {
+    to: "/app/template",
+    key: "template",
+    icon: <GoRepoTemplate className={styles.icon} />
+  },
+  {
+    to: "/app/settings",
+    key: "settings",
+    icon: <HiOutlineBars3 className={styles.icon} />
+  }
+]);
 
 export function SideBar(): React.JSX.Element {
-  const { t } = useTranslation("page");
+  const { t } = useTranslation("routes");
   const { downloaderInfo } = useDownloader();
-
-  const settings = routes.find((route) => route.id === "settings");
 
   return (
     <div className={clsx("app-drag", "size-full", "overflow-hidden", styles.backdropColor)}>
@@ -44,15 +62,16 @@ export function SideBar(): React.JSX.Element {
                 "scrollbar-hidden max-h-[calc(100cqh-100cqw-0.5rem)] overflow-auto"
               )}
             >
-              {routes
-                .filter(({ id }) => id !== "settings")
-                .map(({ id, path }) => (
-                  <SideBarItem key={id} popoverText={t(`${id}.name`)}>
-                    <NavLink
-                      className={clsx("app-no-drag", "size-full")}
-                      to={path ?? "/"}
+              {options
+                .filter((opt) => opt.key !== "settings")
+                .map((option) => (
+                  <SideBarItem key={option.key} popoverText={t(`${option.key}.displayName`)}>
+                    <Link
+                      {...option}
+                      key={option.key}
                       viewTransition
                       draggable={false}
+                      className={clsx("app-no-drag", "size-full")}
                     >
                       {({ isActive }) => (
                         <div
@@ -60,17 +79,15 @@ export function SideBar(): React.JSX.Element {
                             "size-full",
                             "flex items-center justify-center",
                             "rounded-md",
-                            {
-                              [styles.itemColor]: isActive
-                            }
+                            isActive && styles.itemColor
                           )}
                         >
-                          {id ? icons[id] : null}
+                          {option.icon}
                         </div>
                       )}
-                    </NavLink>
+                    </Link>
                     {/* 下载进度条 */}
-                    {id === "downloads" && downloaderInfo && (
+                    {option.key === "downloads" && downloaderInfo && (
                       <div
                         className={clsx(
                           "absolute bottom-1 h-1.25 w-full",
@@ -103,31 +120,27 @@ export function SideBar(): React.JSX.Element {
                 ))}
             </div>
             <div>
-              {settings && (
-                <SideBarItem popoverText={t(`${settings.id}.name`)}>
-                  <NavLink
-                    className={clsx("app-no-drag", "size-full")}
-                    to={settings.path ?? "/"}
-                    viewTransition
-                    draggable={false}
-                  >
-                    {({ isActive }) => (
-                      <div
-                        className={clsx(
-                          "size-full",
-                          "flex items-center justify-center",
-                          "rounded-md",
-                          {
-                            [styles.itemColor]: isActive
-                          }
-                        )}
-                      >
-                        {settings.id ? icons[settings.id] : null}
-                      </div>
-                    )}
-                  </NavLink>
-                </SideBarItem>
-              )}
+              <SideBarItem popoverText={t("settings.displayName")}>
+                <Link
+                  to={settingsRoute.to}
+                  viewTransition
+                  draggable={false}
+                  className={clsx("app-no-drag", "size-full")}
+                >
+                  {({ isActive }) => (
+                    <div
+                      className={clsx(
+                        "size-full",
+                        "flex items-center justify-center",
+                        "rounded-md",
+                        isActive && styles.itemColor
+                      )}
+                    >
+                      {options.find((opt) => opt.key === "settings")?.icon}
+                    </div>
+                  )}
+                </Link>
+              </SideBarItem>
             </div>
           </div>
         </nav>

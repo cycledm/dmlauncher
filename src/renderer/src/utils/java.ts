@@ -2,6 +2,11 @@ import axios from "axios";
 import { objectToCamel } from "ts-case-convert";
 
 export async function fetchJava<T>(url: string): Promise<T> {
+  // 以50%的概率抛出错误
+  // if (Math.random() < 0.5) {
+  //   console.error("Random error occurred while fetching Java data.");
+  //   throw new Error("Random error occurred while fetching Java data.");
+  // }
   console.log(`Fetching data from: ${url}`);
   const response = await axios.get<unknown>(url, { headers: { accept: "application/json" } });
   if (response.status !== 200) {
