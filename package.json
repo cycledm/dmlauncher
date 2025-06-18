@@ -15,7 +15,7 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
-    "dev": "concurrently --kill-others --names tsr,dev \"npm run watch-routes\" \"npm run dev:renderer\"",
+    "dev": "concurrently -k -s command-dev -n tsr,dev 'npm:watch-routes' 'npm:dev:renderer'",
     "dev:renderer": "npm run dotenvx-run:dev electron-vite dev",
     "dotenvx-run": "dotenvx run -f .env.production --",
     "dotenvx-run:dev": "dotenvx run -f .env.development --",
