@@ -18,11 +18,11 @@ const router = createRouter({
   defaultPendingComponent: () => <Spinner className="size-full" size="4rem" center pulse />,
   defaultErrorComponent: DefaultErrorComponent,
   defaultPendingMinMs: 0,
-  defaultPendingMs: 0
+  defaultPendingMs: 0,
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

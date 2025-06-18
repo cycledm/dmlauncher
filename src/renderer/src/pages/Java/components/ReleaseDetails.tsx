@@ -102,7 +102,7 @@ function BasicInfoCard({ details }: { details: AdoptiumReleaseDetails }): React.
   const styles = {
     title: clsx("mb-4 text-xl font-semibold text-gray-900 dark:text-white"),
     dt: clsx("text-sm font-medium text-gray-500 dark:text-gray-400"),
-    dd: clsx("mt-1 font-mono text-sm text-gray-900 dark:text-white")
+    dd: clsx("mt-1 font-mono text-sm text-gray-900 dark:text-white"),
   };
 
   return (

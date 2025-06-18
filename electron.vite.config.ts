@@ -20,20 +20,20 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
           "@main": resolve("src/main"),
-          "@preload": resolve("src/preload")
-        }
+          "@preload": resolve("src/preload"),
+        },
       },
-      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })]
+      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
     },
     preload: {
       envPrefix: ["COMM_", "PRLD_", "PROTECTED_"],
       resolve: {
         alias: {
           "@main": resolve("src/main"),
-          "@preload": resolve("src/preload")
-        }
+          "@preload": resolve("src/preload"),
+        },
       },
-      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })]
+      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
     },
     renderer: {
       envPrefix: ["COMM_", "RNDR_"],
@@ -41,8 +41,8 @@ export default defineConfig(({ mode }) => {
         alias: {
           "@main": resolve("src/main"),
           "@preload": resolve("src/preload"),
-          "@renderer": resolve("src/renderer/src")
-        }
+          "@renderer": resolve("src/renderer/src"),
+        },
       },
       build: {
         rollupOptions: {
@@ -54,22 +54,22 @@ export default defineConfig(({ mode }) => {
                 return "fonts/[name]-[hash][extname]";
               }
               return "assets/[name]-[hash][extname]";
-            }
-          }
-        }
+            },
+          },
+        },
       },
       plugins: [
         tanstackRouter({
           target: "react",
-          autoCodeSplitting: true
+          autoCodeSplitting: true,
         }),
         react({
           babel: {
-            plugins: [jotaiDebugLabel, jotaiReactRefresh]
-          }
+            plugins: [jotaiDebugLabel, jotaiReactRefresh],
+          },
         }),
-        tailwindcss()
-      ]
-    }
+        tailwindcss(),
+      ],
+    },
   };
 });

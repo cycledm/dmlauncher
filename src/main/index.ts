@@ -16,7 +16,7 @@ async function installReactDevTools(): Promise<void> {
 
   try {
     const ext = await installExtension(REACT_DEVELOPER_TOOLS, {
-      loadExtensionOptions: { allowFileAccess: true }
+      loadExtensionOptions: { allowFileAccess: true },
     });
     console.log("Added Extension:", ext.name);
   } catch (error) {
@@ -34,7 +34,7 @@ if (!gotTheLock) {
 // 在开发模式下，使用 `dmlauncher-dev` 协议
 if (!app.isPackaged && import.meta.env.MAIN_APP_PROTOCOL) {
   app.setAsDefaultProtocolClient(import.meta.env.MAIN_APP_PROTOCOL, process.execPath, [
-    resolve(process.argv[1])
+    resolve(process.argv[1]),
   ]);
 }
 

@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Downloads from "@renderer/pages/Downloads";
 
 export const Route = createFileRoute("/app/downloads/")({
-  component: IndexComponent
+  component: IndexComponent,
 });
 
 function IndexComponent(): React.JSX.Element {

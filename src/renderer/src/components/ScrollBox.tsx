@@ -10,8 +10,8 @@ const styles = {
     //"scroll-track-hover-bg-[#f8f8f8c2] dark:scroll-track-hover-bg-[#d2d2d224]",
     "scroll-track-hover-bg-transparent dark:scroll-track-hover-bg-transparent",
     //"scroll-track-hover-border-[#dfdfdf] dark:scroll-track-hover-border-[#e4e4e452]"
-    "scroll-track-hover-border-transparent dark:scroll-track-hover-border-transparent"
-  )
+    "scroll-track-hover-border-transparent dark:scroll-track-hover-border-transparent",
+  ),
 };
 
 const thumbVariants = cva(styles.colors, {
@@ -19,12 +19,12 @@ const thumbVariants = cva(styles.colors, {
     size: {
       small: "scroll-thumb-sm",
       medium: "scroll-thumb-md",
-      large: "scroll-thumb-lg"
-    }
+      large: "scroll-thumb-lg",
+    },
   },
   defaultVariants: {
-    size: "small"
-  }
+    size: "small",
+  },
 });
 
 interface Props extends React.HTMLAttributes<HTMLElement> {

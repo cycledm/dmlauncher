@@ -17,9 +17,9 @@ export default class MainWindow extends PrimaryBrowserWindow {
       ...(process.platform === "linux" ? { icon } : {}),
       webPreferences: {
         preload: fileURLToPath(new URL("../preload/index.js", import.meta.url)),
-        sandbox: false
+        sandbox: false,
       },
-      ...options
+      ...options,
     });
 
     this.on("ready-to-show", () => {

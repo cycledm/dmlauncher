@@ -8,7 +8,7 @@ import {
   DownloaderInfoForRenderer,
   DownloadOptions,
   DownloadTask,
-  DownloadTaskStatus
+  DownloadTaskStatus,
 } from "@main/interfaces/downloader";
 
 // 默认最大并行下载线程数
@@ -39,7 +39,7 @@ export class Downloader {
     console.log(
       "[Downloader]",
       "A new instance has been created. Total instances:",
-      Downloader.instances.length
+      Downloader.instances.length,
     );
   }
 
@@ -56,7 +56,7 @@ export class Downloader {
   private static getPendingTask(): DownloadTask | null {
     return (
       this.tasks.find(
-        (t) => t.status === "pending" || (t.status === "failed" && (t.fails ?? 0) < MAX_FAILS)
+        (t) => t.status === "pending" || (t.status === "failed" && (t.fails ?? 0) < MAX_FAILS),
       ) ?? null
     );
   }
@@ -139,7 +139,7 @@ export class Downloader {
         total,
         directory,
         filename,
-        fails
+        fails,
       };
       this.tasks.push(task);
       console.log("[Downloader]", "Task added:", task.id);
@@ -194,7 +194,7 @@ export class Downloader {
         total,
         startTime,
         speed,
-        tasks: this.tasks
+        tasks: this.tasks,
       });
       if (duration >= 1000) {
         lastUpdateTime = currentTime;
@@ -291,7 +291,7 @@ export class Downloader {
           // TODO: 对于没有 Content-Length 的响应，需要额外处理
           task.total = progressEvent.total ?? progressEvent.loaded + 1;
         },
-        signal: this.controller.signal
+        signal: this.controller.signal,
       });
       const filename: string =
         task.filename ??

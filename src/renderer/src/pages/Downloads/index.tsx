@@ -54,12 +54,12 @@ export function DownloadItem({ item }: DownloadItemProps): React.JSX.Element {
           <div
             className={clsx(
               "col-span-full h-full overflow-hidden",
-              "flex items-center justify-center"
+              "flex items-center justify-center",
             )}
           >
             <Progress.Track
               className={clsx(
-                "h-2 w-full rounded bg-gray-200 shadow-[inset_0_0_0_1px] shadow-gray-200"
+                "h-2 w-full rounded bg-gray-200 shadow-[inset_0_0_0_1px] shadow-gray-200",
               )}
             >
               <Progress.Indicator className="block rounded bg-gray-500 transition-all duration-500" />

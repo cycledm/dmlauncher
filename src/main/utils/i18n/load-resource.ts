@@ -11,7 +11,7 @@ import { resolve } from "path";
  */
 export async function loadResource(
   language: string,
-  namespace: string
+  namespace: string,
 ): Promise<Record<string, string>> {
   const filePath = resolve(app.getAppPath(), "resources", "locales", language, `${namespace}.json`);
   return JSON.parse(readFileSync(filePath, "utf-8"));

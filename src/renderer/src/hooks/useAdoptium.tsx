@@ -15,21 +15,21 @@ export function useAdoptium(version?: number | null): UseAdoptiumResponse {
 
   const { data: releasesInfo } = useSuspenseQuery({
     queryKey: ["https://api.adoptium.net/v3/info/available_releases"],
-    queryFn: ({ queryKey }) => fetchJava<AdoptiumReleasesInfo>(queryKey[0])
+    queryFn: ({ queryKey }) => fetchJava<AdoptiumReleasesInfo>(queryKey[0]),
   });
 
   const { data: releaseDetails } = useSuspenseQuery({
     queryKey: [
-      `https://api.adoptium.net/v3/assets/latest/${version}/hotspot?architecture=${architecture}&image_type=jdk&os=${os}&vendor=eclipse`
+      `https://api.adoptium.net/v3/assets/latest/${version}/hotspot?architecture=${architecture}&image_type=jdk&os=${os}&vendor=eclipse`,
     ],
     queryFn: ({ queryKey }) => {
       if (!version) return null;
       return fetchJava<AdoptiumReleaseDetails>(queryKey[0]);
-    }
+    },
   });
 
   return {
     releasesInfo,
-    releaseDetails
+    releaseDetails,
   };
 }

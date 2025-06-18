@@ -17,7 +17,7 @@ export function Spinner({
   fullscreen,
   center,
   pulse,
-  hidden
+  hidden,
 }: Props): React.JSX.Element {
   return (
     <div
@@ -25,9 +25,9 @@ export function Spinner({
         {
           "flex items-center justify-center self-center justify-self-center": !fullscreen && center,
           "absolute inset-0 z-10 flex min-h-dvh min-w-dvw items-center justify-center bg-white pt-[var(--titlebar-h)] dark:bg-gray-950":
-            fullscreen
+            fullscreen,
         },
-        className
+        className,
       )}
       hidden={hidden}
     >

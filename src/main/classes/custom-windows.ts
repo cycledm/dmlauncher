@@ -27,9 +27,9 @@ export class PrimaryBrowserWindow extends BrowserWindow {
       titleBarOverlay: {
         color: nativeTheme.shouldUseDarkColors ? "#20202000" : "#f0f0f000",
         symbolColor: nativeTheme.shouldUseDarkColors ? "white" : "black",
-        height: 32
+        height: 32,
       },
-      backgroundColor: nativeTheme.shouldUseDarkColors ? "black" : "white"
+      backgroundColor: nativeTheme.shouldUseDarkColors ? "black" : "white",
     };
 
     // 使用自定义参数构建窗口
@@ -56,7 +56,7 @@ export class PrimaryBrowserWindow extends BrowserWindow {
 
     // 主题色，标题栏颜色和窗口背景色相关
     ipc.handle("titlebar:set-color", (_, { color, symbolColor }) =>
-      this.setTitleBarOverlay({ color, symbolColor })
+      this.setTitleBarOverlay({ color, symbolColor }),
     );
     ipc.handle("titlebar:is-focused", () => this.isFocused());
     ipc.handle("theme:set-color-mode", (_, mode) => {
@@ -81,14 +81,14 @@ export class PrimaryBrowserWindow extends BrowserWindow {
           },
           onProgress: (data) => {
             this.setProgressBar(data.progress, {
-              mode: data.progress > 0 ? "normal" : "indeterminate"
+              mode: data.progress > 0 ? "normal" : "indeterminate",
             });
             this.webContents.send("downloader:update-progress", data);
           },
           onComplete: () => {
             this.setProgressBar(-1);
             this.webContents.send("downloader:download-complete");
-          }
+          },
         });
       }
     });

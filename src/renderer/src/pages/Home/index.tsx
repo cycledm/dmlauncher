@@ -20,15 +20,15 @@ export default function Home(): React.JSX.Element {
       "https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse",
       {
         headers: {
-          accept: "application/json"
-        }
-      }
+          accept: "application/json",
+        },
+      },
     );
 
     const opt = {
       url: data[0].binary.package.link,
       directory: "C:\\Users\\CycleDM\\Downloads\\jdk",
-      size: data[0].binary.package.size
+      size: data[0].binary.package.size,
     };
 
     const opts = Array.from({ length: 20 }).map((_, idx) => {
@@ -66,7 +66,7 @@ export default function Home(): React.JSX.Element {
           "cursor-pointer",
           "h-16",
           "w-1/3",
-          "hover:brightness-125"
+          "hover:brightness-125",
         )}
         onClick={handleDownload}
         disabled={loading}
@@ -86,7 +86,7 @@ export default function Home(): React.JSX.Element {
           "cursor-pointer",
           "h-16",
           "w-1/5",
-          "hover:brightness-125"
+          "hover:brightness-125",
         )}
         onClick={handleCancel}
       >

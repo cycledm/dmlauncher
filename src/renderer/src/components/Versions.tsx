@@ -9,7 +9,7 @@ export function Versions(): React.JSX.Element {
     <ul
       className={clsx(
         "absolute bottom-[30px] mx-auto my-0 inline-flex list-none items-center overflow-hidden px-0 py-[15px]",
-        "rounded-[22px] bg-blue-200 font-mono backdrop-blur-[24px] dark:bg-[#202127]"
+        "rounded-[22px] bg-blue-200 font-mono backdrop-blur-[24px] dark:bg-[#202127]",
       )}
     >
       <li className={clsx(versionStyles, "border-r-[1px] border-solid border-[#515c67]")}>

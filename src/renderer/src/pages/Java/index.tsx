@@ -31,7 +31,7 @@ export default function Java(): React.JSX.Element {
               "h-4 w-4",
               "rounded border-gray-300 text-blue-600",
               "dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800",
-              "focus:ring-blue-500 dark:focus:ring-blue-600"
+              "focus:ring-blue-500 dark:focus:ring-blue-600",
             )}
           />
           <label
@@ -54,7 +54,7 @@ export default function Java(): React.JSX.Element {
                   "bg-gray-100 outline-2 outline-blue-700 dark:bg-gray-700 dark:outline-blue-700":
                     selectedVersion === version,
                   "bg-white outline outline-gray-200 hover:bg-gray-50 dark:bg-gray-800":
-                    selectedVersion !== version
+                    selectedVersion !== version,
                 })}
               >
                 <div className="flex items-center justify-between">

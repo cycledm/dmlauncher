@@ -8,8 +8,8 @@ const styles = {
     "rounded-lg shadow-sm outline",
     "bg-white outline-gray-200 dark:bg-gray-800 dark:outline-gray-700",
     "transition-colors",
-    "select-none"
-  )
+    "select-none",
+  ),
 };
 
 type Props = React.HTMLAttributes<HTMLDivElement>;

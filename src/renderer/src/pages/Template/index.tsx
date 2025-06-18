@@ -24,7 +24,7 @@ export default function Template(): React.JSX.Element {
     clsx("inline-block cursor-pointer px-[20px] py-0 text-center"),
     clsx("rounded-[20px] border-[1px] border-solid border-transparent bg-[#32363f]"),
     clsx("text-[14px]/[38px] font-[600] text-nowrap text-[rgba(255,255,245,0.86)] no-underline"),
-    clsx("hover:border-transparent hover:bg-[#414853] hover:text-[rgba(255,255,245,0.86)]")
+    clsx("hover:border-transparent hover:bg-[#414853] hover:text-[rgba(255,255,245,0.86)]"),
   );
 
   return (
@@ -32,7 +32,7 @@ export default function Template(): React.JSX.Element {
       className={clsx(
         "m-0 box-border flex h-full w-full items-center justify-center overflow-hidden select-none",
         "bg-gray-100 bg-[url(@renderer/assets/wavy-lines.svg)] bg-cover dark:bg-[#1b1b1f]",
-        "font-sans leading-[1.6] font-normal text-black antialiased dark:text-[rgba(255,255,245,0.86)]"
+        "font-sans leading-[1.6] font-normal text-black antialiased dark:text-[rgba(255,255,245,0.86)]",
       )}
       style={{ textRendering: "optimizeLegibility" }}
     >
@@ -42,7 +42,7 @@ export default function Template(): React.JSX.Element {
           className={clsx(
             "mb-[20px] h-[128px] w-[128px]",
             "transition-[filter] duration-300 will-change-[filter]",
-            "hover:drop-shadow-[0_0_1.2em_#6988e6aa]"
+            "hover:drop-shadow-[0_0_1.2em_#6988e6aa]",
           )}
           draggable={false}
           src={electronLogo}
@@ -62,7 +62,7 @@ export default function Template(): React.JSX.Element {
               <span
                 key="1"
                 className="bg-gradient-to-br from-[#3178c6] from-45% to-[#f0dc4e] bg-clip-text font-[700] text-transparent"
-              />
+              />,
             ]}
           />
         </div>
@@ -74,10 +74,10 @@ export default function Template(): React.JSX.Element {
               code: (
                 <code
                   className={clsx(
-                    "rounded-[2px] bg-gray-800 px-[5px] py-[3px] font-mono text-[85%] font-[600] dark:bg-[#282828]"
+                    "rounded-[2px] bg-gray-800 px-[5px] py-[3px] font-mono text-[85%] font-[600] dark:bg-[#282828]",
                   )}
                 />
-              )
+              ),
             }}
           />
         </p>

@@ -8,7 +8,7 @@ if (!port) throw new Error("IllegalState");
 port.on("message", ({ dir }) => {
   const watcher = chokidar.watch(dir, {
     persistent: true,
-    ignoreInitial: true
+    ignoreInitial: true,
   });
   console.log("File Tracker:", "Tracking file changes in", dir);
   watcher.on("all", (event, path) => {

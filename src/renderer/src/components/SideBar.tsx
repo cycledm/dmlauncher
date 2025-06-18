@@ -16,35 +16,35 @@ import { FiDownload } from "react-icons/fi";
 const styles = {
   icon: clsx("size-1/2"),
   backdropColor: clsx("bg-[#f0f0f0] dark:bg-[#202020]"),
-  itemColor: clsx("bg-blue-200 dark:bg-blue-700")
+  itemColor: clsx("bg-blue-200 dark:bg-blue-700"),
 };
 
 const options = linkOptions([
   {
     to: "/app/home",
     key: "home",
-    icon: <FiHome className={styles.icon} />
+    icon: <FiHome className={styles.icon} />,
   },
   {
     to: "/app/java",
     key: "java",
-    icon: <RiJavaLine className={styles.icon} />
+    icon: <RiJavaLine className={styles.icon} />,
   },
   {
     to: "/app/downloads",
     key: "downloads",
-    icon: <FiDownload className={styles.icon} />
+    icon: <FiDownload className={styles.icon} />,
   },
   {
     to: "/app/template",
     key: "template",
-    icon: <GoRepoTemplate className={styles.icon} />
+    icon: <GoRepoTemplate className={styles.icon} />,
   },
   {
     to: "/app/settings",
     key: "settings",
-    icon: <HiOutlineBars3 className={styles.icon} />
-  }
+    icon: <HiOutlineBars3 className={styles.icon} />,
+  },
 ]);
 
 export function SideBar(): React.JSX.Element {
@@ -59,7 +59,7 @@ export function SideBar(): React.JSX.Element {
             <div
               className={clsx(
                 "grid auto-rows-min grid-cols-1 gap-0.5",
-                "scrollbar-hidden max-h-[calc(100cqh-100cqw-0.5rem)] overflow-auto"
+                "scrollbar-hidden max-h-[calc(100cqh-100cqw-0.5rem)] overflow-auto",
               )}
             >
               {options
@@ -79,7 +79,7 @@ export function SideBar(): React.JSX.Element {
                             "size-full",
                             "flex items-center justify-center",
                             "rounded-md",
-                            isActive && styles.itemColor
+                            isActive && styles.itemColor,
                           )}
                         >
                           {option.icon}
@@ -97,8 +97,8 @@ export function SideBar(): React.JSX.Element {
                             "opacity-100":
                               downloaderInfo.percent > 0 && downloaderInfo.percent < 100,
                             "opacity-0":
-                              downloaderInfo.percent <= 0 || downloaderInfo.percent >= 100
-                          }
+                              downloaderInfo.percent <= 0 || downloaderInfo.percent >= 100,
+                          },
                         )}
                       >
                         <Progress.Root value={downloaderInfo.percent} className={clsx("size-full")}>
@@ -106,7 +106,7 @@ export function SideBar(): React.JSX.Element {
                             className={clsx(
                               "size-full overflow-hidden",
                               "rounded bg-gray-500",
-                              "shadow-[inset_0_0_0_1px] shadow-gray-200 dark:shadow-gray-900"
+                              "shadow-[inset_0_0_0_1px] shadow-gray-200 dark:shadow-gray-900",
                             )}
                           >
                             <Progress.Indicator
@@ -133,7 +133,7 @@ export function SideBar(): React.JSX.Element {
                         "size-full",
                         "flex items-center justify-center",
                         "rounded-md",
-                        isActive && styles.itemColor
+                        isActive && styles.itemColor,
                       )}
                     >
                       {options.find((opt) => opt.key === "settings")?.icon}
@@ -151,7 +151,7 @@ export function SideBar(): React.JSX.Element {
 
 function SideBarItem({
   children,
-  popoverText
+  popoverText,
 }: {
   children: React.ReactNode;
   popoverText: string;
@@ -179,7 +179,7 @@ function SideBarItem({
               "rounded-lg bg-[canvas] px-2 text-gray-900 shadow-lg shadow-gray-200 outline-1 outline-gray-200",
               "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
               "dark:shadow-none dark:-outline-offset-1 dark:outline-gray-300",
-              "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0"
+              "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
             )}
             finalFocus={finalFocus}
           >

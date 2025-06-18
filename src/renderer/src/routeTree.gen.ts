@@ -205,9 +205,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppTemplateIndexRoute: AppTemplateIndexRoute,
 };
 
-const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
-  AppRouteRouteChildren,
-);
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(AppRouteRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,

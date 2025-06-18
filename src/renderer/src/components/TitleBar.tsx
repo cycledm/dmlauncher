@@ -8,13 +8,13 @@ import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 
 const styles = {
-  icon: clsx("size-full")
+  icon: clsx("size-full"),
 };
 
 const icons = {
   system: <VscColorMode className={styles.icon} />,
   light: <MdOutlineLightMode className={styles.icon} />,
-  dark: <MdOutlineDarkMode className={styles.icon} />
+  dark: <MdOutlineDarkMode className={styles.icon} />,
 };
 
 type Props = {
@@ -64,8 +64,8 @@ export function TitleBar({ icon }: Props): React.JSX.Element {
         "bg-[#f0f0f0] dark:bg-[#202020]",
         {
           "text-black dark:text-white": focused,
-          "text-black/50 dark:text-white/50": !focused
-        }
+          "text-black/50 dark:text-white/50": !focused,
+        },
       )}
       draggable={false}
       ref={ref}
@@ -123,7 +123,7 @@ function ColorModeSwitchButton(): React.JSX.Element {
         "cursor-pointer",
         "transition-colors duration-250",
         "hover:bg-gray-300/50",
-        "dark:hover:bg-gray-500/50"
+        "dark:hover:bg-gray-500/50",
       )}
     >
       {icons[colorMode]}

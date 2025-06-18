@@ -19,7 +19,7 @@ export async function loadSupported(): Promise<SupportedLanguages> {
 
   // Languages
   const directories = readdirSync(srcPath).filter((file) =>
-    statSync(join(srcPath, file)).isDirectory()
+    statSync(join(srcPath, file)).isDirectory(),
   );
   const priority = priorityLngs.filter((dir) => directories.includes(dir));
   const rest = directories.filter((dir) => !priority.includes(dir));
@@ -27,7 +27,7 @@ export async function loadSupported(): Promise<SupportedLanguages> {
 
   // Namespaces
   const files = readdirSync(resolve(srcPath, priorityLngs[0])).filter(
-    (file) => extname(file).toLowerCase() === ".json"
+    (file) => extname(file).toLowerCase() === ".json",
   );
   const namespaces = files.map((file) => basename(file, ".json"));
 
