@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useElectron } from "./useElectron";
 import { atom, useAtom } from "jotai";
+import { useElectron } from "./useElectron";
 
 type DownloaderInfo = Parameters<Parameters<typeof window.api.downloader.onUpdateProgress>[0]>[0];
 

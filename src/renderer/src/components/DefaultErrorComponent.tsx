@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { clsx } from "clsx";
-import { ErrorComponentProps, useRouter } from "@tanstack/react-router";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import { ErrorComponentProps, useRouter } from "@tanstack/react-router";
 
 export function DefaultErrorComponent({ error }: ErrorComponentProps): React.JSX.Element {
   const router = useRouter();

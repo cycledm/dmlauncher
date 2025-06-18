@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { clsx } from "clsx";
 import { formatHex8, parse } from "culori";
 import { useElectron } from "@renderer/hooks";
-
-import { VscColorMode } from "react-icons/vsc";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
+import { VscColorMode } from "react-icons/vsc";
 
 const styles = {
   icon: clsx("size-full"),

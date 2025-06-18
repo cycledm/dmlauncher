@@ -1,10 +1,10 @@
 import React from "react";
-import { Versions } from "@renderer/components";
-import electronLogo from "@renderer/assets/electron.svg";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Trans, useTranslation } from "react-i18next";
 import { atom, useAtomValue } from "jotai";
+import { Versions } from "@renderer/components";
+import electronLogo from "@renderer/assets/electron.svg";
 
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 const countAtom = atom(0);

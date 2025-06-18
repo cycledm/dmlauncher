@@ -1,10 +1,10 @@
 import React from "react";
 import { clsx } from "clsx";
+import prettyBytes from "pretty-bytes";
 import { Progress } from "@base-ui-components/react/progress";
+import { DownloadTask } from "@main/interfaces/downloader";
 import { ScrollBox, SimpleCard } from "@renderer/components";
 import { useDownloader } from "@renderer/hooks";
-import { DownloadTask } from "@main/interfaces/downloader";
-import prettyBytes from "pretty-bytes";
 
 export default function Downloads(): React.JSX.Element {
   const { downloaderInfo } = useDownloader();

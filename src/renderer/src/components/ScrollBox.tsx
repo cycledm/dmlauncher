@@ -1,8 +1,8 @@
 import React from "react";
 import { clsx } from "clsx";
 import { cva, VariantProps } from "class-variance-authority";
-import { cn } from "@renderer/utils";
 import { MacScrollbar } from "mac-scrollbar";
+import { cn } from "@renderer/utils";
 
 const styles = {
   colors: clsx(

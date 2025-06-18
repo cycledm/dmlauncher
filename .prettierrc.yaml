@@ -3,6 +3,7 @@ semi: true
 printWidth: 100
 trailingComma: all
 plugins:
+  - "@trivago/prettier-plugin-sort-imports"
   - "prettier-plugin-packagejson"
   - "prettier-plugin-tailwindcss"
 tailwindFunctions: ["clsx", "cva", "cx", "cn"]
@@ -10,3 +11,27 @@ overrides:
   - files: "package.json"
     options:
       packageSortOrder: ["name", "productName", "description"]
+importOrderSeparation: false
+importOrder:
+  [
+    "^electron$",
+    "^electron-vite(.*)$",
+    "^@electron-toolkit/(.*)$",
+    "^react$",
+    "^clsx$",
+    "^tailwind-merge$",
+    "^cva$",
+    "^class-variance-authority$",
+    "^@tanstack/(.*)$",
+    "^i18next(.*)$",
+    "^react-i18next(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@base-ui-components/(.*)$",
+    "^@main/(.*)$",
+    "^@preload/(.*)$",
+    "^@renderer/(?!assets/)(.*)$",
+    "^@renderer/assets/(.*)$",
+    "^react-icons(.*)$",
+    "^/resources/(.*)$",
+    "^[./]",
+  ]

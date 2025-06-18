@@ -1,17 +1,15 @@
 import React from "react";
 import { clsx } from "clsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SideBar } from "@renderer/components";
-import { TitleBar } from "@renderer/components";
-
 import i18next from "i18next";
 import rtb from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
-
+import { TitleBar } from "@renderer/components";
+import { SideBar } from "@renderer/components";
 import icon from "@renderer/assets/electron.svg";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const supported = await window.api.i18n.loadSupported();
 await i18next

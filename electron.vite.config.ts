@@ -1,10 +1,10 @@
-import { resolve } from "path";
 import { defineConfig, externalizeDepsPlugin, bytecodePlugin, loadEnv } from "electron-vite";
-import react from "@vitejs/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import jotaiDebugLabel from "jotai/babel/plugin-debug-label";
 import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
-import tailwindcss from "@tailwindcss/vite";
+import { resolve } from "path";
 
 export default defineConfig(({ mode }) => {
   // 加载保护的环境变量，构建时会将这些变量的值转换为字节码

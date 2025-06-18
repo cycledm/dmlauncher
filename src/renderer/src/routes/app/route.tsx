@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { createFileRoute, ErrorComponentProps, useRouter } from "@tanstack/react-router";
 import { clsx } from "clsx";
-import { Spinner } from "@renderer/components";
-import App from "@renderer/App";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import { createFileRoute, ErrorComponentProps, useRouter } from "@tanstack/react-router";
+import App from "@renderer/App";
+import { Spinner } from "@renderer/components";
 import { cn } from "@renderer/utils";
 
 export const Route = createFileRoute("/app")({

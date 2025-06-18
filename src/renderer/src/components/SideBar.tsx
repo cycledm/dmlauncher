@@ -1,17 +1,16 @@
 import React, { useRef, useState } from "react";
 import { clsx } from "clsx";
-import { useTranslation } from "react-i18next";
 import { Link, linkOptions } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { Popover } from "@base-ui-components/react/popover";
 import { Progress } from "@base-ui-components/react/progress";
 import { useDownloader } from "@renderer/hooks";
 import { Route as settingsRoute } from "@renderer/routes/app/settings";
-
+import { FiDownload } from "react-icons/fi";
 import { FiHome } from "react-icons/fi";
-import { RiJavaLine } from "react-icons/ri";
 import { GoRepoTemplate } from "react-icons/go";
 import { HiOutlineBars3 } from "react-icons/hi2";
-import { FiDownload } from "react-icons/fi";
+import { RiJavaLine } from "react-icons/ri";
 
 const styles = {
   icon: clsx("size-1/2"),

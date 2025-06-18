@@ -1,10 +1,10 @@
-import tseslint from "@electron-toolkit/eslint-config-ts";
 import eslintConfigPrettier from "@electron-toolkit/eslint-config-prettier";
+import tseslint from "@electron-toolkit/eslint-config-ts";
+import eslintPluginQuery from "@tanstack/eslint-plugin-query";
+import eslintPluginRouter from "@tanstack/eslint-plugin-router";
 import eslintPluginReact from "eslint-plugin-react";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import eslintPluginReactRefresh from "eslint-plugin-react-refresh";
-import eslintPluginRouter from "@tanstack/eslint-plugin-router";
-import eslintPluginQuery from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config(
   { ignores: ["**/node_modules", "**/dist", "**/out"] },

@@ -1,9 +1,9 @@
-import crypto from "crypto";
+import { app } from "electron";
 import axios from "axios";
-import Stream from "stream";
+import crypto from "crypto";
 import fs from "fs";
 import path from "path";
-import { app } from "electron";
+import Stream from "stream";
 import {
   DownloaderInfoForRenderer,
   DownloadOptions,

@@ -1,7 +1,7 @@
 //import { useElectron } from ".";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { AdoptiumReleasesInfo, AdoptiumReleaseDetails } from "@renderer/interfaces";
 import { fetchJava } from "@renderer/utils";
-import { useSuspenseQuery } from "@tanstack/react-query";
 
 interface UseAdoptiumResponse {
   releasesInfo: AdoptiumReleasesInfo;

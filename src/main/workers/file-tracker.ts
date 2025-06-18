@@ -1,6 +1,6 @@
 // https://github.com/paulmillr/chokidar
-import { parentPort } from "worker_threads";
 import chokidar from "chokidar";
+import { parentPort } from "worker_threads";
 
 const port = parentPort;
 if (!port) throw new Error("IllegalState");

@@ -2,8 +2,8 @@ import React from "react";
 import { clsx } from "clsx";
 import dayjs from "dayjs";
 import prettyBytes from "pretty-bytes";
-import { useAdoptium, useElectron } from "@renderer/hooks";
 import { SimpleCard } from "@renderer/components";
+import { useAdoptium, useElectron } from "@renderer/hooks";
 import { AdoptiumReleaseDetails } from "@renderer/interfaces";
 import { RiJavaLine } from "react-icons/ri";
 

@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { useAdoptium } from "@renderer/hooks";
 import { clsx } from "clsx";
 import { ScrollBox, SimpleCard, Spinner } from "@renderer/components";
+import { useAdoptium } from "@renderer/hooks";
 import { ReleaseDetails } from "./components";
 
 export default function Java(): React.JSX.Element {
