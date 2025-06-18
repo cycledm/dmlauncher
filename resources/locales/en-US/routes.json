@@ -1,0 +1,17 @@
+{
+  "home": {
+    "displayName": "Home"
+  },
+  "java": {
+    "displayName": "Java Management"
+  },
+  "downloads": {
+    "displayName": "Download Management"
+  },
+  "settings": {
+    "displayName": "Settings"
+  },
+  "template": {
+    "displayName": "Template"
+  }
+}

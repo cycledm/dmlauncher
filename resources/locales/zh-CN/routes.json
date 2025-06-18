@@ -1,0 +1,17 @@
+{
+  "home": {
+    "displayName": "主页"
+  },
+  "java": {
+    "displayName": "Java管理"
+  },
+  "downloads": {
+    "displayName": "下载管理"
+  },
+  "settings": {
+    "displayName": "设置"
+  },
+  "template": {
+    "displayName": "模板"
+  }
+}

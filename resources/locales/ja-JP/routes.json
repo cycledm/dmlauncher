@@ -1,0 +1,17 @@
+{
+  "home": {
+    "displayName": "ホーム"
+  },
+  "java": {
+    "displayName": "Java管理"
+  },
+  "downloads": {
+    "displayName": "ダウンロード管理"
+  },
+  "settings": {
+    "displayName": "設定"
+  },
+  "template": {
+    "displayName": "テンプレート"
+  }
+}
