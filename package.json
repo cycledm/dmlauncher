@@ -26,8 +26,8 @@
     "prepare": "husky",
     "start": "npm run dotenvx-run electron-vite preview",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "watch-routes": "tsr watch"
   },
   "lint-staged": {
