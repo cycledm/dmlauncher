@@ -1,6 +1,6 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { clsx } from "clsx";
-import { ScrollBox, SimpleCard, Spinner } from "@renderer/components";
+import { ScrollBox, SimpleCard } from "@renderer/components";
 import { useAdoptium } from "@renderer/hooks";
 import { ReleaseDetails } from "./components";
 
@@ -72,9 +72,7 @@ export default function Java(): React.JSX.Element {
         </ul>
       </ScrollBox>
       <ScrollBox className={clsx("size-full bg-gray-50 p-6 dark:bg-gray-900")}>
-        <Suspense fallback={<Spinner className="size-full" size="4rem" center pulse />}>
-          <ReleaseDetails version={selectedVersion} />
-        </Suspense>
+        <ReleaseDetails version={selectedVersion} />
       </ScrollBox>
     </div>
   );
