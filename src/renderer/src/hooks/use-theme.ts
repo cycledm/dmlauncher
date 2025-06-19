@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { colorModeAtom } from "@renderer/atoms";
-import { useElectron } from "./electron";
+import { useElectron } from "./use-electron";
 
 interface UseThemeResponse {
   colorMode: "system" | "light" | "dark";

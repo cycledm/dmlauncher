@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import { DefaultError } from "@renderer/components/common";
 import { DefaultPending } from "@renderer/components/common/DefaultPending";
-import { routeTree } from "@renderer/routeTree.gen";
+import { routeTree } from "@renderer/route-tree.gen";
 
 declare module "@tanstack/react-router" {
   interface Register {
