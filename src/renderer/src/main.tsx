@@ -2,9 +2,9 @@ import "@renderer/styles/main.css";
 import React from "react";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
-import { DefaultError } from "./components/common";
-import { DefaultPending } from "./components/common/DefaultPending";
-import { routeTree } from "./routeTree.gen";
+import { DefaultError } from "@renderer/components/common";
+import { DefaultPending } from "@renderer/components/common/DefaultPending";
+import { routeTree } from "@renderer/routeTree.gen";
 
 declare module "@tanstack/react-router" {
   interface Register {
