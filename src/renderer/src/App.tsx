@@ -9,9 +9,10 @@ import rtb from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
 import { TitleBar } from "@renderer/components/app";
 import { SideBar } from "@renderer/components/app";
+import { LOCAL_STORAGE_KEYS } from "@renderer/constants";
 import icon from "@renderer/assets/electron.svg";
 
-const colorMode = localStorage.getItem("colorMode");
+const colorMode = localStorage.getItem(LOCAL_STORAGE_KEYS.COLOR_MODE);
 await window.api.theme.setColorMode(colorMode ? JSON.parse(colorMode) : "system");
 
 const supported = await window.api.i18n.loadSupported();

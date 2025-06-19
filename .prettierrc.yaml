@@ -32,8 +32,8 @@ importOrder:
     "^@main/(.*)$",
     "^@preload/(.*)$",
     "^@renderer/(?!assets/)(.*)$",
-    "^@renderer/assets/(.*)$",
-    "^react-icons(.*)$",
     "^[./]",
+    "^react-icons(.*)$",
+    "^@renderer/assets/(.*)$",
     "^/resources/(.*)$",
   ]
