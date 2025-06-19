@@ -1,8 +1,8 @@
 import { shell } from "electron";
 import { is } from "@electron-toolkit/utils";
 import { fileURLToPath } from "url";
-import icon from "/resources/icon.png?asset";
 import { PrimaryBrowserWindow, PrimaryBrowserWindowConstructorOptions } from "./custom-windows";
+import icon from "/resources/icon.png?asset";
 
 /**
  * Electron 主窗口
