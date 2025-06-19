@@ -1,5 +1,6 @@
 import React from "react";
 import { clsx } from "clsx";
+import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import prettyBytes from "pretty-bytes";
 import { SimpleCard } from "@renderer/components";
@@ -7,19 +8,20 @@ import { useAdoptium, useElectron } from "@renderer/hooks";
 import { AdoptiumReleaseDetails } from "@renderer/interfaces";
 import { RiJavaLine } from "react-icons/ri";
 
-type Props = {
-  version?: number | null;
-};
+export const Route = createFileRoute("/app/java/$version")({
+  component: VersionDetails,
+});
 
-export function ReleaseDetails({ version }: Props): React.JSX.Element {
-  const { releaseDetails } = useAdoptium(version);
+function VersionDetails(): React.JSX.Element {
+  const { version } = Route.useParams();
+  const { releaseDetails } = useAdoptium(parseInt(version, 10));
   const { downloader } = useElectron();
 
   const handleDownload = (url: string): void => {
     downloader.download([{ url }]);
   };
 
-  if (!version || !releaseDetails) {
+  if (!releaseDetails) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center">

@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as AppRouteRouteImport } from "./routes/app/route";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as AppIndexRouteImport } from "./routes/app/index";
+import { Route as AppJavaRouteRouteImport } from "./routes/app/java/route";
 import { Route as AppTemplateIndexRouteImport } from "./routes/app/template/index";
 import { Route as AppSettingsIndexRouteImport } from "./routes/app/settings/index";
 import { Route as AppJavaIndexRouteImport } from "./routes/app/java/index";
 import { Route as AppHomeIndexRouteImport } from "./routes/app/home/index";
 import { Route as AppDownloadsIndexRouteImport } from "./routes/app/downloads/index";
+import { Route as AppJavaVersionRouteImport } from "./routes/app/java/$version";
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: "/app",
@@ -33,6 +35,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: "/",
   getParentRoute: () => AppRouteRoute,
 } as any);
+const AppJavaRouteRoute = AppJavaRouteRouteImport.update({
+  id: "/java",
+  path: "/java",
+  getParentRoute: () => AppRouteRoute,
+} as any);
 const AppTemplateIndexRoute = AppTemplateIndexRouteImport.update({
   id: "/template/",
   path: "/template/",
@@ -44,9 +51,9 @@ const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
   getParentRoute: () => AppRouteRoute,
 } as any);
 const AppJavaIndexRoute = AppJavaIndexRouteImport.update({
-  id: "/java/",
-  path: "/java/",
-  getParentRoute: () => AppRouteRoute,
+  id: "/",
+  path: "/",
+  getParentRoute: () => AppJavaRouteRoute,
 } as any);
 const AppHomeIndexRoute = AppHomeIndexRouteImport.update({
   id: "/home/",
@@ -58,20 +65,28 @@ const AppDownloadsIndexRoute = AppDownloadsIndexRouteImport.update({
   path: "/downloads/",
   getParentRoute: () => AppRouteRoute,
 } as any);
+const AppJavaVersionRoute = AppJavaVersionRouteImport.update({
+  id: "/$version",
+  path: "/$version",
+  getParentRoute: () => AppJavaRouteRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/app": typeof AppRouteRouteWithChildren;
+  "/app/java": typeof AppJavaRouteRouteWithChildren;
   "/app/": typeof AppIndexRoute;
+  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads": typeof AppDownloadsIndexRoute;
   "/app/home": typeof AppHomeIndexRoute;
-  "/app/java": typeof AppJavaIndexRoute;
+  "/app/java/": typeof AppJavaIndexRoute;
   "/app/settings": typeof AppSettingsIndexRoute;
   "/app/template": typeof AppTemplateIndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/app": typeof AppIndexRoute;
+  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads": typeof AppDownloadsIndexRoute;
   "/app/home": typeof AppHomeIndexRoute;
   "/app/java": typeof AppJavaIndexRoute;
@@ -82,7 +97,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
   "/app": typeof AppRouteRouteWithChildren;
+  "/app/java": typeof AppJavaRouteRouteWithChildren;
   "/app/": typeof AppIndexRoute;
+  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads/": typeof AppDownloadsIndexRoute;
   "/app/home/": typeof AppHomeIndexRoute;
   "/app/java/": typeof AppJavaIndexRoute;
@@ -94,16 +111,19 @@ export interface FileRouteTypes {
   fullPaths:
     | "/"
     | "/app"
+    | "/app/java"
     | "/app/"
+    | "/app/java/$version"
     | "/app/downloads"
     | "/app/home"
-    | "/app/java"
+    | "/app/java/"
     | "/app/settings"
     | "/app/template";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
     | "/app"
+    | "/app/java/$version"
     | "/app/downloads"
     | "/app/home"
     | "/app/java"
@@ -113,7 +133,9 @@ export interface FileRouteTypes {
     | "__root__"
     | "/"
     | "/app"
+    | "/app/java"
     | "/app/"
+    | "/app/java/$version"
     | "/app/downloads/"
     | "/app/home/"
     | "/app/java/"
@@ -149,6 +171,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppIndexRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
+    "/app/java": {
+      id: "/app/java";
+      path: "/java";
+      fullPath: "/app/java";
+      preLoaderRoute: typeof AppJavaRouteRouteImport;
+      parentRoute: typeof AppRouteRoute;
+    };
     "/app/template/": {
       id: "/app/template/";
       path: "/template";
@@ -165,10 +194,10 @@ declare module "@tanstack/react-router" {
     };
     "/app/java/": {
       id: "/app/java/";
-      path: "/java";
-      fullPath: "/app/java";
+      path: "/";
+      fullPath: "/app/java/";
       preLoaderRoute: typeof AppJavaIndexRouteImport;
-      parentRoute: typeof AppRouteRoute;
+      parentRoute: typeof AppJavaRouteRoute;
     };
     "/app/home/": {
       id: "/app/home/";
@@ -184,23 +213,44 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppDownloadsIndexRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
+    "/app/java/$version": {
+      id: "/app/java/$version";
+      path: "/$version";
+      fullPath: "/app/java/$version";
+      preLoaderRoute: typeof AppJavaVersionRouteImport;
+      parentRoute: typeof AppJavaRouteRoute;
+    };
   }
 }
 
+interface AppJavaRouteRouteChildren {
+  AppJavaVersionRoute: typeof AppJavaVersionRoute;
+  AppJavaIndexRoute: typeof AppJavaIndexRoute;
+}
+
+const AppJavaRouteRouteChildren: AppJavaRouteRouteChildren = {
+  AppJavaVersionRoute: AppJavaVersionRoute,
+  AppJavaIndexRoute: AppJavaIndexRoute,
+};
+
+const AppJavaRouteRouteWithChildren = AppJavaRouteRoute._addFileChildren(
+  AppJavaRouteRouteChildren,
+);
+
 interface AppRouteRouteChildren {
+  AppJavaRouteRoute: typeof AppJavaRouteRouteWithChildren;
   AppIndexRoute: typeof AppIndexRoute;
   AppDownloadsIndexRoute: typeof AppDownloadsIndexRoute;
   AppHomeIndexRoute: typeof AppHomeIndexRoute;
-  AppJavaIndexRoute: typeof AppJavaIndexRoute;
   AppSettingsIndexRoute: typeof AppSettingsIndexRoute;
   AppTemplateIndexRoute: typeof AppTemplateIndexRoute;
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppJavaRouteRoute: AppJavaRouteRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
   AppDownloadsIndexRoute: AppDownloadsIndexRoute,
   AppHomeIndexRoute: AppHomeIndexRoute,
-  AppJavaIndexRoute: AppJavaIndexRoute,
   AppSettingsIndexRoute: AppSettingsIndexRoute,
   AppTemplateIndexRoute: AppTemplateIndexRoute,
 };

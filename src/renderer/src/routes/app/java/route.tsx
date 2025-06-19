@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { clsx } from "clsx";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { ScrollBox, SimpleCard } from "@renderer/components";
 import { useAdoptium } from "@renderer/hooks";
-import { ReleaseDetails } from "./components";
 
-export default function Java(): React.JSX.Element {
+export const Route = createFileRoute("/app/java")({
+  component: Java,
+});
+
+function Java(): React.JSX.Element {
+  const navigate = useNavigate({ from: Route.id });
   const { releasesInfo } = useAdoptium();
   const [showLtsOnly, setShowLtsOnly] = useState(false);
   const [filteredReleases, setFilteredReleases] = useState(releasesInfo.availableReleases);
@@ -16,6 +21,12 @@ export default function Java(): React.JSX.Element {
       .sort((a: number, b: number) => b - a);
     setFilteredReleases(filtered);
   }, [releasesInfo, showLtsOnly]);
+
+  useEffect(() => {
+    if (selectedVersion) {
+      navigate({ to: `/app/java/${selectedVersion}` });
+    }
+  }, [navigate, selectedVersion]);
 
   return (
     <div className="grid size-full grid-cols-[16rem_1fr] select-none">
@@ -72,7 +83,7 @@ export default function Java(): React.JSX.Element {
         </ul>
       </ScrollBox>
       <ScrollBox className={clsx("size-full bg-gray-50 p-6 dark:bg-gray-900")}>
-        <ReleaseDetails version={selectedVersion} />
+        <Outlet />
       </ScrollBox>
     </div>
   );
