@@ -1,7 +1,7 @@
+import "@renderer/styles/main.css";
 import React from "react";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
-import "@renderer/styles/main.css";
 import { DefaultError } from "./components/common";
 import { DefaultPending } from "./components/common/DefaultPending";
 import { routeTree } from "./routeTree.gen";

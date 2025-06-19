@@ -17,6 +17,7 @@ importOrder:
     "^electron$",
     "^electron-vite(.*)$",
     "^@electron-toolkit/(.*)$",
+    "^(.*)/styles/(.*).css$",
     "^react$",
     "^clsx$",
     "^tailwind-merge$",
