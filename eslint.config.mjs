@@ -11,25 +11,9 @@ export default tseslint.config(
   tseslint.configs.recommended,
   eslintPluginReact.configs.flat.recommended,
   eslintPluginReact.configs.flat["jsx-runtime"],
+  eslintPluginReactHooks.configs["recommended-latest"],
+  eslintPluginReactRefresh.configs.vite,
   eslintPluginRouter.configs["flat/recommended"],
   eslintPluginQuery.configs["flat/recommended"],
-  {
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
-  },
-  {
-    files: ["**/*.{ts,tsx}"],
-    plugins: {
-      "react-hooks": eslintPluginReactHooks,
-      "react-refresh": eslintPluginReactRefresh,
-    },
-    rules: {
-      ...eslintPluginReactHooks.configs.recommended.rules,
-      ...eslintPluginReactRefresh.configs.vite.rules,
-    },
-  },
   eslintConfigPrettier,
 );

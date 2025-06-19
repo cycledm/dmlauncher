@@ -15,6 +15,14 @@ function Java(): React.JSX.Element {
   const [filteredReleases, setFilteredReleases] = useState(releasesInfo.availableReleases);
   const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
 
+  const handleSelect = (version: number): void => {
+    if (selectedVersion === version) {
+      setSelectedVersion(null);
+      return;
+    }
+    setSelectedVersion(version);
+  };
+
   useEffect(() => {
     const filtered = releasesInfo.availableReleases
       .filter((version) => !showLtsOnly || releasesInfo.availableLtsReleases.includes(version))
@@ -25,6 +33,8 @@ function Java(): React.JSX.Element {
   useEffect(() => {
     if (selectedVersion) {
       navigate({ to: `/app/java/${selectedVersion}`, viewTransition: true });
+    } else {
+      navigate({ to: "/app/java", viewTransition: true });
     }
   }, [navigate, selectedVersion]);
 
@@ -55,11 +65,7 @@ function Java(): React.JSX.Element {
         {/* Java 版本列表 */}
         <ul className="flex w-full flex-col gap-2">
           {filteredReleases.map((version) => (
-            <li
-              key={version}
-              onClick={() => setSelectedVersion(version)}
-              className={clsx("w-full")}
-            >
+            <li key={version} onClick={() => handleSelect(version)} className={clsx("w-full")}>
               <SimpleCard
                 className={clsx("cursor-pointer", "hover:outline-blue-700 dark:hover:bg-gray-700", {
                   "bg-gray-100 outline-2 outline-blue-700 dark:bg-gray-700 dark:outline-blue-700":
