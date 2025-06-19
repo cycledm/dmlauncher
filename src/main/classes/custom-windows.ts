@@ -65,6 +65,9 @@ export class PrimaryBrowserWindow extends BrowserWindow {
       this.webContents.send("titlebar:on-color-mode-change");
       return nativeTheme.themeSource;
     });
+    nativeTheme.on("updated", () => {
+      this.webContents.send("titlebar:on-color-mode-change");
+    });
 
     // 下载
     ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
