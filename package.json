@@ -31,7 +31,10 @@
     "watch-routes": "tsr watch"
   },
   "lint-staged": {
-    "*": "prettier --write"
+    "*.{js,cjs,mjs,ts,tsx,yml,yaml,json,md,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.2",
