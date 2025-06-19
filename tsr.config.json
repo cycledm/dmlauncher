@@ -1,8 +1,8 @@
 {
-  "appDirectory": "./src/renderer/src",
-  "rootDirectory": "./src/renderer",
-  "routesDirectory": "./src/renderer/src/routes",
-  "generatedRouteTree": "./src/renderer/src/route-tree.gen.ts",
+  "appDirectory": "src/renderer/src",
+  "rootDirectory": "src/renderer",
+  "routesDirectory": "src/renderer/src/routes",
+  "generatedRouteTree": "src/renderer/src/route-tree.gen.ts",
   "semicolons": true,
   "quoteStyle": "double"
 }
