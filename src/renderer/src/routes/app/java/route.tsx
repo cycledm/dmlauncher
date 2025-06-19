@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
-import { ScrollBox, SimpleCard } from "@renderer/components";
+import { ScrollBox, SimpleCard } from "@renderer/components/common";
 import { useAdoptium } from "@renderer/hooks";
 
 export const Route = createFileRoute("/app/java")({

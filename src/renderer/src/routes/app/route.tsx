@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { createFileRoute, ErrorComponentProps, useRouter } from "@tanstack/react-router";
 import App from "@renderer/App";
-import { Spinner } from "@renderer/components";
+import { Spinner } from "@renderer/components/common";
 import { cn } from "@renderer/utils";
 
 export const Route = createFileRoute("/app")({

@@ -7,8 +7,8 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import i18next from "i18next";
 import rtb from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
-import { TitleBar } from "@renderer/components";
-import { SideBar } from "@renderer/components";
+import { TitleBar } from "@renderer/components/common";
+import { SideBar } from "@renderer/components/common";
 import icon from "@renderer/assets/electron.svg";
 
 const supported = await window.api.i18n.loadSupported();

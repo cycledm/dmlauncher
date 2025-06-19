@@ -2,7 +2,7 @@ import React from "react";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 import "@renderer/styles/main.css";
-import { DefaultErrorComponent, Spinner } from "./components";
+import { DefaultErrorComponent, Spinner } from "./components/common";
 import { routeTree } from "./routeTree.gen";
 
 declare module "@tanstack/react-router" {

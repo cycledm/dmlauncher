@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation, Trans } from "react-i18next";
 import { atom, useAtomValue } from "jotai";
-import { Versions } from "@renderer/components";
+import { Versions } from "@renderer/components/common";
 import electronLogo from "@renderer/assets/electron.svg";
 
 export const Route = createFileRoute("/app/template/")({

@@ -1,0 +1,1 @@
+export { JavaBasicInfoCard } from "./BasicInfoCard";
