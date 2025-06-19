@@ -2,7 +2,8 @@ import React from "react";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 import "@renderer/styles/main.css";
-import { DefaultErrorComponent, Spinner } from "./components/common";
+import { DefaultError } from "./components/common";
+import { DefaultPending } from "./components/common/DefaultPending";
 import { routeTree } from "./routeTree.gen";
 
 declare module "@tanstack/react-router" {
@@ -15,8 +16,8 @@ const history = createHashHistory();
 const router = createRouter({
   routeTree,
   history,
-  defaultPendingComponent: () => <Spinner className="size-full" size="4rem" center pulse />,
-  defaultErrorComponent: DefaultErrorComponent,
+  defaultPendingComponent: DefaultPending,
+  defaultErrorComponent: DefaultError,
   defaultPendingMinMs: 0,
   defaultPendingMs: 0,
 });

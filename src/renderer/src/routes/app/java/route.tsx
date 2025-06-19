@@ -24,7 +24,7 @@ function Java(): React.JSX.Element {
 
   useEffect(() => {
     if (selectedVersion) {
-      navigate({ to: `/app/java/${selectedVersion}` });
+      navigate({ to: `/app/java/${selectedVersion}`, viewTransition: true });
     }
   }, [navigate, selectedVersion]);
 

@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorComponentProps, useRouter } from "@tanstack/react-router";
 
-export function DefaultErrorComponent({ error }: ErrorComponentProps): React.JSX.Element {
+export function DefaultError({ error }: ErrorComponentProps): React.JSX.Element {
   const router = useRouter();
   const queryErrorResetBoundary = useQueryErrorResetBoundary();
 
