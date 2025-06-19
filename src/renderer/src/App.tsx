@@ -11,6 +11,9 @@ import { TitleBar } from "@renderer/components/common";
 import { SideBar } from "@renderer/components/common";
 import icon from "@renderer/assets/electron.svg";
 
+const colorMode = localStorage.getItem("colorMode");
+await window.api.theme.setColorMode(colorMode ? JSON.parse(colorMode) : "system");
+
 const supported = await window.api.i18n.loadSupported();
 await i18next
   .use(initReactI18next)

@@ -1,3 +1,4 @@
+export { ColorModeButton } from "./ColorModeButton";
 export { DefaultError } from "./DefaultError";
 export { ScrollBox } from "./ScrollBox";
 export { SideBar } from "./SideBar";
