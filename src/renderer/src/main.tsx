@@ -16,6 +16,7 @@ const history = createHashHistory();
 const router = createRouter({
   routeTree,
   history,
+  defaultViewTransition: true,
   defaultPendingComponent: DefaultPending,
   defaultErrorComponent: DefaultError,
   defaultPendingMinMs: 0,

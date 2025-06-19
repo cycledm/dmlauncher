@@ -32,9 +32,9 @@ function Java(): React.JSX.Element {
 
   useEffect(() => {
     if (selectedVersion) {
-      navigate({ to: `/app/java/${selectedVersion}`, viewTransition: true });
+      navigate({ to: `/app/java/${selectedVersion}` });
     } else {
-      navigate({ to: "/app/java", viewTransition: true });
+      navigate({ to: "/app/java" });
     }
   }, [navigate, selectedVersion]);
 

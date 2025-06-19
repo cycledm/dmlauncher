@@ -68,7 +68,6 @@ export function SideBar(): React.JSX.Element {
                     <Link
                       {...option}
                       key={option.key}
-                      viewTransition
                       draggable={false}
                       className={clsx("app-no-drag", "size-full")}
                     >
@@ -122,7 +121,6 @@ export function SideBar(): React.JSX.Element {
               <SideBarItem popoverText={t("settings.displayName")}>
                 <Link
                   to={settingsRoute.to}
-                  viewTransition
                   draggable={false}
                   className={clsx("app-no-drag", "size-full")}
                 >
