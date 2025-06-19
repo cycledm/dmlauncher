@@ -19,6 +19,7 @@ importOrder:
     "^@electron-toolkit/(.*)$",
     "^(.*)/styles/(.*).css$",
     "^react$",
+    "^react-dom(.*)$",
     "^clsx$",
     "^tailwind-merge$",
     "^cva$",
