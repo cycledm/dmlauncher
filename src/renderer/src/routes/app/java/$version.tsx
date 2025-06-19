@@ -3,8 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import prettyBytes from "pretty-bytes";
 import { SimpleCard } from "@renderer/components/common";
 import { JavaBasicInfoCard } from "@renderer/components/java";
-import { useAdoptium, useElectron } from "@renderer/hooks";
-import { RiJavaLine } from "react-icons/ri";
+import { useAdoptiumDetails, useElectron } from "@renderer/hooks";
 
 export const Route = createFileRoute("/app/java/$version")({
   component: VersionDetails,
@@ -12,30 +11,12 @@ export const Route = createFileRoute("/app/java/$version")({
 
 function VersionDetails(): React.JSX.Element {
   const { version } = Route.useParams();
-  const { releaseDetails } = useAdoptium(parseInt(version, 10));
+  const { releaseDetails } = useAdoptiumDetails(parseInt(version, 10));
   const { downloader } = useElectron();
 
   const handleDownload = (url: string): void => {
     downloader.download([{ url }]);
   };
-
-  if (!releaseDetails) {
-    return (
-      <div className="flex h-full items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 flex h-20 items-center justify-center text-center">
-            <RiJavaLine className="size-full" />
-          </div>
-          <h2 className="mb-2 text-xl font-semibold text-gray-700 dark:text-gray-300">
-            选择 Java 版本
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            从左侧列表中选择一个 Java 版本来查看详细信息和安装选项
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="h-full">
