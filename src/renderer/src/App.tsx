@@ -7,8 +7,8 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import i18next from "i18next";
 import rtb from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
-import { TitleBar } from "@renderer/components/common";
-import { SideBar } from "@renderer/components/common";
+import { TitleBar } from "@renderer/components/app";
+import { SideBar } from "@renderer/components/app";
 import icon from "@renderer/assets/electron.svg";
 
 const colorMode = localStorage.getItem("colorMode");

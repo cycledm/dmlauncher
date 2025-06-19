@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { clsx } from "clsx";
 import { formatHex8, parse } from "culori";
+import { ColorModeButton } from "@renderer/components/app";
 import { useElectron } from "@renderer/hooks";
-import { ColorModeButton } from "./ColorModeButton";
 
 type Props = {
   icon?: string;
