@@ -15,10 +15,10 @@ import { Route as AppIndexRouteImport } from "./routes/app/index";
 import { Route as AppJavaRouteRouteImport } from "./routes/app/java/route";
 import { Route as AppTemplateIndexRouteImport } from "./routes/app/template/index";
 import { Route as AppSettingsIndexRouteImport } from "./routes/app/settings/index";
-import { Route as AppJavaIndexRouteImport } from "./routes/app/java/index";
 import { Route as AppHomeIndexRouteImport } from "./routes/app/home/index";
 import { Route as AppDownloadsIndexRouteImport } from "./routes/app/downloads/index";
-import { Route as AppJavaVersionRouteImport } from "./routes/app/java/$version";
+import { Route as AppJavaVersionIndexRouteImport } from "./routes/app/java/_version/index";
+import { Route as AppJavaVersionVersionRouteImport } from "./routes/app/java/_version/$version";
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: "/app",
@@ -50,11 +50,6 @@ const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
   path: "/settings/",
   getParentRoute: () => AppRouteRoute,
 } as any);
-const AppJavaIndexRoute = AppJavaIndexRouteImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => AppJavaRouteRoute,
-} as any);
 const AppHomeIndexRoute = AppHomeIndexRouteImport.update({
   id: "/home/",
   path: "/home/",
@@ -65,8 +60,13 @@ const AppDownloadsIndexRoute = AppDownloadsIndexRouteImport.update({
   path: "/downloads/",
   getParentRoute: () => AppRouteRoute,
 } as any);
-const AppJavaVersionRoute = AppJavaVersionRouteImport.update({
-  id: "/$version",
+const AppJavaVersionIndexRoute = AppJavaVersionIndexRouteImport.update({
+  id: "/_version/",
+  path: "/",
+  getParentRoute: () => AppJavaRouteRoute,
+} as any);
+const AppJavaVersionVersionRoute = AppJavaVersionVersionRouteImport.update({
+  id: "/_version/$version",
   path: "/$version",
   getParentRoute: () => AppJavaRouteRoute,
 } as any);
@@ -76,22 +76,22 @@ export interface FileRoutesByFullPath {
   "/app": typeof AppRouteRouteWithChildren;
   "/app/java": typeof AppJavaRouteRouteWithChildren;
   "/app/": typeof AppIndexRoute;
-  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads": typeof AppDownloadsIndexRoute;
   "/app/home": typeof AppHomeIndexRoute;
-  "/app/java/": typeof AppJavaIndexRoute;
   "/app/settings": typeof AppSettingsIndexRoute;
   "/app/template": typeof AppTemplateIndexRoute;
+  "/app/java/$version": typeof AppJavaVersionVersionRoute;
+  "/app/java/": typeof AppJavaVersionIndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/app": typeof AppIndexRoute;
-  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads": typeof AppDownloadsIndexRoute;
   "/app/home": typeof AppHomeIndexRoute;
-  "/app/java": typeof AppJavaIndexRoute;
   "/app/settings": typeof AppSettingsIndexRoute;
   "/app/template": typeof AppTemplateIndexRoute;
+  "/app/java/$version": typeof AppJavaVersionVersionRoute;
+  "/app/java": typeof AppJavaVersionIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -99,12 +99,12 @@ export interface FileRoutesById {
   "/app": typeof AppRouteRouteWithChildren;
   "/app/java": typeof AppJavaRouteRouteWithChildren;
   "/app/": typeof AppIndexRoute;
-  "/app/java/$version": typeof AppJavaVersionRoute;
   "/app/downloads/": typeof AppDownloadsIndexRoute;
   "/app/home/": typeof AppHomeIndexRoute;
-  "/app/java/": typeof AppJavaIndexRoute;
   "/app/settings/": typeof AppSettingsIndexRoute;
   "/app/template/": typeof AppTemplateIndexRoute;
+  "/app/java/_version/$version": typeof AppJavaVersionVersionRoute;
+  "/app/java/_version/": typeof AppJavaVersionIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -113,34 +113,34 @@ export interface FileRouteTypes {
     | "/app"
     | "/app/java"
     | "/app/"
-    | "/app/java/$version"
     | "/app/downloads"
     | "/app/home"
-    | "/app/java/"
     | "/app/settings"
-    | "/app/template";
+    | "/app/template"
+    | "/app/java/$version"
+    | "/app/java/";
   fileRoutesByTo: FileRoutesByTo;
   to:
     | "/"
     | "/app"
-    | "/app/java/$version"
     | "/app/downloads"
     | "/app/home"
-    | "/app/java"
     | "/app/settings"
-    | "/app/template";
+    | "/app/template"
+    | "/app/java/$version"
+    | "/app/java";
   id:
     | "__root__"
     | "/"
     | "/app"
     | "/app/java"
     | "/app/"
-    | "/app/java/$version"
     | "/app/downloads/"
     | "/app/home/"
-    | "/app/java/"
     | "/app/settings/"
-    | "/app/template/";
+    | "/app/template/"
+    | "/app/java/_version/$version"
+    | "/app/java/_version/";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -192,13 +192,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppSettingsIndexRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
-    "/app/java/": {
-      id: "/app/java/";
-      path: "/";
-      fullPath: "/app/java/";
-      preLoaderRoute: typeof AppJavaIndexRouteImport;
-      parentRoute: typeof AppJavaRouteRoute;
-    };
     "/app/home/": {
       id: "/app/home/";
       path: "/home";
@@ -213,24 +206,31 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppDownloadsIndexRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
-    "/app/java/$version": {
-      id: "/app/java/$version";
+    "/app/java/_version/": {
+      id: "/app/java/_version/";
+      path: "/";
+      fullPath: "/app/java/";
+      preLoaderRoute: typeof AppJavaVersionIndexRouteImport;
+      parentRoute: typeof AppJavaRouteRoute;
+    };
+    "/app/java/_version/$version": {
+      id: "/app/java/_version/$version";
       path: "/$version";
       fullPath: "/app/java/$version";
-      preLoaderRoute: typeof AppJavaVersionRouteImport;
+      preLoaderRoute: typeof AppJavaVersionVersionRouteImport;
       parentRoute: typeof AppJavaRouteRoute;
     };
   }
 }
 
 interface AppJavaRouteRouteChildren {
-  AppJavaVersionRoute: typeof AppJavaVersionRoute;
-  AppJavaIndexRoute: typeof AppJavaIndexRoute;
+  AppJavaVersionVersionRoute: typeof AppJavaVersionVersionRoute;
+  AppJavaVersionIndexRoute: typeof AppJavaVersionIndexRoute;
 }
 
 const AppJavaRouteRouteChildren: AppJavaRouteRouteChildren = {
-  AppJavaVersionRoute: AppJavaVersionRoute,
-  AppJavaIndexRoute: AppJavaIndexRoute,
+  AppJavaVersionVersionRoute: AppJavaVersionVersionRoute,
+  AppJavaVersionIndexRoute: AppJavaVersionIndexRoute,
 };
 
 const AppJavaRouteRouteWithChildren = AppJavaRouteRoute._addFileChildren(

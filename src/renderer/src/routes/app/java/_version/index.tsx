@@ -2,11 +2,11 @@ import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { RiJavaLine } from "react-icons/ri";
 
-export const Route = createFileRoute("/app/java/")({
-  component: JavaIndex,
+export const Route = createFileRoute("/app/java/_version/")({
+  component: VersionIndex,
 });
 
-function JavaIndex(): React.JSX.Element {
+function VersionIndex(): React.JSX.Element {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="text-center">
