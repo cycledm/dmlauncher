@@ -6,7 +6,7 @@ import { JavaBasicInfoCard } from "@renderer/components/java";
 import { useAdoptium, useElectron } from "@renderer/hooks";
 import { RiJavaLine } from "react-icons/ri";
 
-export const Route = createFileRoute("/app/java/_version/$version")({
+export const Route = createFileRoute("/app/java/$version")({
   component: VersionDetails,
 });
 
