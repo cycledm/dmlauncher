@@ -1,15 +1,10 @@
 import { app } from "electron";
+import { DownloadTask } from "@shared/types";
 import axios from "axios";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import Stream from "stream";
-import {
-  DownloaderInfo,
-  DownloadOptions,
-  DownloadTask,
-  DownloadTaskStatus,
-} from "@main/interfaces/downloader";
 
 // 默认最大并行下载线程数
 const DEFAULT_LIMIT = 16;
@@ -18,7 +13,7 @@ const MAX_FAILS = 3;
 
 type DownloadCallbacks = {
   onStart?: () => void;
-  onProgress?: (data: DownloaderInfo) => void;
+  onProgress?: (data: SharedTypes.DownloaderInfo) => void;
   onComplete?: () => void;
 };
 
@@ -115,7 +110,7 @@ export class Downloader {
   /**
    * 添加下载任务，同时获取文件的基本信息（Headers）
    */
-  public static pushTask(opt: DownloadOptions): string {
+  public static pushTask(opt: SharedTypes.DownloadOptions): string {
     try {
       const { url, directory, filename } = opt;
       // 避免重复添加相同的任务
@@ -126,7 +121,7 @@ export class Downloader {
       }
 
       const id = crypto.randomBytes(16).toString("hex");
-      const status: DownloadTaskStatus = "pending";
+      const status: SharedTypes.DownloadTaskStatus = "pending";
       const transferred = 0;
       const total = opt.size ?? 0;
       const fails = 0;

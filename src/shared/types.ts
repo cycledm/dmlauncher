@@ -1,10 +1,3 @@
-import {
-  DownloadTask as DownloadTaskForRenderer,
-  DownloaderInfo as DownloaderInfoForRenderer,
-  DownloadOptions,
-} from "@main/interfaces/downloader";
-import { SupportedLanguages } from "@main/interfaces/i18n";
-
 /**
  * 应用的颜色模式
  *
@@ -13,14 +6,55 @@ import { SupportedLanguages } from "@main/interfaces/i18n";
 export type ColorMode = "light" | "dark" | "system";
 
 /**
- * 下载器任务和进度信息
+ * 下载任务状态
  */
-export type DownloaderInfo = DownloaderInfoForRenderer;
+export type DownloadTaskStatus = "pending" | "downloading" | "completed" | "failed";
 
 /**
  * 下载器任务信息
  */
-export type DownloadTask = DownloadTaskForRenderer;
+export interface DownloadTask {
+  id: string;
+  status: DownloadTaskStatus;
+  url: string;
+  transferred: number;
+  total: number;
+  directory?: string;
+  filename?: string;
+  fails?: number;
+  startTime?: number;
+}
+
+/**
+ * 下载参数
+ */
+export interface DownloadOptions {
+  url: string;
+  directory?: string;
+  filename?: string;
+  size?: number;
+}
+
+/**
+ * 下载器任务和进度信息
+ */
+export interface DownloaderInfo {
+  progress: number;
+  percent: number;
+  transferred: number;
+  total: number;
+  startTime?: number;
+  speed?: number;
+  tasks: DownloadTask[];
+}
+
+/**
+ * 支持的语言信息
+ */
+export interface SupportedLanguages {
+  languages: string[];
+  namespaces: string[];
+}
 
 /**
  * 本地化支持 API

@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
         alias: {
           "@main": resolve("src/main"),
           "@preload": resolve("src/preload"),
+          "@shared": resolve("src/shared"),
         },
       },
       plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
         alias: {
           "@main": resolve("src/main"),
           "@preload": resolve("src/preload"),
+          "@shared": resolve("src/shared"),
         },
       },
       plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
@@ -40,6 +42,7 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
           "@renderer": resolve("src/renderer/src"),
+          "@shared": resolve("src/shared"),
         },
       },
       build: {

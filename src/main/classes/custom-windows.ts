@@ -1,7 +1,6 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, nativeTheme } from "electron";
 import path from "path";
 import { Worker } from "worker_threads";
-import { DownloadOptions } from "@main/interfaces/downloader";
 import fileTracker from "@main/workers/file-tracker?modulePath";
 import { Downloader } from "./downloader";
 
@@ -70,7 +69,7 @@ export class PrimaryBrowserWindow extends BrowserWindow {
     });
 
     // 下载
-    ipc.handle("downloader:download", async (_, opts: DownloadOptions[]) => {
+    ipc.handle("downloader:download", async (_, opts: SharedTypes.DownloadOptions[]) => {
       opts.map((opt) => {
         // opt.url =
         //   "https://mirrors.nju.edu.cn/adoptium/21/jdk/x64/windows/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip";
