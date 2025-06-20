@@ -2,8 +2,8 @@ import { app, BrowserWindow, ipcMain, nativeTheme } from "electron";
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import { installExtension, REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import { resolve } from "path";
+import { MainWindow } from "./classes/browser-window";
 import { Downloader } from "./classes/downloader";
-import MainWindow from "./classes/main-window";
 import { i18n } from "./utils";
 
 function createMainWindow(): MainWindow {

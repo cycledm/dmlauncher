@@ -1,8 +1,8 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, nativeTheme } from "electron";
 import path from "path";
 import { Worker } from "worker_threads";
+import { Downloader } from "@main/classes/downloader";
 import fileTracker from "@main/workers/file-tracker?modulePath";
-import { Downloader } from "./downloader";
 
 export type PrimaryBrowserWindowConstructorOptions = Omit<
   BrowserWindowConstructorOptions,

@@ -7,7 +7,7 @@ import icon from "/resources/icon.png?asset";
 /**
  * Electron 主窗口
  */
-export default class MainWindow extends PrimaryBrowserWindow {
+export class MainWindow extends PrimaryBrowserWindow {
   constructor(options?: PrimaryBrowserWindowConstructorOptions) {
     super({
       width: Number(import.meta.env.MAIN_DEFAULT_WIDTH),
