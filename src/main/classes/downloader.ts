@@ -1,5 +1,4 @@
 import { app } from "electron";
-import { DownloadTask } from "@shared/types";
 import axios from "axios";
 import crypto from "crypto";
 import fs from "fs";
@@ -20,10 +19,10 @@ type DownloadCallbacks = {
 export class Downloader {
   private static limit: number = DEFAULT_LIMIT;
   private static instances: Downloader[] = [];
-  private static tasks: DownloadTask[] = [];
+  private static tasks: SharedTypes.DownloadTask[] = [];
   private static timer: NodeJS.Timeout | null = null;
   private static running: boolean = false;
-  private activeTask: DownloadTask | null = null;
+  private activeTask: SharedTypes.DownloadTask | null = null;
   private controller: AbortController | null = null;
 
   private constructor() {
@@ -48,7 +47,7 @@ export class Downloader {
   /**
    * 获取一个等待下载的任务，达到最大失败次数的任务不会被获取
    */
-  private static getPendingTask(): DownloadTask | null {
+  private static getPendingTask(): SharedTypes.DownloadTask | null {
     return (
       this.tasks.find(
         (t) => t.status === "pending" || (t.status === "failed" && (t.fails ?? 0) < MAX_FAILS),
@@ -87,14 +86,14 @@ export class Downloader {
   /**
    * 返回下载任务列表
    */
-  public static getTasks(): DownloadTask[] {
+  public static getTasks(): SharedTypes.DownloadTask[] {
     return this.tasks;
   }
 
   /**
    * 计算文件大小（Headers）
    */
-  private static async calcTaskSize(task: DownloadTask): Promise<number> {
+  private static async calcTaskSize(task: SharedTypes.DownloadTask): Promise<number> {
     try {
       if (task.total > 0) return task.total;
       const { headers } = await axios.head(task.url);
@@ -126,7 +125,7 @@ export class Downloader {
       const total = opt.size ?? 0;
       const fails = 0;
 
-      const task: DownloadTask = {
+      const task: SharedTypes.DownloadTask = {
         id,
         status,
         url,
