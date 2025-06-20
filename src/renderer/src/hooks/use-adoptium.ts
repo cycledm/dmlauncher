@@ -14,7 +14,7 @@ interface UseAdoptiumDetailsResponse {
 
 export function useAdoptium(): UseAdoptiumResponse {
   const { data: releasesInfo } = useSuspenseQuery({
-    queryKey: ["https://api.adoptium.net/v3/info/available_releases"],
+    queryKey: ["/api/adoptium/info/available_releases"],
     queryFn: ({ queryKey }) => fetchJava<AdoptiumReleasesInfo>(queryKey[0]),
   });
 
@@ -28,7 +28,7 @@ export function useAdoptiumDetails(version: number): UseAdoptiumDetailsResponse 
 
   const { data: releaseDetails } = useSuspenseQuery({
     queryKey: [
-      `https://api.adoptium.net/v3/assets/latest/${version}/hotspot?architecture=${architecture}&image_type=jdk&os=${os}&vendor=eclipse`,
+      `/api/adoptium/assets/latest/${version}/hotspot?architecture=${architecture}&image_type=jdk&os=${os}&vendor=eclipse`,
     ],
     queryFn: ({ queryKey }) => fetchJava<AdoptiumReleaseDetails>(queryKey[0]),
   });
