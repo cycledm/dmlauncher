@@ -1,8 +1,8 @@
 interface useElectronResponse {
-  i18n: Window["api"]["i18n"];
-  theme: Window["api"]["theme"];
-  titlebar: Window["api"]["titlebar"];
-  downloader: Window["api"]["downloader"];
+  i18n: SharedTypes.I18nAPI;
+  theme: SharedTypes.ThemeAPI;
+  titlebar: SharedTypes.TitleBarAPI;
+  downloader: SharedTypes.DownloaderAPI;
 }
 
 export function useElectron(): useElectronResponse {

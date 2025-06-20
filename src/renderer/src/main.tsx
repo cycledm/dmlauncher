@@ -6,12 +6,6 @@ import { DefaultError } from "@renderer/components/common";
 import { DefaultPending } from "@renderer/components/common/DefaultPending";
 import { routeTree } from "@renderer/route-tree.gen";
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
 const history = createHashHistory();
 const router = createRouter({
   routeTree,
@@ -22,6 +16,12 @@ const router = createRouter({
   defaultPendingMinMs: 0,
   defaultPendingMs: 0,
 });
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

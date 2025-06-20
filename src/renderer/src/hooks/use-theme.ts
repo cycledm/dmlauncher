@@ -3,15 +3,15 @@ import { colorModeAtom } from "@renderer/atoms";
 import { useElectron } from "./use-electron";
 
 interface UseThemeResponse {
-  colorMode: "system" | "light" | "dark";
-  setColorMode: (mode: "system" | "light" | "dark") => Promise<void>;
+  colorMode: SharedTypes.ColorMode;
+  setColorMode: (mode: SharedTypes.ColorMode) => Promise<void>;
 }
 
 export function useTheme(): UseThemeResponse {
   const { theme } = useElectron();
   const [colorMode, setColorMode] = useAtom(colorModeAtom);
 
-  const changeColorMode = async (mode: "system" | "light" | "dark"): Promise<void> => {
+  const changeColorMode = async (mode: SharedTypes.ColorMode): Promise<void> => {
     await theme.setColorMode(mode);
     setColorMode(mode);
   };

@@ -1,9 +1,14 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
-import API from "./interfaces/api";
 
 declare global {
+  namespace SharedTypes {
+    export * from "./types";
+  }
+
   interface Window {
     electron: ElectronAPI;
-    api: API;
+    api: SharedTypes.API;
   }
 }
+
+export * from "./types";

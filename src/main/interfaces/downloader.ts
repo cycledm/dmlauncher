@@ -20,7 +20,7 @@ export interface DownloadOptions {
 }
 
 // 用于渲染进程获取下载器信息
-export interface DownloaderInfoForRenderer {
+export interface DownloaderInfo {
   progress: number;
   percent: number;
   transferred: number;

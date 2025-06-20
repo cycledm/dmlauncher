@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import { atom, useAtom } from "jotai";
 import { useElectron } from "./use-electron";
 
-type DownloaderInfo = Parameters<Parameters<typeof window.api.downloader.onUpdateProgress>[0]>[0];
-
-const downloaderInfoAtom = atom<DownloaderInfo | null>(null);
+const downloaderInfoAtom = atom<SharedTypes.DownloaderInfo | null>(null);
 
 interface UseDownloaderResponse {
-  downloaderInfo: DownloaderInfo | null;
+  downloaderInfo: SharedTypes.DownloaderInfo | null;
 }
 
 export function useDownloader(): UseDownloaderResponse {
@@ -16,7 +14,7 @@ export function useDownloader(): UseDownloaderResponse {
 
   useEffect(() => {
     if (downloaderInfo) return;
-    downloader.onUpdateProgress((data: DownloaderInfo) => {
+    downloader.onUpdateProgress((data: SharedTypes.DownloaderInfo) => {
       setDownloaderInfo(data);
     });
   }, [downloader, downloaderInfo, setDownloaderInfo]);

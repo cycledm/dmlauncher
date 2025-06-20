@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import Stream from "stream";
 import {
-  DownloaderInfoForRenderer,
+  DownloaderInfo,
   DownloadOptions,
   DownloadTask,
   DownloadTaskStatus,
@@ -18,7 +18,7 @@ const MAX_FAILS = 3;
 
 type DownloadCallbacks = {
   onStart?: () => void;
-  onProgress?: (data: DownloaderInfoForRenderer) => void;
+  onProgress?: (data: DownloaderInfo) => void;
   onComplete?: () => void;
 };
 
