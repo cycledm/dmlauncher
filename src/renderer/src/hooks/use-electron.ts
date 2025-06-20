@@ -1,8 +1,8 @@
 interface useElectronResponse {
-  i18n: SharedTypes.I18nAPI;
-  theme: SharedTypes.ThemeAPI;
-  titlebar: SharedTypes.TitleBarAPI;
-  downloader: SharedTypes.DownloaderAPI;
+  i18n: Global.Types.I18nAPI;
+  theme: Global.Types.ThemeAPI;
+  titlebar: Global.Types.TitleBarAPI;
+  downloader: Global.Types.DownloaderAPI;
 }
 
 export function useElectron(): useElectronResponse {

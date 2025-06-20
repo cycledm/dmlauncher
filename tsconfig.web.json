@@ -1,6 +1,6 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
-  "include": ["src/renderer/src/**/*", "src/shared/**/*"],
+  "include": ["src/renderer/src/**/*", "src/global/**/*"],
   "compilerOptions": {
     "moduleResolution": "bundler",
     "composite": true,
@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "@renderer/*": ["src/renderer/src/*"],
-      "@shared/*": ["src/shared/*"]
+      "@global/*": ["src/global/*"]
     }
   }
 }

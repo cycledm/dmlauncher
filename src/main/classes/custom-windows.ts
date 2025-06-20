@@ -69,7 +69,7 @@ export class PrimaryBrowserWindow extends BrowserWindow {
     });
 
     // 下载
-    ipc.handle("downloader:download", async (_, opts: SharedTypes.DownloadOptions[]) => {
+    ipc.handle("downloader:download", async (_, opts: Global.Types.DownloadOptions[]) => {
       opts.map((opt) => {
         // opt.url =
         //   "https://mirrors.nju.edu.cn/adoptium/21/jdk/x64/windows/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip";

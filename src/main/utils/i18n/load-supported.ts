@@ -11,7 +11,7 @@ import { basename, extname, join, resolve } from "path";
  *
  * @returns 所有支持的语言和命名空间
  */
-export async function loadSupported(): Promise<SharedTypes.SupportedLanguages> {
+export async function loadSupported(): Promise<Global.Types.SupportedLanguages> {
   const priorityLngs = ["en-US", "zh-CN", "ja-JP"];
 
   const srcPath = resolve(app.getAppPath(), "resources", "locales");

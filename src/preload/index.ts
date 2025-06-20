@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 
 // Custom APIs for renderer
-const api: SharedTypes.API = {
+const api: Global.Types.API = {
   i18n: {
     getAppLocale: () => ipcRenderer.invoke("i18n:get-app-locale"),
     loadSupported: () => ipcRenderer.invoke("i18n:load-supported"),

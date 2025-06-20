@@ -12,17 +12,17 @@ const MAX_FAILS = 3;
 
 type DownloadCallbacks = {
   onStart?: () => void;
-  onProgress?: (data: SharedTypes.DownloaderInfo) => void;
+  onProgress?: (data: Global.Types.DownloaderInfo) => void;
   onComplete?: () => void;
 };
 
 export class Downloader {
   private static limit: number = DEFAULT_LIMIT;
   private static instances: Downloader[] = [];
-  private static tasks: SharedTypes.DownloadTask[] = [];
+  private static tasks: Global.Types.DownloadTask[] = [];
   private static timer: NodeJS.Timeout | null = null;
   private static running: boolean = false;
-  private activeTask: SharedTypes.DownloadTask | null = null;
+  private activeTask: Global.Types.DownloadTask | null = null;
   private controller: AbortController | null = null;
 
   private constructor() {
@@ -47,7 +47,7 @@ export class Downloader {
   /**
    * 获取一个等待下载的任务，达到最大失败次数的任务不会被获取
    */
-  private static getPendingTask(): SharedTypes.DownloadTask | null {
+  private static getPendingTask(): Global.Types.DownloadTask | null {
     return (
       this.tasks.find(
         (t) => t.status === "pending" || (t.status === "failed" && (t.fails ?? 0) < MAX_FAILS),
@@ -86,14 +86,14 @@ export class Downloader {
   /**
    * 返回下载任务列表
    */
-  public static getTasks(): SharedTypes.DownloadTask[] {
+  public static getTasks(): Global.Types.DownloadTask[] {
     return this.tasks;
   }
 
   /**
    * 计算文件大小（Headers）
    */
-  private static async calcTaskSize(task: SharedTypes.DownloadTask): Promise<number> {
+  private static async calcTaskSize(task: Global.Types.DownloadTask): Promise<number> {
     try {
       if (task.total > 0) return task.total;
       const { headers } = await axios.head(task.url);
@@ -109,7 +109,7 @@ export class Downloader {
   /**
    * 添加下载任务，同时获取文件的基本信息（Headers）
    */
-  public static pushTask(opt: SharedTypes.DownloadOptions): string {
+  public static pushTask(opt: Global.Types.DownloadOptions): string {
     try {
       const { url, directory, filename } = opt;
       // 避免重复添加相同的任务
@@ -120,12 +120,12 @@ export class Downloader {
       }
 
       const id = crypto.randomBytes(16).toString("hex");
-      const status: SharedTypes.DownloadTaskStatus = "pending";
+      const status: Global.Types.DownloadTaskStatus = "pending";
       const transferred = 0;
       const total = opt.size ?? 0;
       const fails = 0;
 
-      const task: SharedTypes.DownloadTask = {
+      const task: Global.Types.DownloadTask = {
         id,
         status,
         url,

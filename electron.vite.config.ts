@@ -7,18 +7,6 @@ import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
 import { resolve } from "path";
 import { UserConfig } from "vite";
 
-const serverOptions: UserConfig = {
-  server: {
-    proxy: {
-      "/api/adoptium": {
-        target: "https://api.adoptium.net/v3",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/adoptium/, ""),
-      },
-    },
-  },
-};
-
 export default defineConfig(({ mode }) => {
   // 加载保护的环境变量，构建时会将这些变量的值转换为字节码
   const env = loadEnv(mode, process.cwd(), ["PROTECTED_"]);
@@ -27,38 +15,33 @@ export default defineConfig(({ mode }) => {
     protectedStrings.push(value);
   }
 
+  // 主进程和预加载脚本的共用配置
+  const electronCommonOptions: UserConfig = {
+    resolve: {
+      alias: {
+        "@main": resolve("src/main"),
+        "@preload": resolve("src/preload"),
+        "@global": resolve("src/global"),
+      },
+    },
+    plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
+  };
+
   return {
     main: {
-      ...serverOptions,
+      ...electronCommonOptions,
       envPrefix: ["COMM_", "MAIN_", "PROTECTED_"],
-      resolve: {
-        alias: {
-          "@main": resolve("src/main"),
-          "@preload": resolve("src/preload"),
-          "@shared": resolve("src/shared"),
-        },
-      },
-      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
     },
     preload: {
-      ...serverOptions,
+      ...electronCommonOptions,
       envPrefix: ["COMM_", "PRLD_", "PROTECTED_"],
-      resolve: {
-        alias: {
-          "@main": resolve("src/main"),
-          "@preload": resolve("src/preload"),
-          "@shared": resolve("src/shared"),
-        },
-      },
-      plugins: [externalizeDepsPlugin(), bytecodePlugin({ protectedStrings })],
     },
     renderer: {
-      ...serverOptions,
       envPrefix: ["COMM_", "RNDR_"],
       resolve: {
         alias: {
           "@renderer": resolve("src/renderer/src"),
-          "@shared": resolve("src/shared"),
+          "@global": resolve("src/global"),
         },
       },
       build: {

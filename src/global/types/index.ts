@@ -1,11 +1,4 @@
 /**
- * 应用的颜色模式
- *
- * 浅色 / 深色 / 自动（与操作系统同步）
- */
-export type ColorMode = "light" | "dark" | "system";
-
-/**
  * 下载任务状态
  */
 export type DownloadTaskStatus = "pending" | "downloading" | "completed" | "failed";
@@ -47,6 +40,13 @@ export interface DownloaderInfo {
   speed?: number;
   tasks: DownloadTask[];
 }
+
+/**
+ * 应用的颜色模式
+ *
+ * 浅色 / 深色 / 自动（与操作系统同步）
+ */
+export type ColorMode = "light" | "dark" | "system";
 
 /**
  * 支持的语言信息

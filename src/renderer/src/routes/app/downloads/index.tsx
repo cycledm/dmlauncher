@@ -31,7 +31,7 @@ function Downloads(): React.JSX.Element {
 }
 
 type DownloadItemProps = {
-  item: SharedTypes.DownloadTask;
+  item: Global.Types.DownloadTask;
 };
 
 export function DownloadItem({ item }: DownloadItemProps): React.JSX.Element {
