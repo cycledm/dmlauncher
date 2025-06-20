@@ -1,4 +1,5 @@
 import {
+  DownloadTask as DownloadTaskForRenderer,
   DownloaderInfo as DownloaderInfoForRenderer,
   DownloadOptions,
 } from "@main/interfaces/downloader";
@@ -12,9 +13,14 @@ import { SupportedLanguages } from "@main/interfaces/i18n";
 export type ColorMode = "light" | "dark" | "system";
 
 /**
- * 下载器任务信息
+ * 下载器任务和进度信息
  */
 export type DownloaderInfo = DownloaderInfoForRenderer;
+
+/**
+ * 下载器任务信息
+ */
+export type DownloadTask = DownloadTaskForRenderer;
 
 /**
  * 本地化支持 API

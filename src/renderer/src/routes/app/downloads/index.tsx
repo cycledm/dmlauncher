@@ -3,7 +3,6 @@ import { clsx } from "clsx";
 import { createFileRoute } from "@tanstack/react-router";
 import prettyBytes from "pretty-bytes";
 import { Progress } from "@base-ui-components/react/progress";
-import { DownloadTask } from "@main/interfaces/downloader";
 import { ScrollBox, SimpleCard } from "@renderer/components/common";
 import { useDownloader } from "@renderer/hooks";
 
@@ -32,7 +31,7 @@ function Downloads(): React.JSX.Element {
 }
 
 type DownloadItemProps = {
-  item: DownloadTask;
+  item: SharedTypes.DownloadTask;
 };
 
 export function DownloadItem({ item }: DownloadItemProps): React.JSX.Element {
