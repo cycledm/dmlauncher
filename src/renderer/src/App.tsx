@@ -12,9 +12,6 @@ import { SideBar } from "@renderer/components/app";
 import { LOCAL_STORAGE_KEYS } from "@renderer/constants";
 import icon from "@renderer/assets/electron.svg";
 
-const a: SharedTypes.ColorMode = "light";
-console.log(a);
-
 const colorMode = localStorage.getItem(LOCAL_STORAGE_KEYS.COLOR_MODE);
 await window.api.theme.setColorMode(colorMode ? JSON.parse(colorMode) : "system");
 
