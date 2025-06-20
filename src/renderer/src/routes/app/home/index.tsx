@@ -22,7 +22,7 @@ function Home(): React.JSX.Element {
     if (loading) return;
     setLoading(true);
     const { data } = await axios.get(
-      "/api/adoptium/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse",
+      "https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse",
       {
         headers: {
           accept: "application/json",
