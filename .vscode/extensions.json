@@ -4,6 +4,7 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "christian-kohler.path-intellisense"
+    "christian-kohler.path-intellisense",
+    "dotenv.dotenvx-vscode"
   ]
 }
