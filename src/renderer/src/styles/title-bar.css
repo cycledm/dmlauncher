@@ -9,7 +9,6 @@
 }
 
 /* Electron 窗口拖动 */
-/* prettier-ignore */
 @utility app-* {
   -webkit-app-region: --value(--app-region-*);
 }

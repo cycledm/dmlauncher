@@ -13,7 +13,6 @@
   --scroll-thumb-scale-lg: 1.25;
 }
 
-/* prettier-ignore */
 @utility scroll-thumb-* {
   padding: calc(
     var(--spacing) * --value(--scroll-thumb-size-*) * --value(--scroll-thumb-scale-*) +
@@ -95,7 +94,6 @@
   }
 }
 
-/* prettier-ignore */
 @utility scroll-thumb-bg-* {
   .ms-track {
     .ms-thumb {
@@ -105,7 +103,6 @@
   }
 }
 
-/* prettier-ignore */
 @utility scroll-track-hover-bg-* {
   .ms-track {
     &.ms-active,
@@ -116,7 +113,6 @@
   }
 }
 
-/* prettier-ignore */
 @utility scroll-track-hover-border-* {
   .ms-track {
     &.ms-active,
