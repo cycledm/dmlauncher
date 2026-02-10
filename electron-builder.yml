@@ -1,4 +1,4 @@
-appId: net.southcraft.dmlauncher
+appId: dev.cycledm.dmlauncher
 productName: DMLauncher
 directories:
   buildResources: build
